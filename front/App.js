@@ -29,6 +29,7 @@ import {
 import {Button, ThemeProvider} from 'react-native-elements';
 import LoginView from './src/view/LoginView';
 import Icon from 'react-native-vector-icons/RNIMigration';
+import UserListView from './src/view/UserListView';
 
 const Section = ({children, title}): Node => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -65,7 +66,7 @@ const App: () => Node = () => {
 
   return (
     <ThemeProvider>
-      <LoginView />
+      <UserListView />
     </ThemeProvider>
   );
 };

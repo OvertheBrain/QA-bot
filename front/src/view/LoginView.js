@@ -7,7 +7,6 @@ class LoginView extends React.Component{
     render() {
         return (
             <Button
-
                 title="Login"
             />
         )
