@@ -24,7 +24,7 @@ class StartPage extends React.Component{
 
             <Divider style={styles.container}>
                 <Text h1 h1Style={{textAlign:"center",marginBottom:200,color:"#1d3f63"}}>
-                    QA Robot1
+                    QA Robot2
                 </Text>
 
 
