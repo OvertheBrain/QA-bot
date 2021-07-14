@@ -65,8 +65,8 @@ const App: () => Node = () => {
   };
 
   return (
-    <ThemeProvider>
-      <UserListView />
+    <ThemeProvider >
+      <LoginView/>
     </ThemeProvider>
   );
 };
