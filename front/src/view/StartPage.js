@@ -15,7 +15,7 @@ const
         }
 
     })
-class LoginView extends React.Component{
+class StartPage extends React.Component{
 
 
 
@@ -50,4 +50,4 @@ class LoginView extends React.Component{
         )
     }
 }
-export default LoginView
+export default StartPage

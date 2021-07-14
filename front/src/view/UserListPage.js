@@ -1,6 +1,8 @@
 import React from 'react';
-import {Button, Header, ThemeProvider} from 'react-native-elements';
-import { ListItem, Avatar } from 'react-native-elements'
+import {Badge, Button, Header, ThemeProvider} from 'react-native-elements';
+import { ListItem, Avatar,ButtonGroup } from 'react-native-elements'
+import {buttonGroup} from '../component/buttonGroup'
+import {View} from 'react-native';
 
 const list = [
         {
@@ -27,11 +29,27 @@ const list = [
     ]
 
 
-class UserListView extends React.Component{
+class UserListPage extends React.Component{
+    constructor () {
+        super()
+        this.state = {
+            selectedIndex: 2
+        }
+        this.updateIndex = this.updateIndex.bind(this)
+    }
+
+
+    updateIndex (selectedIndex) {
+        this.setState({selectedIndex})
+    }
     render() {
+        const buttons = ['Chat', 'Identity']
+        const { selectedIndex } = this.state
         return (
             <ThemeProvider>
+
             <Header
+
                 leftComponent={{ icon: 'menu', color: '#fff', iconStyle: { color: '#fff' } }}
                 centerComponent={{ text: 'MY TITLE', style: { color: '#fff' } }}
                 rightComponent={{ icon: 'home', color: '#fff' }}
@@ -40,9 +58,18 @@ class UserListView extends React.Component{
                     {
                         list.map((l, i) => (
                             <ListItem key={i} bottomDivider>
-                                <Avatar source={{uri: l.avatar_url}} />
+                                <View>
+                                    <Avatar
+                                        rounded
+                                        source={{
+                                            uri: l.avatar_url,
+                                        }}
+                                        size="large"
+                                    />
+                                    <Badge value="99+" status="error" containerStyle={{ position: 'absolute', top: -4, right: -4 }} />
+                                </View>
                                 <ListItem.Content>
-                                    <ListItem.Title>{l.name}</ListItem.Title>
+                                    <ListItem.Title >{l.name}</ListItem.Title>
                                     <ListItem.Subtitle>{l.subtitle}</ListItem.Subtitle>
                                 </ListItem.Content>
                             </ListItem>
@@ -57,4 +84,4 @@ class UserListView extends React.Component{
     }
 }
 
-export default UserListView;;
+export default UserListPage;;

@@ -27,9 +27,10 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import {Button, ThemeProvider} from 'react-native-elements';
-import LoginView from './src/view/LoginView';
+import StartPage from './src/view/StartPage';
 import Icon from 'react-native-vector-icons/RNIMigration';
-import UserListView from './src/view/UserListView';
+import UserListPage from './src/view/UserListPage';
+
 
 const Section = ({children, title}): Node => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -65,9 +66,7 @@ const App: () => Node = () => {
   };
 
   return (
-    <ThemeProvider >
-      <LoginView/>
-    </ThemeProvider>
+      <StartPage />
   );
 };
 
