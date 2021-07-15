@@ -4,6 +4,7 @@ import {StyleSheet} from 'react-native';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+
 const
     styles=StyleSheet.create({
         container: {
@@ -16,6 +17,12 @@ const
 
     })
 class StartPage extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state={
+            navigation:this.props.navigation
+        }
+    }
 
 
 
@@ -33,6 +40,7 @@ class StartPage extends React.Component{
                     containerStyle={{ marginHorizontal:30 ,marginVertical:10}}
                     title="Login"
                     type="outline"
+                    onPress={()=>this.state.navigation.navigate('Home')}
 
                 />
 
