@@ -7,8 +7,6 @@ import StartPage from './view/StartPage';
 import UserListPage from './view/UserListPage';
 import LoginPage from './view/LoginPage';
 import RegisterPage from './view/RegisterPage';
-
-
 // Navigation Usage：onPress={() => navigation.navigate('Details')}
 const Stack = createStackNavigator();
 //传递参数
