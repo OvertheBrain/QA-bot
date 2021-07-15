@@ -10,14 +10,8 @@ import RegisterPage from './view/RegisterPage';
 
 
 // Navigation Usage：onPress={() => navigation.navigate('Details')}
-function DetailsScreen() {
-    return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text>Details Screen</Text>
-        </View>
-    );
-}
 const Stack = createStackNavigator();
+//传递参数
 function StartScreen({ navigation }){
     return(
         <StartPage navigation={navigation} />
@@ -33,7 +27,6 @@ function Navigator() {
         <NavigationContainer>
             <Stack.Navigator screenOptions={{
                 headerShown: false,
-
             }}>
                 <Stack.Screen name="Start" component={StartScreen} headerMode={"none"}/>
                 <Stack.Screen name="Home" component={HomeScreen} />
