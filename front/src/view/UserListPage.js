@@ -30,10 +30,11 @@ const list = [
 
 
 class UserListPage extends React.Component{
-    constructor () {
-        super()
+    constructor (props) {
+        super(props)
         this.state = {
-            selectedIndex: 2
+            selectedIndex: 2,
+            navigation:this.props.navigation
         }
         this.updateIndex = this.updateIndex.bind(this)
     }
@@ -50,7 +51,7 @@ class UserListPage extends React.Component{
 
             <Header
 
-                leftComponent={{ icon: 'menu', color: '#fff', iconStyle: { color: '#fff' } }}
+                leftComponent={{ icon: 'menu', color: '#fff', iconStyle: { color: '#fff' } ,onPress:()=>{this.state.navigation.navigate('Start')}} }
                 centerComponent={{ text: 'MY TITLE', style: { color: '#fff' } }}
                 rightComponent={{ icon: 'home', color: '#fff' }}
             />

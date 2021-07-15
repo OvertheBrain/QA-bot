@@ -23,12 +23,20 @@ function StartScreen({ navigation }){
         <StartPage navigation={navigation} />
     )
 }
+function HomeScreen({ navigation }){
+    return(
+        <UserListPage navigation={navigation} />
+    )
+}
 function Navigator() {
     return (
         <NavigationContainer>
-            <Stack.Navigator>
+            <Stack.Navigator screenOptions={{
+                headerShown: false,
+
+            }}>
                 <Stack.Screen name="Start" component={StartScreen} headerMode={"none"}/>
-                <Stack.Screen name="Home" component={UserListPage} />
+                <Stack.Screen name="Home" component={HomeScreen} />
                 <Stack.Screen name="Login" component={LoginPage} />
                 <Stack.Screen name="Register" component={RegisterPage} />
             </Stack.Navigator>
