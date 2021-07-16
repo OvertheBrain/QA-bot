@@ -16,6 +16,12 @@ function StartScreen({navigation}) {
 function HomeScreen({navigation}) {
   return <UserListPage navigation={navigation} />;
 }
+function LoginScreen({navigation}) {
+  return <LoginPage navigation={navigation} />;
+}
+function RegisterScreen({navigation}) {
+  return <RegisterPage navigation={navigation} />;
+}
 function Navigator() {
   return (
     <NavigationContainer>
@@ -29,8 +35,8 @@ function Navigator() {
           headerMode={'none'}
         />
         <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Login" component={LoginPage} />
-        <Stack.Screen name="Register" component={RegisterPage} />
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Register" component={RegisterScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

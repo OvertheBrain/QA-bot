@@ -4,6 +4,11 @@ import {Avatar, Button, CheckBox, Header} from 'react-native-elements';
 import {Text} from 'react-native-elements';
 import {Icon} from 'react-native-elements/dist/icons/Icon';
 import {Input} from 'react-native-elements/dist/input/Input';
+import LoginTitle from '../component/LoginCom/LoginTitle';
+import RightIcon from '../component/LoginCom/RightIcon';
+import ReturnHead from '../component/LoginCom/ReturnHead';
+
+const User1 = {userName: 'sam', password: '123'};
 
 class LoginPage extends React.Component {
   constructor(props) {
@@ -12,44 +17,52 @@ class LoginPage extends React.Component {
       navigation: this.props.navigation,
       checked: false,
       visible: true,
+      isShow: false,
       visIcon: true,
+      username: '',
+      password: '',
     };
   }
+  /**
+   * changeProps - 与子组件通信.
+   * */
+  changeProps(v, i) {
+    this.setState({visible: v, visIcon: i});
+  }
+
+  changeNav(n) {
+    this.setState({navigation: n});
+  }
+
+  handleLogin = () => {
+    if (
+      this.state.username === User1.userName &&
+      this.state.password === User1.password
+    ) {
+      this.state.navigation.navigate('Home');
+    } else {
+      alert('用户名或者密码错误!');
+    }
+  };
 
   render() {
-    const eyeIcon = ['lock', 'eye'];
+    if (this.state.password === '') {
+      this.state.isShow = false;
+    }
     return (
       <ScrollView>
-        <View style={{flex: 1}}>
-          <Header
-            leftComponent={
-              <Icon
-                name="left"
-                type="antdesign"
-                onPress={() => {
-                  this.state.navigation.navigate('Start');
-                }}
-              />
-            }
-          />
-        </View>
-        <View style={{flex: 2}}>
-          <Text
-            h1
-            h1Style={{
-              textAlign: 'center',
-              marginTop: 50,
-              marginBottom: 20,
-              color: '#1d3f63',
-              fontSize: 43,
-            }}>
-            Login
-          </Text>
-        </View>
+        <ReturnHead
+          navigation={this.state.navigation}
+          changeNav={this.changeNav.bind(this)}
+        />
+        <LoginTitle isLogin={true} />
         <View style={{flex: 1}}>
           <Input
             placeholder={'User'}
             leftIcon={<Icon name="user" type="font-awesome" color="#1d3f63" />}
+            onChangeText={username => {
+              this.setState({username: username});
+            }}
           />
         </View>
         <View style={{flex: 1}}>
@@ -60,27 +73,27 @@ class LoginPage extends React.Component {
               <Icon name={'lock'} type="font-awesome" color="#1d3f63" />
             }
             rightIcon={
-              <Icon
-                name={this.state.visIcon ? eyeIcon[0] : eyeIcon[1]}
-                type={'font-awesome'}
-                color="#1d3f63"
-                onPress={() => {
-                  this.setState({
-                    visible: !this.state.visible,
-                    visIcon: !this.state.visIcon,
-                  });
-                }}
+              <RightIcon
+                isShow={this.state.isShow}
+                visible={this.state.visible}
+                visIcon={this.state.visIcon}
+                changeProp={this.changeProps.bind(this)}
               />
             }
+            onChangeText={password => {
+              this.setState({isShow: true, password: password});
+            }}
           />
         </View>
-        <View>
+        <View style={{flex: 1}}>
           <CheckBox
             title={'Remember'}
             checked={this.state.checked}
+            size={30}
             onPress={() => {
               this.setState({checked: !this.state.checked});
             }}
+            containerStyle={{backgroundColor: ''}}
           />
         </View>
         <View style={{flex: 1}}>
@@ -89,7 +102,9 @@ class LoginPage extends React.Component {
             containerStyle={{marginHorizontal: 30, marginVertical: 10}}
             title="Login"
             type="outline"
-            onPress={() => this.state.navigation.navigate('Home')}
+            onPress={() => {
+              this.handleLogin();
+            }}
           />
         </View>
       </ScrollView>
