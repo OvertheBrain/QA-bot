@@ -22,7 +22,7 @@ export const BotList = [
     name: 'Bot3',
     avatar_url:
       'https://seikim.com/i/2021/07/19/nrq1o0.png',
-    subtitle: 'Vice President',
+    subtitle: 'Uncle',
   },
   {
     name: 'Bot4',
@@ -68,8 +68,8 @@ class UserListPage extends React.Component {
         {BotList.map((l, i) => (
           <ListItem key={i} bottomDivider onPress={() =>
           {
-            this.state.navigation.push('Chat',{
-              botId:i,
+            this.state.navigation.navigate('Chat',{
+              botId:i
             })
           }
 

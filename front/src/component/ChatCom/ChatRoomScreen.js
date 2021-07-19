@@ -4,10 +4,11 @@ import 'dayjs/locale/zh-cn';
 import {View,Text,StyleSheet,SafeAreaView} from 'react-native';
 import {themeColor} from '../../styles';
 
-export default function ChatRoomScreen() {
+export default function ChatRoomScreen(props) {
 
     const [messages, setMessages] = useState([]);
     useEffect(() => {
+        const {avatar}=props
         setMessages([
             {
                 _id: 1,
@@ -16,13 +17,14 @@ export default function ChatRoomScreen() {
                 user: {
                     _id: 2,
                     name: 'mm',
-                    avatar: 'https://placeimg.com/140/140/any',
+                    avatar: avatar,
                 },
             },
         ])
     }, []);
     const onSend = useCallback((msg = []) => {
         setMessages(previousMessages => GiftedChat.append(previousMessages, msg))
+
     }, []);
 
     const renderBubble = (props) => {
@@ -30,13 +32,19 @@ export default function ChatRoomScreen() {
             <Bubble
                 {...props}
                 textStyle={{
+                    left: {
+
+
+                    },
                     right: {
                         color: 'white',
+
                     },
                 }}
                 wrapperStyle={{
                     left: {
                         backgroundColor: '#fff',
+
                     },
                     right: {
                         backgroundColor: themeColor,

@@ -23,8 +23,8 @@ function LoginScreen({navigation}) {
 function RegisterScreen({navigation}) {
   return <RegisterPage navigation={navigation} />;
 }
-function ChatScreen({navigation}) {
-  return <ChatPage navigation={navigation} />;
+function ChatScreen({route,navigation}) {
+  return <ChatPage route={route} navigation={navigation} />;
 }
 function Navigator() {
   return (

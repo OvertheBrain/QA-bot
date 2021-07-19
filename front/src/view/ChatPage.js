@@ -4,6 +4,7 @@ import {StyleSheet, ScrollView, View} from 'react-native';
 import ChatRoomScreen from '../component/ChatCom/ChatRoomScreen';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {themeColor} from '../styles';
+import {BotList} from './UserListPage';
 
 const styles = StyleSheet.create({
     container: {
@@ -17,9 +18,9 @@ const styles = StyleSheet.create({
 export class ChatPage extends React.Component {
     constructor(props) {
         super(props);
+
         this.state = {
             navigation: this.props.navigation,
-            robotName: this,
             OptionsOpen: 0
         };
     }
@@ -29,6 +30,8 @@ export class ChatPage extends React.Component {
     }
 
     render() {
+        const { params } = this.props.route;
+
         return (
             <View style={styles.container}>
                 <Header
@@ -42,7 +45,7 @@ export class ChatPage extends React.Component {
                         color={'#fff'}
                         size={40}
                     />}
-                    centerComponent={{ text: this.state.robotName, style: { color: '#fff',fontSize: 30 }  }}
+                    centerComponent={{ text:BotList[params.botId].name, style: { color: '#fff',fontSize: 30 }  }}
                     rightComponent={<Icon
                         name="info"
                         type="AntDesign"
@@ -53,7 +56,8 @@ export class ChatPage extends React.Component {
                         size={40}
                     />}
                 />
-                <ChatRoomScreen navigation={this.state.navigation}/>
+
+                <ChatRoomScreen avatar={BotList[params.botId].avatar_url} />
                 <SpeedDial style={styles.options}
                            isOpen={this.state.OptionsOpen}
                            icon={{ name: 'add', color: '#fff' }}

@@ -7,6 +7,7 @@ import {Icon} from 'react-native-elements/dist/icons/Icon';
 import LoginTitle from '../component/LoginCom/LoginTitle';
 import RightIcon from '../component/LoginCom/RightIcon';
 import ReturnHead from '../component/LoginCom/ReturnHead';
+import {styles} from '../styles';
 
 class RegisterPage extends React.Component {
   constructor(props) {
@@ -113,13 +114,11 @@ class RegisterPage extends React.Component {
 
         <View style={{flex: 1}}>
           <Button
-            buttonStyle={{height: 60, borderRadius: 20}}
-            containerStyle={{
-              marginHorizontal: 30,
-              marginVertical: 10,
-              marginTop: 15,
-            }}
-            title="Register"
+            buttonStyle={styles.button1}
+            containerStyle={styles.buttonContainer}
+            title="注册"
+            titleStyle={styles.buttonTitle1}
+
             type="outline"
             disabled={!canClick}
             onPress={() => this.state.navigation.navigate('Home')}
