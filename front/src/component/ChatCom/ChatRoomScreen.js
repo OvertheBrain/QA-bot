@@ -37,7 +37,7 @@ export default function ChatRoomScreen() {
                         backgroundColor: '#fff',
                     },
                     right: {
-                        backgroundColor: '#0779f3',
+                        backgroundColor: '#4192ea',
                     },
                 }}
             />

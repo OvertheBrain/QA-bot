@@ -7,6 +7,7 @@ import {Input} from 'react-native-elements/dist/input/Input';
 import LoginTitle from '../component/LoginCom/LoginTitle';
 import RightIcon from '../component/LoginCom/RightIcon';
 import ReturnHead from '../component/LoginCom/ReturnHead';
+import {styles} from '../styles';
 
 const User1 = {userName: 'sam', password: '123'};
 
@@ -98,10 +99,11 @@ class LoginPage extends React.Component {
         </View>
         <View style={{flex: 1}}>
           <Button
-            buttonStyle={{height: 60, borderRadius: 20, marginTop: 10}}
-            containerStyle={{marginHorizontal: 30, marginVertical: 10}}
-            title="Login"
-            type="outline"
+            buttonStyle={styles.button}
+            containerStyle={styles.buttonContainer}
+            title="登录"
+            titleStyle={styles.buttonTitle}
+            type="clear"
             onPress={() => {
               this.handleLogin();
             }}

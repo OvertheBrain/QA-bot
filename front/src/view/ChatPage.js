@@ -1,7 +1,7 @@
 import React from 'react';
 import {Header, SpeedDial} from 'react-native-elements';
 import {StyleSheet, ScrollView, View} from 'react-native';
-import ChatRoomScreen from '../component/ChatRoomScreen';
+import ChatRoomScreen from '../component/ChatCom/ChatRoomScreen';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const styles = StyleSheet.create({
@@ -34,9 +34,9 @@ export class ChatPage extends React.Component {
                     leftComponent={<Icon
                         name="arrow-circle-o-left"
                         type="Ionicons"
-                        //onPress={() => {
-                        //this.state.navigation.navigate('Start');
-                        //}}
+                        onPress={() => {
+                        this.state.navigation.navigate('Home');
+                        }}
                         color={'#fff'}
                         size={40}
                     />}
@@ -77,6 +77,6 @@ export class ChatPage extends React.Component {
             </View>
         );
     }
-}
+};
 
 export default ChatPage;

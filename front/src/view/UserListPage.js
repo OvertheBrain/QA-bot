@@ -57,13 +57,14 @@ class UserListPage extends React.Component {
             onPress: () => {
               this.state.navigation.navigate('Start');
             },
+            size:40
           }}
-          centerComponent={{text: 'MY TITLE', style: {color: '#fff'}}}
-          rightComponent={{icon: 'home', color: '#fff'}}
+          centerComponent={{text: 'Home', style: {color: '#fff',fontSize:30}}}
+          rightComponent={{icon: 'home', color: '#fff',size:40}}
         />
 
         {list.map((l, i) => (
-          <ListItem key={i} bottomDivider>
+          <ListItem key={i} bottomDivider onPress={() => this.state.navigation.navigate('Chat')}>
             <View>
               <Avatar
                 rounded
