@@ -19,7 +19,7 @@ export class ChatPage extends React.Component {
         super(props);
         this.state = {
             navigation: this.props.navigation,
-            robotName: 'Miku',
+            robotName: this,
             OptionsOpen: 0
         };
     }
@@ -53,8 +53,7 @@ export class ChatPage extends React.Component {
                         size={40}
                     />}
                 />
-
-                <ChatRoomScreen/>
+                <ChatRoomScreen navigation={this.state.navigation}/>
                 <SpeedDial style={styles.options}
                            isOpen={this.state.OptionsOpen}
                            icon={{ name: 'add', color: '#fff' }}

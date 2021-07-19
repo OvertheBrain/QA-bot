@@ -5,6 +5,7 @@ import {View,Text,StyleSheet,SafeAreaView} from 'react-native';
 import {themeColor} from '../../styles';
 
 export default function ChatRoomScreen() {
+
     const [messages, setMessages] = useState([]);
     useEffect(() => {
         setMessages([

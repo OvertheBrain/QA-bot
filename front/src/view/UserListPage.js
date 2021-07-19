@@ -5,29 +5,29 @@ import {buttonGroup} from '../component/buttonGroup';
 import {View} from 'react-native';
 import {themeColor} from '../styles';
 
-const list = [
+export const BotList = [
   {
     name: 'Bot1',
     avatar_url:
-      'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
+      'https://seikim.com/i/2021/07/19/nqplo9.png',
     subtitle: 'Vice President',
   },
   {
     name: 'Bot2',
     avatar_url:
-      'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+      'https://seikim.com/i/2021/07/19/nroe63.png',
     subtitle: 'Vice Chairman',
   },
   {
     name: 'Bot3',
     avatar_url:
-      'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
+      'https://seikim.com/i/2021/07/19/nrq1o0.png',
     subtitle: 'Vice President',
   },
   {
     name: 'Bot4',
     avatar_url:
-      'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+      'https://seikim.com/i/2021/07/19/nrqmjj.png',
     subtitle: 'Vice Chairman',
   },
 ];
@@ -65,8 +65,15 @@ class UserListPage extends React.Component {
           rightComponent={{icon: 'home', color: '#fff',size:40}}
         />
 
-        {list.map((l, i) => (
-          <ListItem key={i} bottomDivider onPress={() => this.state.navigation.navigate('Chat')}>
+        {BotList.map((l, i) => (
+          <ListItem key={i} bottomDivider onPress={() =>
+          {
+            this.state.navigation.push('Chat',{
+              botId:i,
+            })
+          }
+
+          }>
             <View>
               <Avatar
                 rounded
@@ -75,11 +82,11 @@ class UserListPage extends React.Component {
                 }}
                 size="large"
               />
-              <Badge
-                value="99+"
-                status="error"
-                containerStyle={{position: 'absolute', top: -4, right: -4}}
-              />
+              {/*<Badge*/}
+              {/*  value="99+"*/}
+              {/*  status="error"*/}
+              {/*  containerStyle={{position: 'absolute', top: -4, right: -4}}*/}
+              {/*/>*/}
             </View>
             <ListItem.Content>
               <ListItem.Title>{l.name}</ListItem.Title>
