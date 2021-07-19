@@ -26,6 +26,7 @@ class ReturnHead extends React.Component {
             <Icon
               name="angle-left"
               type="font-awesome"
+              color={"white"}
               onPress={() => {
                 this.state.navigation.navigate('Start');
                 this.changeNav();

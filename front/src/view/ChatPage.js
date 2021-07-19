@@ -37,8 +37,8 @@ export class ChatPage extends React.Component {
                 <Header
                     backgroundColor={themeColor}
                     leftComponent={<Icon
-                        name="arrow-circle-o-left"
-                        type="Ionicons"
+                        name="angle-left"
+                        type="font-awesome"
                         onPress={() => {
                         this.state.navigation.navigate('Home');
                         }}

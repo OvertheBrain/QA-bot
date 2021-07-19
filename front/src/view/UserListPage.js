@@ -62,7 +62,14 @@ class UserListPage extends React.Component {
             size:40
           }}
           centerComponent={{text: 'Home', style: {color: '#fff',fontSize:30}}}
-          rightComponent={{icon: 'home', color: '#fff',size:40}}
+          rightComponent={ <Avatar
+              rounded
+              source={{
+                uri: 'https://placeimg.com/140/140/any',
+              }}
+              size="medium"
+              onPress={()=>{this.props.navigation.navigate('Developer')}}
+          /> }
         />
 
         {BotList.map((l, i) => (

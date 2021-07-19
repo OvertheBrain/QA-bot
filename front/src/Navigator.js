@@ -8,6 +8,7 @@ import UserListPage from './view/UserListPage';
 import LoginPage from './view/LoginPage';
 import RegisterPage from './view/RegisterPage';
 import ChatPage from './view/ChatPage';
+import DeveloperPage from './view/DeveloperPage';
 // Navigation Usage：onPress={() => navigation.navigate('Details')}
 const Stack = createStackNavigator();
 //传递参数
@@ -26,6 +27,9 @@ function RegisterScreen({navigation}) {
 function ChatScreen({route,navigation}) {
   return <ChatPage route={route} navigation={navigation} />;
 }
+function DeveloperScreen({navigation}){
+  return <DeveloperPage navigation={navigation} />
+}
 function Navigator() {
   return (
     <NavigationContainer>
@@ -42,6 +46,7 @@ function Navigator() {
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Register" component={RegisterScreen} />
         <Stack.Screen name="Chat"  component={ChatScreen} />
+        <Stack.Screen name="Developer"  component={DeveloperScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

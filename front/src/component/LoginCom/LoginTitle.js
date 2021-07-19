@@ -37,7 +37,7 @@ class LoginTitle extends React.Component {
             textAlign: 'center',
             marginTop: 50,
             marginBottom: 20,
-            color: '#1d3f63',
+            color: themeColor,
           }}>
           Register
         </Text>
