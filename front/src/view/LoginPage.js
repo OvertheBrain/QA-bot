@@ -7,7 +7,7 @@ import {Input} from 'react-native-elements/dist/input/Input';
 import LoginTitle from '../component/LoginCom/LoginTitle';
 import RightIcon from '../component/LoginCom/RightIcon';
 import ReturnHead from '../component/LoginCom/ReturnHead';
-import {styles} from '../styles';
+import {styles, themeColor} from '../styles';
 
 const User1 = {userName: 'sam', password: '123'};
 
@@ -51,16 +51,17 @@ class LoginPage extends React.Component {
       this.state.isShow = false;
     }
     return (
-      <ScrollView>
+      <ScrollView >
         <ReturnHead
           navigation={this.state.navigation}
           changeNav={this.changeNav.bind(this)}
+
         />
         <LoginTitle isLogin={true} />
-        <View style={{flex: 1}}>
+        <View style={{flex: 1}} >
           <Input
             placeholder={'User'}
-            leftIcon={<Icon name="user" type="font-awesome" color="#1d3f63" />}
+            leftIcon={<Icon name="user" type="font-awesome" color={themeColor} />}
             onChangeText={username => {
               this.setState({username: username});
             }}
@@ -71,7 +72,7 @@ class LoginPage extends React.Component {
             placeholder={'Password'}
             secureTextEntry={this.state.visible}
             leftIcon={
-              <Icon name={'lock'} type="font-awesome" color="#1d3f63" />
+              <Icon name={'lock'} type="font-awesome" color={themeColor} />
             }
             rightIcon={
               <RightIcon
@@ -95,14 +96,15 @@ class LoginPage extends React.Component {
               this.setState({checked: !this.state.checked});
             }}
             containerStyle={{backgroundColor: ''}}
+            checkedColor={themeColor}
           />
         </View>
         <View style={{flex: 1}}>
           <Button
-            buttonStyle={styles.button}
+            buttonStyle={styles.button1}
             containerStyle={styles.buttonContainer}
             title="登录"
-            titleStyle={styles.buttonTitle}
+            titleStyle={styles.buttonTitle1}
             type="clear"
             onPress={() => {
               this.handleLogin();

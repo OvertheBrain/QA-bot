@@ -3,6 +3,7 @@ import {Header, SpeedDial} from 'react-native-elements';
 import {StyleSheet, ScrollView, View} from 'react-native';
 import ChatRoomScreen from '../component/ChatCom/ChatRoomScreen';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {themeColor} from '../styles';
 
 const styles = StyleSheet.create({
     container: {
@@ -31,6 +32,7 @@ export class ChatPage extends React.Component {
         return (
             <View style={styles.container}>
                 <Header
+                    backgroundColor={themeColor}
                     leftComponent={<Icon
                         name="arrow-circle-o-left"
                         type="Ionicons"
@@ -59,19 +61,19 @@ export class ChatPage extends React.Component {
                            openIcon={{ name: 'close', color: '#fff' }}
                            onOpen={() => this.OpenDial(1)}
                            onClose={() => this.OpenDial(0)}
-                           color={'#1E56EA'}
+                           color={themeColor}
                 >
                     <SpeedDial.Action
                         icon={{ name: 'add', color: '#fff' }}
                         title="Add"
                         onPress={() => console.log('Add Something')}
-                        color={'#1E56EA'}
+                        color={themeColor}
                     />
                     <SpeedDial.Action
                         icon={{ name: 'delete', color: '#fff' }}
                         title="Delete"
                         onPress={() => console.log('Delete Something')}
-                        color={'#1E56EA'}
+                        color={themeColor}
                     />
                 </SpeedDial>
             </View>

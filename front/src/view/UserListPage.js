@@ -3,6 +3,7 @@ import {Badge, Button, Header, ThemeProvider} from 'react-native-elements';
 import {ListItem, Avatar, ButtonGroup} from 'react-native-elements';
 import {buttonGroup} from '../component/buttonGroup';
 import {View} from 'react-native';
+import {themeColor} from '../styles';
 
 const list = [
   {
@@ -50,6 +51,7 @@ class UserListPage extends React.Component {
     return (
       <ThemeProvider>
         <Header
+            backgroundColor={themeColor}
           leftComponent={{
             icon: 'menu',
             color: '#fff',

@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { GiftedChat,Bubble,Send } from 'react-native-gifted-chat';
 import 'dayjs/locale/zh-cn';
 import {View,Text,StyleSheet,SafeAreaView} from 'react-native';
+import {themeColor} from '../../styles';
 
 export default function ChatRoomScreen() {
     const [messages, setMessages] = useState([]);
@@ -29,7 +30,7 @@ export default function ChatRoomScreen() {
                 {...props}
                 textStyle={{
                     right: {
-                        color: 'black',
+                        color: 'white',
                     },
                 }}
                 wrapperStyle={{
@@ -37,7 +38,8 @@ export default function ChatRoomScreen() {
                         backgroundColor: '#fff',
                     },
                     right: {
-                        backgroundColor: '#4192ea',
+                        backgroundColor: themeColor,
+
                     },
                 }}
             />
@@ -83,7 +85,7 @@ const styles = StyleSheet.create({
         width: 63,
         height: 32,
         borderRadius: 3,
-        backgroundColor:'#0779f3',
+        backgroundColor:themeColor,
         justifyContent: 'center',
         alignItems: 'center',
         marginBottom:5,

@@ -2,6 +2,7 @@ import React from 'react';
 import {Header, Text} from 'react-native-elements';
 import {Icon} from 'react-native-elements/dist/icons/Icon';
 import {ScrollView, View} from 'react-native';
+import {themeColor} from '../../styles';
 
 /**
  * LoginTitle - Show the title of Login or Register
@@ -22,7 +23,7 @@ class LoginTitle extends React.Component {
             textAlign: 'center',
             marginTop: 50,
             marginBottom: 20,
-            color: '#1d3f63',
+            color: themeColor,
             fontSize: 43,
           }}>
           Login

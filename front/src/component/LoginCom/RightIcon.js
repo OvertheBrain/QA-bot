@@ -1,6 +1,7 @@
 import React from 'react';
 import {Icon} from 'react-native-elements/dist/icons/Icon';
 import {ScrollView, Text, View} from 'react-native';
+import {themeColor} from '../../styles';
 
 /**
  * RightIcon - 代表密码输入框右侧眼睛按钮，可随着输入而改变
@@ -28,7 +29,7 @@ class RightIcon extends React.Component {
             this.props.isShow && (this.state.visIcon ? eyeIcon[0] : eyeIcon[1])
           }
           type={'font-awesome'}
-          color="#1d3f63"
+          color={themeColor}
           onPress={() => {
             this.setState({
               visible: !this.state.visible,

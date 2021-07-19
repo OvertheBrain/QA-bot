@@ -2,6 +2,7 @@ import React from 'react';
 import {Header} from 'react-native-elements';
 import {View} from 'react-native';
 import {Icon} from 'react-native-elements/dist/icons/Icon';
+import {themeColor} from '../../styles';
 
 /**
  * ReturnHead - 登录和注册页面上方的返回按钮
@@ -18,8 +19,9 @@ class ReturnHead extends React.Component {
   }
   render() {
     return (
-      <View style={{flex: 1}}>
+      <View style={{flex: 1}} >
         <Header
+            backgroundColor={themeColor}
           leftComponent={
             <Icon
               name="angle-left"
