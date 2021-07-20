@@ -43,6 +43,7 @@ export default function ChatRoomScreen(props) {
                 }}
                 wrapperStyle={{
                     left: {
+
                         backgroundColor: '#fff',
 
                     },

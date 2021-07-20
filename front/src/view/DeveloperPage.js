@@ -26,14 +26,14 @@ class DeveloperPage extends React.Component{
                         size={40}
                         color={"white"}
                         onPress={() => {
-                            this.state.navigation.navigate('Home');
+                            this.state.navigation.goBack();
 
                         }}
                     />}
                     centerComponent={{text: 'MyId', style: {color: '#fff',fontSize:30}}}
                 />
 
-                <Avatar rounded size={'large'} source={{uri: 'https://placeimg.com/140/140/any'}} />
+                <Avatar rounded containerStyle={{alignSelf:'center' ,marginTop:20}} size={'xlarge'} source={{uri: 'https://placeimg.com/140/140/any'}} />
 
             </View>
 
