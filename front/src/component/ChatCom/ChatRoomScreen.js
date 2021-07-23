@@ -3,6 +3,7 @@ import { GiftedChat,Bubble,Send } from 'react-native-gifted-chat';
 import 'dayjs/locale/zh-cn';
 import {View,Text,StyleSheet,SafeAreaView} from 'react-native';
 import {themeColor} from '../../styles';
+import {SendService} from '../../service/UserService';
 
 export default function ChatRoomScreen(props) {
 
@@ -24,6 +25,9 @@ export default function ChatRoomScreen(props) {
     }, []);
     const onSend = useCallback((msg = []) => {
         setMessages(previousMessages => GiftedChat.append(previousMessages, msg))
+        console.log(msg[0].text)
+        SendService(msg[0].text,null)
+
 
     }, []);
 
@@ -33,8 +37,6 @@ export default function ChatRoomScreen(props) {
                 {...props}
                 textStyle={{
                     left: {
-
-
                     },
                     right: {
                         color: 'white',
@@ -43,13 +45,10 @@ export default function ChatRoomScreen(props) {
                 }}
                 wrapperStyle={{
                     left: {
-
                         backgroundColor: '#fff',
-
                     },
                     right: {
                         backgroundColor: themeColor,
-
                     },
                 }}
             />

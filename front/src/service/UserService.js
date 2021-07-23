@@ -1,12 +1,19 @@
-import config from 'config';
-import {postRequest} from "../utils/ajax";
-
-export const Send = (message,userId,BotId,callback) => {
+export const SendService = (message,callback) => {
     const data={
         message:message,
-        userId:userId,
-        BotId:BotId,
     }
-    const url = `${config.apiUrl}/SendMsg`;
-    postRequest(url, data, callback);
+
+    fetch(`http://127.0.0.1:8000/test`,{
+        method: "GET",
+    })
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            console.log(data);
+            callback(data);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
 };
