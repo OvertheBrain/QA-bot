@@ -26,7 +26,21 @@ export default function ChatRoomScreen(props) {
     const onSend = useCallback((msg = []) => {
         setMessages(previousMessages => GiftedChat.append(previousMessages, msg))
         console.log(msg[0].text)
-        SendService(msg[0].text,null)
+        const {avatar}=props
+        SendService(msg[0].text,(data)=>{
+            console.log(data)
+            let msg1={
+                _id: 1,
+                text: data.reply,
+                createdAt: new Date(),
+                user: {
+                    _id: 2,
+                    name: 'mm',
+                    avatar: avatar,
+                },
+            }
+            setMessages(previousMessages => GiftedChat.append(previousMessages, msg1))
+        })
 
 
     }, []);

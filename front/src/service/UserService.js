@@ -3,11 +3,13 @@ export const SendService = (message,callback) => {
         message:message,
     }
 
-    fetch(`http://127.0.0.1:8000/test`,{
+    fetch(`http://10.0.2.2:8000/test`,{
         method: "GET",
     })
         .then((response) => {
+
             return response.json();
+
         })
         .then((data) => {
             console.log(data);
