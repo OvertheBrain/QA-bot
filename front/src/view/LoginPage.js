@@ -51,17 +51,18 @@ class LoginPage extends React.Component {
       this.state.isShow = false;
     }
     return (
-      <ScrollView >
+      <ScrollView>
         <ReturnHead
           navigation={this.state.navigation}
           changeNav={this.changeNav.bind(this)}
-
         />
         <LoginTitle isLogin={true} />
-        <View style={{flex: 1}} >
+        <View style={{flex: 1}}>
           <Input
             placeholder={'User'}
-            leftIcon={<Icon name="user" type="font-awesome" color={themeColor} />}
+            leftIcon={
+              <Icon name="user" type="font-awesome" color={themeColor} />
+            }
             onChangeText={username => {
               this.setState({username: username});
             }}

@@ -22,7 +22,7 @@ class StartPage extends React.Component {
 
   render() {
     return (
-      <Divider style={styles.startContainer} >
+      <Divider style={styles.startContainer}>
         <Text
           h1
           h1Style={{textAlign: 'center', marginBottom: 200, color: '#ffffff'}}>
@@ -30,25 +30,22 @@ class StartPage extends React.Component {
         </Text>
 
         <Button
-            buttonStyle={styles.button}
-            containerStyle={styles.buttonContainer}
-            title="登录"
-            titleStyle={styles.buttonTitle}
-            type="clear"
-            onPress={() => this.state.navigation.navigate('Login')}
+          buttonStyle={styles.button}
+          containerStyle={styles.buttonContainer}
+          title="登录"
+          titleStyle={styles.buttonTitle}
+          type="clear"
+          onPress={() => this.state.navigation.navigate('Login')}
         />
 
         <Button
-
-            buttonStyle={styles.button}
-            containerStyle={styles.buttonContainer}
-            title="注册"
-            titleStyle={styles.buttonTitle}
-            type="clear"
-            onPress={() => this.state.navigation.navigate('Register')}
+          buttonStyle={styles.button}
+          containerStyle={styles.buttonContainer}
+          title="注册"
+          titleStyle={styles.buttonTitle}
+          type="clear"
+          onPress={() => this.state.navigation.navigate('Register')}
         />
-
-
       </Divider>
     );
   }

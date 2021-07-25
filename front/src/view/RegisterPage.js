@@ -118,7 +118,6 @@ class RegisterPage extends React.Component {
             containerStyle={styles.buttonContainer}
             title="注册"
             titleStyle={styles.buttonTitle1}
-
             type="outline"
             disabled={!canClick}
             onPress={() => this.state.navigation.navigate('Home')}
