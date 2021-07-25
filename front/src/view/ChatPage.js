@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
         flex:1,
     },
     options: {
-        marginBottom:50
+        marginBottom:50,
     },
 });
 
@@ -57,7 +57,9 @@ export class ChatPage extends React.Component {
                     />}
                 />
 
-                <ChatRoomScreen avatar={BotList[params.botId].avatar_url} />
+                <ChatRoomScreen avatar={BotList[params.botId].avatar_url}
+                                BotName={BotList[params.botId].name}
+                />
                 <SpeedDial style={styles.options}
                            isOpen={this.state.OptionsOpen}
                            icon={{ name: 'add', color: '#fff' }}
