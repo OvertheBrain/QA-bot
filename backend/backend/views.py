@@ -11,15 +11,7 @@ from .qa import qa
 
 class ChatBotApiView(View):
     chatterbot = ChatBot(**settings.CHATTERBOT)
-    chatterbot.storage.drop()
-    # def api(self, request, *args, **kwargs):
-    #     # x = request.POST.get('message')
-    #     # return qa(x)
-    #     input_data = request.POST.get('message')
-    #     response = self.chatterbot.get_response(input_data)
-    #
-    #     response_data = response.serialize()
-    #     return JsonResponse(response_data, status=200)
+
     def post(self, request, *args, **kwargs):
         # x = request.POST.get('message')
         # return qa(x)
@@ -28,7 +20,7 @@ class ChatBotApiView(View):
 
         # response_data = response.serialize()
         res = {
-            'reply': response.text
+            'reply': response.text,
         }
         return HttpResponse(json.dumps(res), content_type='application/json')
 

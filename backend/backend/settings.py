@@ -43,16 +43,15 @@ INSTALLED_APPS = [
 CHATTERBOT = {
     'name': 'Ron Obvious',
     'django_app_name': 'django_chatterbot',
-    # 'read_only': True,
+    'read_only': True,
     'logic_adapters': [
         'chatterbot.logic.BestMatch',
-        'chatterbot.logic.MathematicalEvaluation',
-        'chatterbot.logic.TimeLogicAdapter',
-
+        # 'chatterbot.logic.MathematicalEvaluation',
+        # 'chatterbot.logic.TimeLogicAdapter',
         {
             'import_path': 'chatterbot.logic.LowConfidenceAdapter',
-            'threshold': 0.65,  # 低于置信度，则默认回答
-            'default_response': 'I don know', }
+            'threshold': 0.85,  # 低于置信度，则默认回答
+            'default_response': 'Sorry,I don\'t know', }
     ],
     'trainer': 'chatterbot.trainers.ChatterBotCorpusTrainer',
     'training_data': [
