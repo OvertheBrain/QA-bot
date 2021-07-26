@@ -24,11 +24,11 @@ function LoginScreen({navigation}) {
 function RegisterScreen({navigation}) {
   return <RegisterPage navigation={navigation} />;
 }
-function ChatScreen({route,navigation}) {
+function ChatScreen({route, navigation}) {
   return <ChatPage route={route} navigation={navigation} />;
 }
-function DeveloperScreen({navigation}){
-  return <DeveloperPage navigation={navigation} />
+function DeveloperScreen({navigation}) {
+  return <DeveloperPage navigation={navigation} />;
 }
 function Navigator() {
   return (
@@ -37,16 +37,12 @@ function Navigator() {
         screenOptions={{
           headerShown: false,
         }}>
-        <Stack.Screen
-          name="Start"
-          component={StartScreen}
-
-        />
+        <Stack.Screen name="Start" component={StartScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Register" component={RegisterScreen} />
-        <Stack.Screen name="Chat"  component={ChatScreen} />
-        <Stack.Screen name="Developer"  component={DeveloperScreen} />
+        <Stack.Screen name="Chat" component={ChatScreen} />
+        <Stack.Screen name="Developer" component={DeveloperScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

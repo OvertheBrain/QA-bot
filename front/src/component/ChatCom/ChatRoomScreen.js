@@ -24,7 +24,7 @@ export default function ChatRoomScreen(props) {
   }, []);
   const onSend = useCallback((msg = []) => {
     setMessages(previousMessages => GiftedChat.append(previousMessages, msg));
-    console.log(msg[0].text);
+    console.log('Q:' + msg[0].text);
     const {avatar} = props;
     SendService(msg[0].text, data => {
       console.log(data);
@@ -44,6 +44,7 @@ export default function ChatRoomScreen(props) {
     });
   }, []);
 
+  // eslint-disable-next-line no-shadow
   const renderBubble = props => {
     return (
       <Bubble
@@ -97,6 +98,7 @@ export default function ChatRoomScreen(props) {
     />
   );
 }
+
 const styles = StyleSheet.create({
   sendBtn: {
     width: 63,

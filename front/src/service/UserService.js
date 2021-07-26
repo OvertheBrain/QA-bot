@@ -11,7 +11,7 @@ export const SendService = (message, callback) => {
       return response.json();
     })
     .then(data => {
-      console.log(data);
+      // console.log(data);
       callback(data);
     })
     .catch(error => {
