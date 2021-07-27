@@ -51,8 +51,7 @@ CHATTERBOT = {
         # 'chatterbot.logic.MathematicalEvaluation',
         # 'chatterbot.logic.TimeLogicAdapter',
         {
-            # 'import_path': 'chatterbot.logic.LowConfidenceAdapter',
-            'import_path': 'chatterbot.logic.ClosestMeaningAdapter',
+            'import_path': 'chatterbot.logic.LowConfidenceAdapter',
             'threshold': 0.35,  # 低于置信度，则默认回答
             'default_response': 'Sorry,I don\'t know', }
     ],
