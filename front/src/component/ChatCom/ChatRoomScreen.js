@@ -22,6 +22,7 @@ export default function ChatRoomScreen(props) {
       },
     ]);
   }, []);
+  let index = 2;
   const onSend = useCallback((msg = []) => {
     setMessages(previousMessages => GiftedChat.append(previousMessages, msg));
     console.log('Q:' + msg[0].text);
@@ -29,7 +30,7 @@ export default function ChatRoomScreen(props) {
     SendService(msg[0].text, data => {
       console.log(data);
       let msg1 = {
-        _id: 1,
+        _id: index,
         text: data.reply,
         createdAt: new Date(),
         user: {
@@ -42,6 +43,7 @@ export default function ChatRoomScreen(props) {
         GiftedChat.append(previousMessages, msg1),
       );
     });
+    index++;
   }, []);
 
   // eslint-disable-next-line no-shadow

@@ -41,21 +41,25 @@ INSTALLED_APPS = [
 ]
 
 CHATTERBOT = {
-    'name': 'Ron Obvious',
+    'name': 'My bot',
     'django_app_name': 'django_chatterbot',
     'read_only': True,
     'logic_adapters': [
-        'chatterbot.logic.BestMatch',
+        {
+            'import_path': 'chatterbot.logic.BestMatch',
+        },
         # 'chatterbot.logic.MathematicalEvaluation',
         # 'chatterbot.logic.TimeLogicAdapter',
         {
-            'import_path': 'chatterbot.logic.LowConfidenceAdapter',
-            'threshold': 0.85,  # 低于置信度，则默认回答
+            # 'import_path': 'chatterbot.logic.LowConfidenceAdapter',
+            'import_path': 'chatterbot.logic.ClosestMeaningAdapter',
+            'threshold': 0.35,  # 低于置信度，则默认回答
             'default_response': 'Sorry,I don\'t know', }
     ],
     'trainer': 'chatterbot.trainers.ChatterBotCorpusTrainer',
     'training_data': [
-        'chatterbot.corpus.english'
+        'chatterbot.corpus.english',
+        'chatterbot.corpus.chinese',
     ],
 }
 MIDDLEWARE = [

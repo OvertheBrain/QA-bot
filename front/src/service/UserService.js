@@ -1,6 +1,6 @@
 export const SendService = (message, callback) => {
   const data = {
-    'text': message,
+    text: message,
   };
 
   fetch('http://10.0.2.2:8000/test/', {
