@@ -1,12 +1,13 @@
 import React, {useState, useCallback, useEffect} from 'react';
 import {GiftedChat, Bubble, Send} from 'react-native-gifted-chat';
 import 'dayjs/locale/zh-cn';
-import {View, Text, StyleSheet, SafeAreaView} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import {themeColor} from '../../styles';
 import {SendService} from '../../service/UserService';
 
 export default function ChatRoomScreen(props) {
   const [messages, setMessages] = useState([]);
+
   useEffect(() => {
     const {avatar, BotName} = props;
     setMessages([
@@ -23,6 +24,8 @@ export default function ChatRoomScreen(props) {
     ]);
   }, []);
 
+  let index = 2;
+
   const onSend = useCallback((msg = []) => {
     setMessages(previousMessages => GiftedChat.append(previousMessages, msg));
     console.log(msg[0].text);
@@ -30,7 +33,7 @@ export default function ChatRoomScreen(props) {
     SendService(msg[0].text, data => {
       console.log(data);
       let msg1 = {
-        _id: 1,
+        _id: index,
         text: data.reply,
         createdAt: new Date(),
         user: {
@@ -42,6 +45,7 @@ export default function ChatRoomScreen(props) {
       setMessages(previousMessages =>
         GiftedChat.append(previousMessages, msg1),
       );
+      index++;
     });
   }, []);
 
@@ -67,8 +71,7 @@ export default function ChatRoomScreen(props) {
     );
   };
 
-  const PressAvatar = () =>{
-  };
+  const PressAvatar = () => {};
 
   const renderSend = props => {
     return (
@@ -102,6 +105,7 @@ export default function ChatRoomScreen(props) {
     />
   );
 }
+
 const styles = StyleSheet.create({
   sendBtn: {
     width: 63,

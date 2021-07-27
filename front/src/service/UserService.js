@@ -1,6 +1,6 @@
 export const SendService = (message, callback) => {
   const data = {
-    message: message,
+    'text': message,
   };
   const url = 'http://10.0.2.2:8000/test/';
   postRequest(url, data, callback);
@@ -16,7 +16,8 @@ let postRequest = (url, json, callback) => {
     credentials: 'include',
   };
   fetch(url, {
-    method: 'GET',
+    method: 'POST',
+    body: JSON.stringify(json),
   })
     .then(response => {
       return response.json();
