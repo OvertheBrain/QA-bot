@@ -1,9 +1,19 @@
-/**
- * @format
- */
-
+import React, {Component} from 'react';
 import {AppRegistry} from 'react-native';
-import App from './App';
-import {name as appName} from './app.json';
+import {Tester, TestHookStore} from 'cavy';
+import ExampleSpec from './specs/exampleSpec';
 
-AppRegistry.registerComponent(appName, () => App);
+const testHookStore = new TestHookStore();
+
+class AppWrapper extends Component {
+  render() {
+    return (
+      // eslint-disable-next-line react/jsx-no-comment-textnodes
+      <Tester specs={[ExampleSpec]} store={testHookStore}>
+        // Your app goes here
+      </Tester>
+    );
+  }
+}
+
+AppRegistry.registerComponent('yourAppName', () => AppWrapper);
