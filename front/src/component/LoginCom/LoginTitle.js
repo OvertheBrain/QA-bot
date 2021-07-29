@@ -3,6 +3,7 @@ import {Header, Text} from 'react-native-elements';
 import {Icon} from 'react-native-elements/dist/icons/Icon';
 import {ScrollView, View} from 'react-native';
 import {themeColor} from '../../styles';
+import {hook, wrap} from 'cavy';
 
 /**
  * LoginTitle - Show the title of Login or Register
@@ -15,9 +16,11 @@ class LoginTitle extends React.Component {
     };
   }
   render() {
+    const {generateTestHook} = this.props;
+    const TestableText = wrap(Text);
     return this.state.isLogin ? (
       <View style={{flex: 2}}>
-        <Text
+        <TestableText
           h1
           h1Style={{
             textAlign: 'center',
@@ -25,9 +28,10 @@ class LoginTitle extends React.Component {
             marginBottom: 20,
             color: themeColor,
             fontSize: 43,
-          }}>
+          }}
+          ref={generateTestHook('Login.title')}>
           Login
-        </Text>
+        </TestableText>
       </View>
     ) : (
       <View style={{flex: 1}}>
@@ -45,4 +49,6 @@ class LoginTitle extends React.Component {
     );
   }
 }
-export default LoginTitle;
+// export default LoginTitle;
+const TestableScene = hook(LoginTitle);
+export default TestableScene;

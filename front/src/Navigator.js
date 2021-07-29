@@ -9,11 +9,15 @@ import LoginPage from './view/LoginPage';
 import RegisterPage from './view/RegisterPage';
 import ChatPage from './view/ChatPage';
 import DeveloperPage from './view/DeveloperPage';
+import TestableStart from './view/StartPage';
 // Navigation Usage：onPress={() => navigation.navigate('Details')}
 const Stack = createStackNavigator();
 //传递参数
+// function StartScreen({navigation}) {
+//   return <StartPage navigation={navigation} />;
+// }
 function StartScreen({navigation}) {
-  return <StartPage navigation={navigation} />;
+  return <TestableStart navigation={navigation} />;
 }
 function HomeScreen({navigation}) {
   return <UserListPage navigation={navigation} />;

@@ -19,15 +19,26 @@ class RightIcon extends React.Component {
   handleChange() {
     this.props.changeProp(this.state.visible, this.state.visIcon);
   }
-
   render() {
     const eyeIcon = ['eye-slash', 'eye'];
+    let iconView = this.state.isShow ? (
+      <Icon
+        name={this.state.visIcon ? eyeIcon[0] : eyeIcon[1]}
+        type={'font-awesome'}
+        color={themeColor}
+        onPress={() => {
+          this.setState({
+            visible: !this.state.visible,
+            visIcon: !this.state.visIcon,
+          });
+          this.handleChange();
+        }}
+      />
+    ) : null;
     return (
       <View>
         <Icon
-          name={
-            this.props.isShow && (this.state.visIcon ? eyeIcon[0] : eyeIcon[1])
-          }
+          name={this.state.visIcon ? eyeIcon[0] : eyeIcon[1]}
           type={'font-awesome'}
           color={themeColor}
           onPress={() => {

@@ -19,14 +19,14 @@ class ReturnHead extends React.Component {
   }
   render() {
     return (
-      <View style={{flex: 1}} >
+      <View style={{flex: 1}}>
         <Header
-            backgroundColor={themeColor}
+          backgroundColor={themeColor}
           leftComponent={
             <Icon
               name="angle-left"
               type="font-awesome"
-              color={"white"}
+              color={'white'}
               onPress={() => {
                 this.state.navigation.navigate('Start');
                 this.changeNav();
