@@ -35,16 +35,17 @@ class LoginTitle extends React.Component {
       </View>
     ) : (
       <View style={{flex: 1}}>
-        <Text
+        <TestableText
           h1
           h1Style={{
             textAlign: 'center',
             marginTop: 50,
             marginBottom: 20,
             color: themeColor,
-          }}>
+          }}
+          ref={generateTestHook('Register.title')}>
           Register
-        </Text>
+        </TestableText>
       </View>
     );
   }

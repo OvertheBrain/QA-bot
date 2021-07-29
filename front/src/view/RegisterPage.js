@@ -36,7 +36,6 @@ class RegisterPage extends React.Component {
     this.setState({navigation: n});
   }
   render() {
-    const eyeIcon = ['eye-slash', 'eye'];
     let canClick = true;
     if (this.state.firstPassword === '') {
       this.state.isShowFirst = false;
@@ -53,7 +52,6 @@ class RegisterPage extends React.Component {
     }
     let iconView1 = this.state.isShowFirst ? (
       <RightIcon
-        isShow={this.state.isShowFirst}
         visible={this.state.firstVisible}
         visIcon={this.state.firstVisIcon}
         changeProp={this.changeProps1.bind(this)}
@@ -61,7 +59,6 @@ class RegisterPage extends React.Component {
     ) : null;
     let iconView2 = this.state.isShowSecond ? (
       <RightIcon
-        isShow={this.state.isShowSecond}
         visible={this.state.secondVisible}
         visIcon={this.state.secondVisIcon}
         changeProp={this.changeProps2.bind(this)}

@@ -11,7 +11,6 @@ class RightIcon extends React.Component {
     super(props);
     this.state = {
       visible: !this.props.visible,
-      isShow: this.props.isShow,
       visIcon: this.props.visIcon,
     };
   }
@@ -21,20 +20,6 @@ class RightIcon extends React.Component {
   }
   render() {
     const eyeIcon = ['eye-slash', 'eye'];
-    let iconView = this.state.isShow ? (
-      <Icon
-        name={this.state.visIcon ? eyeIcon[0] : eyeIcon[1]}
-        type={'font-awesome'}
-        color={themeColor}
-        onPress={() => {
-          this.setState({
-            visible: !this.state.visible,
-            visIcon: !this.state.visIcon,
-          });
-          this.handleChange();
-        }}
-      />
-    ) : null;
     return (
       <View>
         <Icon

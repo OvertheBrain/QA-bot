@@ -53,7 +53,6 @@ class LoginPage extends React.Component {
     }
     let iconView = this.state.isShow ? (
       <RightIcon
-        isShow={this.state.isShow}
         visible={this.state.visible}
         visIcon={this.state.visIcon}
         changeProp={this.changeProps.bind(this)}

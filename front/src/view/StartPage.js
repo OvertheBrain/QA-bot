@@ -32,16 +32,17 @@ class StartPage extends React.Component {
           titleStyle={styles.buttonTitle}
           type="clear"
           onPress={() => this.state.navigation.navigate('Login')}
-          ref={generateTestHook('Start.Button')}
+          ref={generateTestHook('StartLogin.Button')}
         />
 
-        <Button
+        <WrappedButton
           buttonStyle={styles.button}
           containerStyle={styles.buttonContainer}
           title="注册"
           titleStyle={styles.buttonTitle}
           type="clear"
           onPress={() => this.state.navigation.navigate('Register')}
+          ref={generateTestHook('StartRegister.Button')}
         />
       </Divider>
     );
