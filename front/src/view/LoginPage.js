@@ -4,10 +4,10 @@ import {Avatar, Button, CheckBox, Header} from 'react-native-elements';
 import {Text} from 'react-native-elements';
 import {Icon} from 'react-native-elements/dist/icons/Icon';
 import {Input} from 'react-native-elements/dist/input/Input';
-import LoginTitle from '../component/LoginCom/LoginTitle';
 import RightIcon from '../component/LoginCom/RightIcon';
 import ReturnHead from '../component/LoginCom/ReturnHead';
 import {styles, themeColor} from '../styles';
+import TestableScene from '../component/LoginCom/LoginTitle';
 
 const User1 = {userName: 'sam', password: '123'};
 
@@ -50,18 +50,26 @@ class LoginPage extends React.Component {
     if (this.state.password === '') {
       this.state.isShow = false;
     }
+    let iconView = this.state.isShow ? (
+      <RightIcon
+        visible={this.state.visible}
+        visIcon={this.state.visIcon}
+        changeProp={this.changeProps.bind(this)}
+      />
+    ) : null;
     return (
-      <ScrollView >
+      <ScrollView>
         <ReturnHead
           navigation={this.state.navigation}
           changeNav={this.changeNav.bind(this)}
-
         />
-        <LoginTitle isLogin={true} />
-        <View style={{flex: 1}} >
+        <TestableScene isLogin={true} />
+        <View style={{flex: 1}}>
           <Input
             placeholder={'User'}
-            leftIcon={<Icon name="user" type="font-awesome" color={themeColor} />}
+            leftIcon={
+              <Icon name="user" type="font-awesome" color={themeColor} />
+            }
             onChangeText={username => {
               this.setState({username: username});
             }}
@@ -74,14 +82,7 @@ class LoginPage extends React.Component {
             leftIcon={
               <Icon name={'lock'} type="font-awesome" color={themeColor} />
             }
-            rightIcon={
-              <RightIcon
-                isShow={this.state.isShow}
-                visible={this.state.visible}
-                visIcon={this.state.visIcon}
-                changeProp={this.changeProps.bind(this)}
-              />
-            }
+            rightIcon={iconView}
             onChangeText={password => {
               this.setState({isShow: true, password: password});
             }}

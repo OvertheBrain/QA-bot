@@ -8,26 +8,22 @@ import {themeColor} from '../styles';
 export const BotList = [
   {
     name: 'Bot1',
-    avatar_url:
-      'https://seikim.com/i/2021/07/19/nqplo9.png',
+    avatar_url: 'https://seikim.com/i/2021/07/19/nqplo9.png',
     subtitle: '交大相关咨询（生活学习，图书馆等）',
   },
   {
     name: 'Bot2',
-    avatar_url:
-      'https://seikim.com/i/2021/07/19/nroe63.png',
+    avatar_url: 'https://seikim.com/i/2021/07/19/nroe63.png',
     subtitle: 'Vice Chairman',
   },
   {
     name: 'Bot3',
-    avatar_url:
-      'https://seikim.com/i/2021/07/19/nrq1o0.png',
+    avatar_url: 'https://seikim.com/i/2021/07/19/nrq1o0.png',
     subtitle: 'Uncle',
   },
   {
     name: 'Bot4',
-    avatar_url:
-      'https://seikim.com/i/2021/07/19/nrqmjj.png',
+    avatar_url: 'https://seikim.com/i/2021/07/19/nrqmjj.png',
     subtitle: 'Vice Chairman',
   },
 ];
@@ -51,7 +47,7 @@ class UserListPage extends React.Component {
     return (
       <ThemeProvider>
         <Header
-            backgroundColor={themeColor}
+          backgroundColor={themeColor}
           leftComponent={{
             icon: 'menu',
             color: '#fff',
@@ -59,28 +55,32 @@ class UserListPage extends React.Component {
             onPress: () => {
               this.state.navigation.navigate('Start');
             },
-            size:40
+            size: 40,
           }}
-          centerComponent={{text: 'Home', style: {color: '#fff',fontSize:30}}}
-          rightComponent={ <Avatar
+          centerComponent={{text: 'Home', style: {color: '#fff', fontSize: 30}}}
+          rightComponent={
+            <Avatar
               rounded
               source={{
                 uri: 'https://placeimg.com/140/140/any',
               }}
               size="medium"
-              onPress={()=>{this.props.navigation.navigate('Developer')}}
-          /> }
+              onPress={() => {
+                this.props.navigation.navigate('Developer');
+              }}
+            />
+          }
         />
 
         {BotList.map((l, i) => (
-          <ListItem key={i} bottomDivider onPress={() =>
-          {
-            this.state.navigation.navigate('Chat',{
-              botId:i
-            })
-          }
-
-          }>
+          <ListItem
+            key={i}
+            bottomDivider
+            onPress={() => {
+              this.state.navigation.navigate('Chat', {
+                botId: i,
+              });
+            }}>
             <View>
               <Avatar
                 rounded
