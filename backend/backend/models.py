@@ -3,39 +3,50 @@ from django.contrib import admin
 
 
 class User(models.Model):
-    UserId = models.AutoField(primary_key=True)
+    userid = models.AutoField(primary_key=True)
     username = models.CharField(max_length=30)
     nickname = models.CharField(max_length=30)
     password = models.CharField(max_length=255)
-    type = models.IntegerField(default=1)
     email = models.CharField(max_length=255)
     avatar = models.CharField(max_length=1000, null=True)
+    usertype =models.IntegerField(default=1)
 
-    class Meta:
-        verbose_name_plural:"用户"
+    def __str__(self):
+        return self.username
 
 
 class Developer(models.Model):
-    UserId = models.ForeignKey(User, primary_key=True, on_delete=models.CASCADE)
-    APIcount = models.IntegerField
-    billings = models.FloatField
+    devid = models.AutoField(primary_key=True)
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    APIcount = models.IntegerField(default=0)
+    billings = models.FloatField(default=0)
+
+    def __str__(self):
+        return self.user.username
+
+
 
 
 class API(models.Model):
-    APIid = models.AutoField(primary_key=True)
+    apiid = models.AutoField(primary_key=True)
     name = models.CharField(max_length=30)
-    address = models.CharField(max_length=100)
+    address = models.CharField(max_length=100 , default="")
     description = models.CharField(max_length=1000)
-    price = models.FloatField
+    price = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.name
 
 
 class APIorder(models.Model):
-    OrderId = models.AutoField(primary_key=True)
+    orderid = models.AutoField(primary_key=True)
     api = models.OneToOneField(API, on_delete=models.CASCADE)
-    devId = models.ForeignKey(Developer, on_delete=models.CASCADE)
+    dev = models.ForeignKey(Developer, on_delete=models.CASCADE)
     start_date = models.DateField(auto_now_add=True)
     count = models.IntegerField()
     end_date = models.DateField()
+
+
 
 
 admin.site.register(User)
