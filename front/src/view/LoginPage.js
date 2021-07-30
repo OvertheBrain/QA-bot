@@ -4,7 +4,6 @@ import {Avatar, Button, CheckBox, Header} from 'react-native-elements';
 import {Text} from 'react-native-elements';
 import {Icon} from 'react-native-elements/dist/icons/Icon';
 import {Input} from 'react-native-elements/dist/input/Input';
-import LoginTitle from '../component/LoginCom/LoginTitle';
 import RightIcon from '../component/LoginCom/RightIcon';
 import ReturnHead from '../component/LoginCom/ReturnHead';
 import {styles, themeColor} from '../styles';

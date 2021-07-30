@@ -50,14 +50,14 @@ CHATTERBOT = {
         # 'chatterbot.logic.TimeLogicAdapter',
         {
             'import_path': 'chatterbot.logic.LowConfidenceAdapter',
-            'threshold': 0.9,  # 低于置信度，则默认回答
+            'threshold': 0.3,  # 低于置信度，则默认回答
             'default_response': 'Sorry,I don\'t know', }
     ],
     'trainer': 'chatterbot.trainers.ChatterBotCorpusTrainer',
     'training_data': [
         # 'chatterbot.corpus.english',
         # 'chatterbot.corpus.chinese',
-        './backend/static/sjtu2'
+        './backend/static/sjtu3'
     ],
 }
 MIDDLEWARE = [

@@ -9,7 +9,7 @@ export const BotList = [
   {
     name: 'Bot1',
     avatar_url: 'https://seikim.com/i/2021/07/19/nqplo9.png',
-    subtitle: 'Vice President',
+    subtitle: '交大相关咨询（生活学习，图书馆等）',
   },
   {
     name: 'Bot2',

@@ -1,6 +1,12 @@
 import React from 'react';
 import {Header, SpeedDial} from 'react-native-elements';
-import {StyleSheet, ScrollView, View} from 'react-native';
+import {
+  StyleSheet,
+  ScrollView,
+  View,
+  PanResponder,
+  Animated,
+} from 'react-native';
 import ChatRoomScreen from '../component/ChatCom/ChatRoomScreen';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {themeColor} from '../styles';
@@ -75,18 +81,18 @@ export class ChatPage extends React.Component {
           openIcon={{name: 'close', color: '#fff'}}
           onOpen={() => this.OpenDial(1)}
           onClose={() => this.OpenDial(0)}
-          color={themeColor}>
+          color={'#18d9ea'}>
           <SpeedDial.Action
             icon={{name: 'add', color: '#fff'}}
             title="Add"
             onPress={() => console.log('Add Something')}
-            color={themeColor}
+            color={'#18d9ea'}
           />
           <SpeedDial.Action
             icon={{name: 'delete', color: '#fff'}}
             title="Delete"
             onPress={() => console.log('Delete Something')}
-            color={themeColor}
+            color={'#18d9ea'}
           />
         </SpeedDial>
       </View>
