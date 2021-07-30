@@ -1,6 +1,6 @@
 import React from 'react';
-import {ScrollView, View} from 'react-native';
-import {Avatar, Button, CheckBox, Header} from 'react-native-elements';
+import {Alert, ScrollView, View} from 'react-native';
+import {Button, CheckBox} from 'react-native-elements';
 import {Text} from 'react-native-elements';
 import {Input} from 'react-native-elements/dist/input/Input';
 import {Icon} from 'react-native-elements/dist/icons/Icon';
@@ -34,6 +34,19 @@ class RegisterPage extends React.Component {
   }
   changeNav(n) {
     this.setState({navigation: n});
+  }
+  handleRegister() {
+    if (
+      this.state.username === '' ||
+      this.state.firstPassword === '' ||
+      this.state.secondPassword === ''
+    ) {
+      Alert.alert('提示', '用户名与密码不能为空', [
+        {text: '我知道了', onPress: this.confirm},
+      ]);
+    } else {
+      this.state.navigation.navigate('Home');
+    }
   }
   render() {
     let canClick = true;
@@ -129,7 +142,7 @@ class RegisterPage extends React.Component {
             titleStyle={styles.buttonTitle1}
             type="outline"
             disabled={!canClick}
-            onPress={() => this.state.navigation.navigate('Home')}
+            onPress={() => this.handleRegister()}
           />
         </View>
       </ScrollView>

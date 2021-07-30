@@ -1,5 +1,5 @@
 import React from 'react';
-import {ScrollView, View} from 'react-native';
+import {Alert, ScrollView, View} from 'react-native';
 import {Avatar, Button, CheckBox, Header} from 'react-native-elements';
 import {Text} from 'react-native-elements';
 import {Icon} from 'react-native-elements/dist/icons/Icon';
@@ -42,7 +42,9 @@ class LoginPage extends React.Component {
     ) {
       this.state.navigation.navigate('Home');
     } else {
-      alert('用户名或者密码错误!');
+      Alert.alert('提示', '用户名或者密码错误', [
+        {text: '我知道了', onPress: this.confirm},
+      ]);
     }
   };
 
