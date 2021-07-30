@@ -1,13 +1,8 @@
 import json
-from django.views.generic.base import TemplateView
 from django.views.generic import View
 from chatterbot.ext.django_chatterbot import settings
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render
 from chatterbot import ChatBot
-
-from .models import User, Developer
-from .qa import qa
 
 
 class ChatBotApiView(View):
@@ -39,7 +34,7 @@ class ChatBotApiView(View):
 #         'reply': '呵呵'
 #     }
 #     return HttpResponse(json.dumps(res), content_type='application/json')
-def getUser(request):
-    tmp = User.objects.filter(username='A')
-    data = [{'name': obj.username, 'pass': obj.password} for obj in tmp]
-    return HttpResponse(json.dumps(data), content_type='application/json')
+# def getUser(request):
+#     tmp = User.objects.filter(username='A')
+#     data = [{'name': obj.username, 'pass': obj.password} for obj in tmp]
+#     return HttpResponse(json.dumps(data), content_type='application/json')

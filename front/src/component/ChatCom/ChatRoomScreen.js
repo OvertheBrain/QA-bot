@@ -3,7 +3,7 @@ import {GiftedChat, Bubble, Send} from 'react-native-gifted-chat';
 import 'dayjs/locale/zh-cn';
 import {View, Text, StyleSheet} from 'react-native';
 import {themeColor} from '../../styles';
-import {SendService} from '../../service/UserService';
+import {SendService} from '../../service/MessageService';
 
 export default function ChatRoomScreen(props) {
   const [messages, setMessages] = useState([]);
