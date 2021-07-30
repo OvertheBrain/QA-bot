@@ -1,4 +1,4 @@
-import postRequest from './AJAX';
+import {postRequest} from './AJAX';
 
 export const SendService = (message, callback) => {
   const data = {

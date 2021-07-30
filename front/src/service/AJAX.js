@@ -22,3 +22,4 @@ let postRequest = (url, json, callback) => {
       console.log(error);
     });
 };
+export {postRequest};
