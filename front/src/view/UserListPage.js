@@ -1,9 +1,11 @@
 import React from 'react';
-import {Badge, Button, Header, ThemeProvider} from 'react-native-elements';
+import {Badge, Button, CheckBox, Header, ThemeProvider} from 'react-native-elements';
 import {ListItem, Avatar, ButtonGroup} from 'react-native-elements';
 import {buttonGroup} from '../component/buttonGroup';
 import {View} from 'react-native';
 import {themeColor} from '../styles';
+import {hook, wrap} from 'cavy';
+import {Input} from 'react-native-elements/dist/input/Input';
 
 export const BotList = [
   {
@@ -42,6 +44,8 @@ class UserListPage extends React.Component {
     this.setState({selectedIndex});
   }
   render() {
+    const {generateTestHook} = this.props;
+    const WrappedList = wrap(ListItem);
     const buttons = ['Chat', 'Identity'];
     const {selectedIndex} = this.state;
     return (
@@ -73,7 +77,8 @@ class UserListPage extends React.Component {
         />
 
         {BotList.map((l, i) => (
-          <ListItem
+          <WrappedList
+            ref={generateTestHook('userList' + String(i))}
             key={i}
             bottomDivider
             onPress={() => {
@@ -99,11 +104,14 @@ class UserListPage extends React.Component {
               <ListItem.Title>{l.name}</ListItem.Title>
               <ListItem.Subtitle>{l.subtitle}</ListItem.Subtitle>
             </ListItem.Content>
-          </ListItem>
+          </WrappedList>
         ))}
       </ThemeProvider>
     );
   }
 }
 
-export default UserListPage;
+// export default UserListPage;
+const TestableUserList = hook(UserListPage);
+
+export default TestableUserList;

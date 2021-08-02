@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Avatar,
   Button,
+  CheckBox,
   Divider,
   Header,
   Text,
@@ -10,6 +11,8 @@ import {
 import {styles, themeColor} from '../styles';
 import {View} from 'react-native';
 import {Icon} from 'react-native-elements/dist/icons/Icon';
+import {hook, wrap} from 'cavy';
+import {Input} from 'react-native-elements/dist/input/Input';
 
 class DeveloperPage extends React.Component {
   constructor(props) {
@@ -20,6 +23,8 @@ class DeveloperPage extends React.Component {
   }
 
   render() {
+    const {generateTestHook} = this.props;
+    const WrappedAvatar = wrap(Avatar);
     return (
       <View
         style={{
@@ -63,7 +68,8 @@ class DeveloperPage extends React.Component {
               width: '60%',
               flex: 4,
             }}>
-            <Avatar
+            <WrappedAvatar
+              ref={generateTestHook('Develop.avatar')}
               rounded
               size={'large'}
               source={{uri: 'https://placeimg.com/140/140/any'}}
@@ -123,5 +129,8 @@ class DeveloperPage extends React.Component {
     );
   }
 }
+//
+// export default DeveloperPage;
+const TestableDevelop = hook(DeveloperPage);
 
-export default DeveloperPage;
+export default TestableDevelop;

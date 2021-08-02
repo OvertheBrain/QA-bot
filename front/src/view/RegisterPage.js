@@ -8,6 +8,7 @@ import LoginTitle from '../component/LoginCom/LoginTitle';
 import RightIcon from '../component/LoginCom/RightIcon';
 import ReturnHead from '../component/LoginCom/ReturnHead';
 import {styles, themeColor} from '../styles';
+import {GetUser, RegisterService} from '../service/UserService';
 
 class RegisterPage extends React.Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class RegisterPage extends React.Component {
       username: '',
       firstPassword: '',
       secondPassword: '',
+      usertype: 0,
       firstVisible: true,
       secondVisible: true,
       isShowFirst: false,
@@ -24,6 +26,7 @@ class RegisterPage extends React.Component {
       firstVisIcon: true,
       secondVisIcon: true,
       isSame: true,
+      isExist: false,
     };
   }
   changeProps1(v, i) {
@@ -35,6 +38,22 @@ class RegisterPage extends React.Component {
   changeNav(n) {
     this.setState({navigation: n});
   }
+  checkExist() {
+    GetUser(this.state.username, data => {
+      console.log(data);
+      if (data.msg === 'exist') {
+        this.setState({isExist: true});
+      } else {
+        this.setState({isExist: false});
+      }
+    });
+  }
+  /**
+   * handleRegister - 注册
+   * 如果勾选开发者，注册成功跳转到开发者页面，普通用户跳转到机器人选择页面。
+   * 存在用户，提示已存在该用户，并重新输入。
+   * 如果两次输入密码不一致，无法注册
+   * */
   handleRegister() {
     if (
       this.state.username === '' ||
@@ -45,7 +64,27 @@ class RegisterPage extends React.Component {
         {text: '我知道了', onPress: this.confirm},
       ]);
     } else {
-      this.state.navigation.navigate('Home');
+      this.setState({usertype: this.state.checked});
+      RegisterService(
+        this.state.username,
+        this.state.firstPassword,
+        this.state.usertype,
+        data => {
+          console.log(data);
+          let message = data.msg;
+          if (message === 'exist') {
+            Alert.alert('提示', '用户名已存在', [
+              {text: '我知道了', onPress: this.confirm},
+            ]);
+          } else {
+            if (this.state.usertype) {
+              this.state.navigation.navigate('Developer');
+            } else {
+              this.state.navigation.navigate('Home');
+            }
+          }
+        },
+      );
     }
   }
   render() {
@@ -91,6 +130,9 @@ class RegisterPage extends React.Component {
             onChangeText={username => {
               this.setState({username: username});
             }}
+            onBlur={() => this.checkExist()}
+            errorStyle={{color: 'red'}}
+            errorMessage={this.state.isExist ? 'username exists' : ''}
           />
         </View>
         <View style={{flex: 1}}>
@@ -117,10 +159,11 @@ class RegisterPage extends React.Component {
             onChangeText={password => {
               this.setState({isShowSecond: true, secondPassword: password});
             }}
+            errorStyle={{color: 'red'}}
+            errorMessage={
+              !this.state.isSame ? 'the password is not the same' : ''
+            }
           />
-          {!this.state.isSame && (
-            <Text style={{color: 'red'}}>the password is not the same</Text>
-          )}
         </View>
         <View style={{flex: 1}}>
           <CheckBox

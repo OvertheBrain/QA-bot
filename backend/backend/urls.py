@@ -15,11 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from backend.views import ChatBotApiView, getUser
+
+from backend import views
+from backend.views import ChatBotApiView
 
 urlpatterns = [
+    path('login/', views.loginView),
+    path('register/', views.registerView),
+    path('getuser/', views.getuserView),
     path('', admin.site.urls),
-    path('getUser/', getUser),
     path('test/', ChatBotApiView.as_view()),
     # path('sendMsg/', views.api),
 ]
