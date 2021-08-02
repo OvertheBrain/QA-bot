@@ -9,6 +9,7 @@ import LoginPage from './view/LoginPage';
 import RegisterPage from './view/RegisterPage';
 import ChatPage from './view/ChatPage';
 import DeveloperPage from './view/DeveloperPage';
+import BuyPage from './view/BuyPage';
 import TestableStart from './view/StartPage';
 // Navigation Usage：onPress={() => navigation.navigate('Details')}
 const Stack = createStackNavigator();
@@ -19,6 +20,11 @@ const Stack = createStackNavigator();
 function StartScreen({navigation}) {
   return <TestableStart navigation={navigation} />;
 }
+
+function BuyScreen({navigation}) {
+  return <BuyPage navigation={navigation} />;
+}
+
 function HomeScreen({navigation}) {
   return <UserListPage navigation={navigation} />;
 }
@@ -41,12 +47,14 @@ function Navigator() {
         screenOptions={{
           headerShown: false,
         }}>
+        <Stack.Screen name="BuyAPI" component={BuyScreen} />
         <Stack.Screen name="Start" component={StartScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Register" component={RegisterScreen} />
         <Stack.Screen name="Chat" component={ChatScreen} />
         <Stack.Screen name="Developer" component={DeveloperScreen} />
+
       </Stack.Navigator>
     </NavigationContainer>
   );
