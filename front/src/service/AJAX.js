@@ -15,12 +15,11 @@ let postRequest = (url, json, callback) => {
       return response.json();
     })
     .then(data => {
-      console.log(data);
+      console.log('data:', data);
       callback(data);
     })
     .catch(error => {
       console.log(error);
     });
 };
-
-export {postRequest}
+export {postRequest};

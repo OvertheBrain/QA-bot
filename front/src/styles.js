@@ -9,6 +9,9 @@ export const styles = StyleSheet.create({
     height: '100%',
     paddingBottom: 50,
   },
+  view: {
+    flex: 1,
+  },
   button: {
     height: 50,
     borderRadius: 40,
