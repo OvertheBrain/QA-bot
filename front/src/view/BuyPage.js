@@ -6,10 +6,11 @@ import {
   Overlay,
 } from 'react-native-elements';
 import React from 'react';
-import {View, StyleSheet, ScrollView, Text} from 'react-native';
+import {View, StyleSheet, ScrollView, Text, AsyncStorage} from 'react-native';
 import {themeColor} from '../styles';
 import ApiCard from '../component/apiCom/apiCard';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {addOrder} from '../service/DevService';
 
 const styles = StyleSheet.create({
   container: {
@@ -31,11 +32,26 @@ class BuyPage extends React.Component {
     this.state = {
       navigation: this.props.navigation,
       BuyVisibility: false,
-      PurchaseAlert: true,
+      PurchaseAlert: false,
     };
   }
 
-  buyAPI = () => {};
+  buyAPI = days => {
+    let user = JSON.parse(AsyncStorage.getItem('user'));
+    let userID = user.userid;
+    let devID = user.devid;
+    let apiID = this.props.route;
+    let json = {
+      userID: userID,
+      devID: devID,
+      apiID: apiID,
+      days: days,
+    };
+    const callback = data => {
+      this.setState({PurchaseAlert: true});
+    };
+    addOrder(json, callback);
+  };
 
   BuyList = [
     {title: '7天'},
@@ -43,11 +59,10 @@ class BuyPage extends React.Component {
     {title: '90天'},
     {
       title: 'Cancel',
-      containerStyle: {backgroundColor: 'red'},
+      containerStyle: {backgroundColor: themeColor},
       titleStyle: {color: 'white'},
       onPress: () => {
         this.setState({BuyVisibility: false});
-        console.log('你好');
       },
     },
   ];
@@ -86,7 +101,7 @@ class BuyPage extends React.Component {
         />
 
         <ScrollView>
-          <ApiCard></ApiCard>
+          <ApiCard />
         </ScrollView>
 
         <Button
@@ -112,6 +127,7 @@ class BuyPage extends React.Component {
             </ListItem>
           ))}
         </BottomSheet>
+
         <Overlay isVisible={this.state.PurchaseAlert}>
           <Text>恭喜你，完成订阅</Text>
           <Button

@@ -25,8 +25,6 @@ class Developer(models.Model):
         return self.user.username
 
 
-
-
 class API(models.Model):
     apiid = models.AutoField(primary_key=True)
     name = models.CharField(max_length=30)

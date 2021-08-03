@@ -1,5 +1,5 @@
 import React from 'react';
-import {Alert, ScrollView, View} from 'react-native';
+import {Alert, ScrollView, View, AsyncStorage} from 'react-native';
 import {Button, CheckBox} from 'react-native-elements';
 import {Icon} from 'react-native-elements/dist/icons/Icon';
 import {Input} from 'react-native-elements/dist/input/Input';
@@ -63,6 +63,8 @@ class LoginPage extends React.Component {
         } else {
           this.state.navigation.navigate('Home');
         }
+        AsyncStorage.setItem('user', JSON.stringify(data));
+        console.log(AsyncStorage.getItem('user'));
       } else {
         Alert.alert('提示', this.state.msg, [
           {

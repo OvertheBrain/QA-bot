@@ -1,5 +1,11 @@
 import React from 'react';
-import {Badge, Button, CheckBox, Header, ThemeProvider} from 'react-native-elements';
+import {
+  Badge,
+  Button,
+  CheckBox,
+  Header,
+  ThemeProvider,
+} from 'react-native-elements';
 import {ListItem, Avatar, ButtonGroup} from 'react-native-elements';
 import {buttonGroup} from '../component/buttonGroup';
 import {View} from 'react-native';

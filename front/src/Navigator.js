@@ -24,10 +24,9 @@ function StartScreen({navigation}) {
   return <TestableStart navigation={navigation} />;
 }
 
-function BuyScreen({navigation}) {
-  return <BuyPage navigation={navigation} />;
+function BuyScreen({route, navigation}) {
+  return <BuyPage route={route} navigation={navigation} />;
 }
-
 function HomeScreen({navigation}) {
   return <TestableUserList navigation={navigation} />;
 }
@@ -57,7 +56,6 @@ function Navigator() {
         <Stack.Screen name="Register" component={RegisterScreen} />
         <Stack.Screen name="Chat" component={ChatScreen} />
         <Stack.Screen name="Developer" component={DeveloperScreen} />
-
       </Stack.Navigator>
     </NavigationContainer>
   );
