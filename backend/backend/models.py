@@ -42,9 +42,9 @@ class APIorder(models.Model):
     orderid = models.AutoField(primary_key=True)
     api = models.OneToOneField(API, on_delete=models.CASCADE)
     dev = models.ForeignKey(Developer, on_delete=models.CASCADE)
-    start_date = models.DateField()
+    start_date = models.DateTimeField()
     count = models.IntegerField()
-    end_date = models.DateField()
+    end_date = models.DateTimeField()
 
 
 
