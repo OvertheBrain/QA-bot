@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
   },
   price: {
     flexDirection: 'row',
-    flexWrap: "wrap",
+    flexWrap: 'wrap',
   },
 });
 
@@ -38,7 +38,7 @@ class ApiCard extends React.Component {
           <Text h3={1}>参数表</Text>
           <Text>sadscsdsdsadsadsad</Text>
         </Divider>
-          <Text h3={1}>价目表</Text>
+        <Text h3={1}>价目表</Text>
         <Divider style={styles.price}>
           <PricingCard
             color="#4f9deb"
