@@ -15,11 +15,18 @@ export const GetUser = (username, callback) => {
   const url = 'http://10.0.2.2:8000/getuser/';
   postRequest(url, data, callback);
 };
-export const RegisterService = (username, password, usertype, callback) => {
+export const RegisterService = (
+  username,
+  password,
+  usertype,
+  email,
+  callback,
+) => {
   const data = {
     username: username,
     password: password,
     usertype: usertype,
+    email: email,
   };
   const url = 'http://10.0.2.2:8000/register/';
   postRequest(url, data, callback);
