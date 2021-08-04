@@ -25,6 +25,8 @@ class RegisterPage extends React.Component {
       isShowSecond: false,
       firstVisIcon: true,
       secondVisIcon: true,
+      emailAddress: '',
+      emailError: false,
       isSame: true,
       isExist: false,
     };
@@ -48,6 +50,15 @@ class RegisterPage extends React.Component {
       }
     });
   }
+  checkEmail() {
+    let regex =
+      /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+    if (!regex.test(this.state.emailAddress)) {
+      this.setState({emailError: true});
+    } else {
+      this.setState({emailError: false});
+    }
+  }
   /**
    * handleRegister - 注册
    * 如果勾选开发者，注册成功跳转到开发者页面，普通用户跳转到机器人选择页面。
@@ -69,6 +80,7 @@ class RegisterPage extends React.Component {
         this.state.username,
         this.state.firstPassword,
         this.state.usertype,
+        this.state.emailAddress,
         data => {
           console.log(data);
           let message = data.userdata;
@@ -89,7 +101,8 @@ class RegisterPage extends React.Component {
     }
   }
   render() {
-    let canClick = true;
+    let canClick;
+    let emailMsg = '邮箱地址为空或者格式错误';
     if (this.state.firstPassword === '') {
       this.state.isShowFirst = false;
     }
@@ -133,7 +146,24 @@ class RegisterPage extends React.Component {
             }}
             onBlur={() => this.checkExist()}
             errorStyle={{color: 'red'}}
-            errorMessage={this.state.isExist ? 'username exists' : ''}
+            errorMessage={this.state.isExist ? '用户名已存在' : ''}
+          />
+        </View>
+        <View style={{flex: 1}}>
+          <Input
+            placeholder={'Email'}
+            leftIcon={<Icon name={'mail'} type="AntDesign" color="#1d3f63" />}
+            onChangeText={email => {
+              this.setState({emailAddress: email});
+              this.checkEmail();
+            }}
+            onBlur={() => {
+              if (this.state.emailAddress === '') {
+                this.setState({emailError: true});
+              }
+            }}
+            errorStyle={{color: 'red'}}
+            errorMessage={this.state.emailError ? emailMsg : ''}
           />
         </View>
         <View style={{flex: 1}}>
@@ -161,9 +191,7 @@ class RegisterPage extends React.Component {
               this.setState({isShowSecond: true, secondPassword: password});
             }}
             errorStyle={{color: 'red'}}
-            errorMessage={
-              !this.state.isSame ? 'the password is not the same' : ''
-            }
+            errorMessage={!this.state.isSame ? '两次输入密码不一致' : ''}
           />
         </View>
         <View style={{flex: 1}}>
