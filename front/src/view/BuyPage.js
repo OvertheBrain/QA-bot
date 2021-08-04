@@ -33,12 +33,22 @@ class BuyPage extends React.Component {
       navigation: this.props.navigation,
       BuyVisibility: false,
       PurchaseAlert: false,
+      user: {},
     };
   }
 
+  async componentDidMount() {
+    try {
+      const shop = await AsyncStorage.getItem('user');
+      this.setState({user: shop});
+      console.log(this.state.user);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   buyAPI = days => {
-    let user = AsyncStorage.getItem('user');
-    console.log(user);
+    let user = JSON.parse(this.state.user);
     let userID = user.userid;
     let devID = user.devid;
     //let apiID = this.props.route;
@@ -46,7 +56,7 @@ class BuyPage extends React.Component {
       userID: userID,
       devID: devID,
       //apiID: apiID,
-      //days: days,
+      days: days,
     };
     console.log(json);
     const callback = data => {

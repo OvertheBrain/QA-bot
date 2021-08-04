@@ -10,7 +10,8 @@ def addOrder(request):
     post = json.loads(request.body.decode('utf-8'))
     userid = post['userID']
     devid = post['devID']
-    apiid = post['apiID']
+    # apiid = post['apiID']
     start_time = datetime.datetime.now()
     now = start_time.strftime('%Y-%m-%d %H:%M')
+
     print('start_date:'+now)

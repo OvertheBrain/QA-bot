@@ -59,13 +59,13 @@ class LoginPage extends React.Component {
        * 开发者usertype为1，普通用户usertype为0
        * */
       if (userdata === 'right') {
+        AsyncStorage.setItem('user', JSON.stringify(data)).then(r => {});
+        console.log(JSON.stringify(data));
         if (this.state.usertype) {
           this.state.navigation.navigate('BuyAPI');
         } else {
           this.state.navigation.navigate('Home');
         }
-        AsyncStorage.setItem('user', JSON.stringify(data));
-        console.log(AsyncStorage.getItem('user'));
       } else {
         Alert.alert('提示', this.state.msg, [
           {
