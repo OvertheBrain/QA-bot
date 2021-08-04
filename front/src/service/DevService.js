@@ -1,6 +1,7 @@
 import {postRequest} from './AJAX';
+import {server} from './settings';
 
 export const addOrder = (data, callback) => {
-  const url = 'http://10.0.2.2:8000/addOrder/';
+  const url = server + 'addOrder/';
   postRequest(url, data, callback);
 };
