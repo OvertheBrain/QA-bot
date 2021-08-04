@@ -6,7 +6,14 @@ import {
   Overlay,
 } from 'react-native-elements';
 import React from 'react';
-import {View, StyleSheet, ScrollView, Text, AsyncStorage} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  Text,
+  AsyncStorage,
+  Alert,
+} from 'react-native';
 import {themeColor} from '../styles';
 import ApiCard from '../component/apiCom/apiCard';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -64,7 +71,18 @@ class BuyPage extends React.Component {
     };
     console.log(json);
     const callback = data => {
-      this.setState({PurchaseAlert: true});
+      console.log(data);
+      let userdata = '';
+      userdata = data.userdata;
+      console.log(userdata);
+      if (userdata == 'success') {
+        Alert.alert('提示', '恭喜您，购买成功', [
+          {
+            text: '我知道了',
+            onPress: this.confirm,
+          },
+        ]);
+      }
     };
     addOrder(json, callback);
   };
