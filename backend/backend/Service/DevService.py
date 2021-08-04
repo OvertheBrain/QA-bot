@@ -12,7 +12,7 @@ def addOrder(request):
     devid = post['devID']
     length = post['days']
     count = 0
-    apiid = post['apiID']
+    apiid = 1
     start_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M')
     print('start_date:'+start_time)
     end_time = (datetime.datetime.now() + datetime.timedelta(days=length)).strftime("%Y-%m-%d %H:%M")

@@ -1,10 +1,4 @@
-import {
-  Header,
-  BottomSheet,
-  Button,
-  ListItem,
-  Overlay,
-} from 'react-native-elements';
+import {Header, BottomSheet, Button, ListItem} from 'react-native-elements';
 import React from 'react';
 import {
   View,
@@ -33,13 +27,11 @@ const styles = StyleSheet.create({
   },
 });
 
-class BuyPage extends React.Component {
+class OrderDetailPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       navigation: this.props.navigation,
-      BuyVisibility: false,
-      PurchaseAlert: false,
       user: {},
     };
   }
@@ -56,42 +48,6 @@ class BuyPage extends React.Component {
 
   BuyCallback = buying => {
     this.setState({BuyVisibility: buying});
-  };
-
-  buyAPI = days => {
-    let user = JSON.parse(this.state.user);
-    let userID = user.userid;
-    let devID = user.devid;
-    //let apiID = this.props.route;
-    const json = {
-      userID: userID,
-      devID: devID,
-      //apiID: apiID,
-      days: days,
-    };
-    console.log(json);
-    const callback = data => {
-      console.log(data);
-      let userdata = '';
-      userdata = data.userdata;
-      console.log(userdata);
-      if (userdata == 'success') {
-        Alert.alert('提示', '恭喜您，购买成功', [
-          {
-            text: '我知道了',
-            onPress: this.confirm,
-          },
-        ]);
-      } else {
-        Alert.alert('提示', '下单出现错误', [
-          {
-            text: '我知道了',
-            onPress: this.confirm,
-          },
-        ]);
-      }
-    };
-    addOrder(json, callback);
   };
 
   BuyList = [
@@ -147,7 +103,7 @@ class BuyPage extends React.Component {
             />
           }
           centerComponent={{
-            text: 'API详情',
+            text: '订单详情',
             style: {color: '#fff', fontSize: 30},
           }}
           rightComponent={
@@ -175,24 +131,9 @@ class BuyPage extends React.Component {
           }}
           buttonStyle={styles.buy}
         />
-
-        <BottomSheet
-          isVisible={this.state.BuyVisibility}
-          containerStyle={{backgroundColor: 'rgba(0.5, 0.25, 0, 0.2)'}}>
-          {this.BuyList.map((l, i) => (
-            <ListItem
-              key={i}
-              containerStyle={l.containerStyle}
-              onPress={l.onPress}>
-              <ListItem.Content>
-                <ListItem.Title style={l.titleStyle}>{l.title}</ListItem.Title>
-              </ListItem.Content>
-            </ListItem>
-          ))}
-        </BottomSheet>
       </View>
     );
   }
 }
 
-export default BuyPage;
+export default OrderDetailPage;
