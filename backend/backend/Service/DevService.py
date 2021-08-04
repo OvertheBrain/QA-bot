@@ -12,12 +12,12 @@ def addOrder(request):
     devid = post['devID']
     length = post['days']
     count = 0
-    apiid = 1
+    apiid = post['apiID']
     start_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M')
     print('start_date:'+start_time)
     end_time = (datetime.datetime.now() + datetime.timedelta(days=length)).strftime("%Y-%m-%d %H:%M")
     print(end_time)
-    order_obj = APIorder(dev_id=devid, start_date= start_time, end_date= end_time, count=count, api_id= 2)
+    order_obj = APIorder(dev_id=devid, start_date= start_time, end_date= end_time, count=count, api_id= apiid)
     try:
         order_obj.save()
     except Exception:
