@@ -30,9 +30,19 @@ export const styles = StyleSheet.create({
     fontSize: 24,
     color: themeColor,
   },
+  buttonTitles: {
+    fontSize: 18,
+    color: 'white',
+  },
   buttonTitle1: {
     fontSize: 24,
     color: 'white',
   },
   header: {},
+  tab: {
+    backgroundColor: themeColor,
+  },
+  tabIndicator: {
+    backgroundColor: 'white',
+  },
 });

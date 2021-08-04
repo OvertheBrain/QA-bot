@@ -14,6 +14,7 @@ import TestableStart from './view/StartPage';
 import TestableLogin from './view/LoginPage';
 import TestableUserList from './view/UserListPage';
 import TestableDevelop from './view/DeveloperPage';
+import DeveloperHomePage from './view/DeveloperHomePage';
 // Navigation Usage：onPress={() => navigation.navigate('Details')}
 const Stack = createStackNavigator();
 //传递参数
@@ -42,6 +43,9 @@ function ChatScreen({route, navigation}) {
 function DeveloperScreen({navigation}) {
   return <TestableDevelop navigation={navigation} />;
 }
+function DeveloperHomeScreen({navigation}) {
+  return <DeveloperHomePage navigation={navigation} />;
+}
 function Navigator() {
   return (
     <NavigationContainer>
@@ -56,6 +60,7 @@ function Navigator() {
         <Stack.Screen name="Chat" component={ChatScreen} />
         <Stack.Screen name="Developer" component={DeveloperScreen} />
         <Stack.Screen name="BuyAPI" component={BuyScreen} />
+        <Stack.Screen name="DevHome" component={DeveloperHomeScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
