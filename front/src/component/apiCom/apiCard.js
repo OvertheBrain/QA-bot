@@ -15,6 +15,18 @@ const styles = StyleSheet.create({
 });
 
 class ApiCard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      buying: false,
+    };
+  }
+
+  change = () => {
+    this.setState({buying: true});
+    this.props.callback(this.state.buying);
+  };
+
   render() {
     return (
       <View style={styles.container}>
@@ -42,31 +54,55 @@ class ApiCard extends React.Component {
         <Divider style={styles.price}>
           <PricingCard
             color="#4f9deb"
-            title="Free"
-            price="$0"
+            title="7天"
+            price="￥7"
             info={['1 User', 'Basic Support', 'All Core Features']}
-            button={{title: 'GET STARTED', icon: 'flight-takeoff'}}
+            button={{
+              title: 'GET STARTED',
+              icon: 'flight-takeoff',
+              onPress: () => {
+                this.change();
+              },
+            }}
           />
           <PricingCard
             color="#4f9deb"
-            title="Free"
-            price="$0"
+            title="30天"
+            price="￥25"
             info={['1 User', 'Basic Support', 'All Core Features']}
-            button={{title: 'GET STARTED', icon: 'flight-takeoff'}}
+            button={{
+              title: 'GET STARTED',
+              icon: 'flight-takeoff',
+              onPress: () => {
+                this.change();
+              },
+            }}
           />
           <PricingCard
             color="#4f9deb"
-            title="Free"
-            price="$0"
+            title="90天"
+            price="￥80"
             info={['1 User', 'Basic Support', 'All Core Features']}
-            button={{title: 'GET STARTED', icon: 'flight-takeoff'}}
+            button={{
+              title: 'GET STARTED',
+              icon: 'flight-takeoff',
+              onPress: () => {
+                this.change();
+              },
+            }}
           />
           <PricingCard
             color="#4f9deb"
-            title="Free"
-            price="$0"
+            title="180天"
+            price="￥150"
             info={['1 User', 'Basic Support', 'All Core Features']}
-            button={{title: 'GET STARTED', icon: 'flight-takeoff'}}
+            button={{
+              title: 'GET STARTED',
+              icon: 'flight-takeoff',
+              onPress: () => {
+                this.change();
+              },
+            }}
           />
         </Divider>
       </View>

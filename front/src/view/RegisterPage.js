@@ -64,7 +64,7 @@ class RegisterPage extends React.Component {
         {text: '我知道了', onPress: this.confirm},
       ]);
     } else {
-      this.setState({usertype: this.state.checked});
+      this.setState({usertype: this.state.usertype});
       RegisterService(
         this.state.username,
         this.state.firstPassword,
@@ -73,7 +73,6 @@ class RegisterPage extends React.Component {
           console.log(data);
           let message = data.userdata;
           AsyncStorage.setItem('user', JSON.stringify(data));
-          console.log(AsyncStorage.getItem('user'));
           if (message === 'exist') {
             Alert.alert('提示', '用户名已存在', [
               {text: '我知道了', onPress: this.confirm},
@@ -170,10 +169,10 @@ class RegisterPage extends React.Component {
         <View style={{flex: 1}}>
           <CheckBox
             title={'注册为开发者'}
-            checked={this.state.checked}
+            checked={this.state.usertype}
             size={30}
             onPress={() => {
-              this.setState({checked: !this.state.checked});
+              this.setState({usertype: !this.state.usertype});
             }}
             containerStyle={{backgroundColor: '', padding: 5, margin: 5}}
             checkedColor={themeColor}

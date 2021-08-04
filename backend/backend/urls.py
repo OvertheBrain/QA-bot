@@ -20,6 +20,7 @@ from backend import views
 from backend.views import ChatBotApiView
 
 urlpatterns = [
+
     path('login/', views.loginView),
     path('register/', views.registerView),
     path('getuser/', views.getuserView),

@@ -47,6 +47,10 @@ class BuyPage extends React.Component {
     }
   }
 
+  BuyCallback = buying => {
+    this.setState({BuyVisibility: buying});
+  };
+
   buyAPI = days => {
     let user = JSON.parse(this.state.user);
     let userID = user.userid;
@@ -69,11 +73,28 @@ class BuyPage extends React.Component {
     {
       title: '7天',
       onPress: () => {
-        this.buyAPI(70);
+        this.buyAPI(7);
       },
     },
-    {title: '30天'},
-    {title: '90天'},
+    {
+      title: '30天',
+      onPress: () => {
+        this.buyAPI(30);
+      },
+    },
+    {
+      title: '90天',
+      onPress: () => {
+        this.buyAPI(90);
+      },
+    },
+    {
+      title: '180天',
+      onPress: () => {
+        this.buyAPI(180);
+      },
+    },
+
     {
       title: 'Cancel',
       containerStyle: {backgroundColor: themeColor},
@@ -118,7 +139,7 @@ class BuyPage extends React.Component {
         />
 
         <ScrollView>
-          <ApiCard />
+          <ApiCard callback={this.BuyCallback} />
         </ScrollView>
 
         <Button

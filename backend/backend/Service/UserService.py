@@ -51,12 +51,15 @@ def addUser(request):
     # usertype为0为普通用户，usertype为1为开发者
     if User.objects.filter(username=username):
         msg = 'exist'
+        data = {'userdata': msg}
+        return HttpResponse(json.dumps(data), content_type='application/json')
     else:
         user_obj = User(username=username, password=pwd, usertype=usertype)
         user_obj.save()
-        userid = user_obj.userid
-        develop_obj = Developer(user_id=userid)
-        develop_obj.save()
+        if usertype:
+            userid = user_obj.userid
+            develop_obj = Developer(user_id=userid)
+            develop_obj.save()
         msg = 'no exist'
     user = User.objects.filter(username=username)[0]
     usertype = user.usertype
