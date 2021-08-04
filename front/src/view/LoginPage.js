@@ -1,5 +1,6 @@
 import React from 'react';
 import {Alert, ScrollView, View} from 'react-native';
+import {AsyncStorage} from 'react-native';
 import {Button, CheckBox} from 'react-native-elements';
 import {Icon} from 'react-native-elements/dist/icons/Icon';
 import {Input} from 'react-native-elements/dist/input/Input';
@@ -58,8 +59,10 @@ class LoginPage extends React.Component {
        * 开发者usertype为1，普通用户usertype为0
        * */
       if (userdata === 'right') {
+        AsyncStorage.setItem('user', JSON.stringify(data)).then(r => {});
+        console.log(JSON.stringify(data));
         if (this.state.usertype) {
-          this.state.navigation.navigate('Developer');
+          this.state.navigation.navigate('BuyAPI');
         } else {
           this.state.navigation.navigate('Home');
         }

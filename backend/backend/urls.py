@@ -20,10 +20,12 @@ from backend import views
 from backend.views import ChatBotApiView
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path('login/', views.loginView),
     path('register/', views.registerView),
     path('getuser/', views.getuserView),
-    path('', admin.site.urls),
+    path('addOrder/', views.addOrderView),
+
     path('test/', ChatBotApiView.as_view()),
     # path('sendMsg/', views.api),
 ]

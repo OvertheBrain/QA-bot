@@ -1,9 +1,10 @@
 import {postRequest} from './AJAX';
+import {server} from './settings';
 
 export const SendService = (message, callback) => {
   const data = {
     text: message,
   };
-  const url = 'http://10.0.2.2:8000/test/';
+  const url = server + 'test/';
   postRequest(url, data, callback);
 };

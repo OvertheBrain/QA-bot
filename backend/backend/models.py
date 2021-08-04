@@ -25,8 +25,6 @@ class Developer(models.Model):
         return self.user.username
 
 
-
-
 class API(models.Model):
     apiid = models.AutoField(primary_key=True)
     name = models.CharField(max_length=30)
@@ -40,11 +38,11 @@ class API(models.Model):
 
 class APIorder(models.Model):
     orderid = models.AutoField(primary_key=True)
-    api = models.OneToOneField(API, on_delete=models.CASCADE)
+    api = models.ForeignKey(API, on_delete=models.CASCADE)
     dev = models.ForeignKey(Developer, on_delete=models.CASCADE)
-    start_date = models.DateField()
+    start_date = models.DateTimeField()
     count = models.IntegerField()
-    end_date = models.DateField()
+    end_date = models.DateTimeField()
 
 
 

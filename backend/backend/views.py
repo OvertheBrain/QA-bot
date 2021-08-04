@@ -3,7 +3,7 @@ from django.views.generic import View
 from chatterbot.ext.django_chatterbot import settings
 from django.http import HttpResponse, JsonResponse
 from chatterbot import ChatBot
-
+from backend.Service.DevService import addOrder
 from backend.Service.UserService import login, getUser, addUser
 
 
@@ -55,3 +55,6 @@ def getuserView(request):
     :return: msg:代表是否存在该用户名的消息
     """
     return getUser(request)
+
+def addOrderView(request):
+    return addOrder(request)
