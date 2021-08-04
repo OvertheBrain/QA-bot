@@ -23,6 +23,7 @@ urlpatterns = [
     path('login/', views.loginView),
     path('register/', views.registerView),
     path('getuser/', views.getuserView),
+    path('addOrder/', views.addOrderView),
     path('', admin.site.urls),
     path('test/', ChatBotApiView.as_view()),
     # path('sendMsg/', views.api),

@@ -1,5 +1,6 @@
 import React from 'react';
-import {Alert, ScrollView, View, AsyncStorage} from 'react-native';
+import {Alert, ScrollView, View} from 'react-native';
+import {AsyncStorage} from 'react-native';
 import {Button, CheckBox} from 'react-native-elements';
 import {Icon} from 'react-native-elements/dist/icons/Icon';
 import {Input} from 'react-native-elements/dist/input/Input';
@@ -59,7 +60,7 @@ class LoginPage extends React.Component {
        * */
       if (userdata === 'right') {
         if (this.state.usertype) {
-          this.state.navigation.navigate('Developer');
+          this.state.navigation.navigate('BuyAPI');
         } else {
           this.state.navigation.navigate('Home');
         }

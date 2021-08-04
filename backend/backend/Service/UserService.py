@@ -58,5 +58,16 @@ def addUser(request):
         develop_obj = Developer(user_id=userid)
         develop_obj.save()
         msg = 'no exist'
-    data = {'msg': msg}
-    return HttpResponse(json.dumps(data), content_type='application/json')
+    user = User.objects.filter(username=username)[0]
+    usertype = user.usertype
+    userid = user.userid
+    if usertype:
+        developer = Developer.objects.filter(user_id=userid)[0]
+        dev_id = developer.devid
+        data = {'userdata': msg, 'usertype': usertype, 'userid': userid, 'devid': dev_id,
+                'nickname': username}
+        return HttpResponse(json.dumps(data), content_type='application/json')
+    else:
+        data = {'userdata': msg, 'usertype': usertype, 'userid': userid, 'nickname': username}
+        return HttpResponse(json.dumps(data), content_type='application/json')
+

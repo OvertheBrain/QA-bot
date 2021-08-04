@@ -1,5 +1,5 @@
 import React from 'react';
-import {Alert, ScrollView, View} from 'react-native';
+import {Alert, AsyncStorage, ScrollView, View} from 'react-native';
 import {Button, CheckBox} from 'react-native-elements';
 import {Text} from 'react-native-elements';
 import {Input} from 'react-native-elements/dist/input/Input';
@@ -71,7 +71,9 @@ class RegisterPage extends React.Component {
         this.state.usertype,
         data => {
           console.log(data);
-          let message = data.msg;
+          let message = data.userdata;
+          AsyncStorage.setItem('user', JSON.stringify(data));
+          console.log(AsyncStorage.getItem('user'));
           if (message === 'exist') {
             Alert.alert('提示', '用户名已存在', [
               {text: '我知道了', onPress: this.confirm},

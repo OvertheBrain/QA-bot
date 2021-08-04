@@ -37,16 +37,18 @@ class BuyPage extends React.Component {
   }
 
   buyAPI = days => {
-    let user = JSON.parse(AsyncStorage.getItem('user'));
+    let user = AsyncStorage.getItem('user');
+    console.log(user);
     let userID = user.userid;
     let devID = user.devid;
-    let apiID = this.props.route;
-    let json = {
+    //let apiID = this.props.route;
+    const json = {
       userID: userID,
       devID: devID,
-      apiID: apiID,
-      days: days,
+      //apiID: apiID,
+      //days: days,
     };
+    console.log(json);
     const callback = data => {
       this.setState({PurchaseAlert: true});
     };
@@ -54,7 +56,12 @@ class BuyPage extends React.Component {
   };
 
   BuyList = [
-    {title: '7天'},
+    {
+      title: '7天',
+      onPress: () => {
+        this.buyAPI(70);
+      },
+    },
     {title: '30天'},
     {title: '90天'},
     {
@@ -127,16 +134,6 @@ class BuyPage extends React.Component {
             </ListItem>
           ))}
         </BottomSheet>
-
-        <Overlay isVisible={this.state.PurchaseAlert}>
-          <Text>恭喜你，完成订阅</Text>
-          <Button
-            title={'确认'}
-            onPress={() => {
-              this.setState({PurchaseAlert: false});
-            }}
-          />
-        </Overlay>
       </View>
     );
   }
