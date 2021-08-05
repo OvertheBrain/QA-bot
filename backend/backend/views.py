@@ -3,7 +3,9 @@ from django.views.generic import View
 from chatterbot.ext.django_chatterbot import settings
 from django.http import HttpResponse, JsonResponse
 from chatterbot import ChatBot
-from backend.Service.DevService import addOrder, getOrder
+
+from backend.Service.AuthService import check_auth
+from backend.Service.DevService import addOrder, getOrder, getAllOrders
 from backend.Service.UserService import login, getUser, addUser
 
 
