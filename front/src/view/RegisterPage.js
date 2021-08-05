@@ -84,13 +84,14 @@ class RegisterPage extends React.Component {
         data => {
           console.log(data);
           let message = data.userdata;
-          AsyncStorage.setItem('user', JSON.stringify(data));
+
           if (message === 'exist') {
             Alert.alert('提示', '用户名已存在', [
               {text: '我知道了', onPress: this.confirm},
             ]);
           } else {
             if (this.state.usertype) {
+              AsyncStorage.setItem('user', JSON.stringify(data));
               this.state.navigation.navigate('Developer');
             } else {
               this.state.navigation.navigate('Home');

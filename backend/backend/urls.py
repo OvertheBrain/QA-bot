@@ -25,6 +25,7 @@ urlpatterns = [
     path('register/', views.registerView),
     path('getuser/', views.getuserView),
     path('addOrder/', views.addOrderView),
+    path('getOrder/', views.getOrderView),
 
     path('test/', ChatBotApiView.as_view()),
     # path('sendMsg/', views.api),

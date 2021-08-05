@@ -1,17 +1,16 @@
-import {Header, BottomSheet, Button, ListItem} from 'react-native-elements';
-import React from 'react';
 import {
-  View,
-  StyleSheet,
-  ScrollView,
+  Header,
+  BottomSheet,
+  Button,
   Text,
-  AsyncStorage,
-  Alert,
-} from 'react-native';
+  ListItem,
+} from 'react-native-elements';
+import React from 'react';
+import {View, StyleSheet, ScrollView, AsyncStorage, Alert} from 'react-native';
 import {themeColor} from '../styles';
-import ApiCard from '../component/apiCom/apiCard';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {addOrder} from '../service/DevService';
+import {getOrder} from '../service/DevService';
+import OrderCard from '../component/apiCom/orderCard';
 
 const styles = StyleSheet.create({
   container: {
@@ -32,59 +31,19 @@ class OrderDetailPage extends React.Component {
     super(props);
     this.state = {
       navigation: this.props.navigation,
-      user: {},
+      route: this.props.route,
+      order: ' ',
     };
   }
 
-  async componentDidMount() {
-    try {
-      const shop = await AsyncStorage.getItem('user');
-      this.setState({user: shop});
-      console.log(this.state.user);
-    } catch (error) {
-      console.log(error);
-    }
+  componentDidMount() {
+    const {params} = this.state.route;
+
+    getOrder(params.apiId, data => {
+      this.setState({order: data});
+      console.log(this.state.order);
+    });
   }
-
-  BuyCallback = buying => {
-    this.setState({BuyVisibility: buying});
-  };
-
-  BuyList = [
-    {
-      title: '7天',
-      onPress: () => {
-        this.buyAPI(7);
-      },
-    },
-    {
-      title: '30天',
-      onPress: () => {
-        this.buyAPI(30);
-      },
-    },
-    {
-      title: '90天',
-      onPress: () => {
-        this.buyAPI(90);
-      },
-    },
-    {
-      title: '180天',
-      onPress: () => {
-        this.buyAPI(180);
-      },
-    },
-
-    {
-      title: 'Cancel',
-      containerStyle: {backgroundColor: themeColor},
-      titleStyle: {color: 'white'},
-      onPress: () => {
-        this.setState({BuyVisibility: false});
-      },
-    },
-  ];
 
   render() {
     return (
@@ -120,16 +79,14 @@ class OrderDetailPage extends React.Component {
         />
 
         <ScrollView>
-          <ApiCard callback={this.BuyCallback} />
+          <OrderCard orderInfo={this.state.order} />
         </ScrollView>
 
         <Button
-          title={'购买API'}
+          title={'Cancel'}
           titleStyle={styles.buttonTitle}
-          onPress={() => {
-            this.setState({BuyVisibility: true});
-          }}
           buttonStyle={styles.buy}
+          onPress={() => this.state.navigation.goBack()}
         />
       </View>
     );

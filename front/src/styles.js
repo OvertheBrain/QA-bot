@@ -1,7 +1,9 @@
 import {StyleSheet} from 'react-native';
 
-export const themeColor = '#3358dc';
-
+export const themeColor = '#2260e7';
+export const themeColor2 = '#85afe2';
+export const themeColor3 = '#859be2';
+export const themeColor4 = '#9f9f9f';
 export const styles = StyleSheet.create({
   startContainer: {
     backgroundColor: themeColor,
