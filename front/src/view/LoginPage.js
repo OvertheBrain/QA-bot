@@ -17,19 +17,38 @@ class LoginPage extends React.Component {
     super(props);
     this.state = {
       navigation: this.props.navigation,
-      checked: false,
+      checked: true,
       visible: true,
       isShow: false,
       visIcon: true,
       username: '',
       password: '',
+      user: {},
       msg: '',
       usertype: 0,
       inputUser: '',
       inputPwd: '',
     };
   }
-
+  async componentDidMount() {
+    try {
+      const data = await AsyncStorage.getItem('user');
+      this.state.user = data;
+      console.log(data);
+      let user = JSON.parse(this.state.user);
+      let name = user.username;
+      let pwd = user.password;
+      let usertype = user.usertype;
+      if (name !== '' && pwd !== '') {
+        console.log('user', user);
+        this.setState({inputUser: name, inputPwd: pwd, usertype: usertype});
+        this.state.username = name;
+        this.state.password = pwd;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
   /**
    * changeProps - 与子组件通信.
    * */
@@ -48,36 +67,41 @@ class LoginPage extends React.Component {
   handleLogin = () => {
     // inputUser.current.clear();
     // inputPwd.current.clear();
-    LoginService(this.state.username, this.state.password, data => {
-      console.log(data);
-      let userdata = '';
-      userdata = data.userdata;
-      this.setState({usertype: data.usertype});
-      this.setState({msg: userdata});
-      console.log(userdata);
-      /**
-       * 开发者usertype为1，普通用户usertype为0
-       * */
-      if (userdata === 'right') {
-        AsyncStorage.setItem('user', JSON.stringify(data)).then(r => {});
-        console.log(JSON.stringify(data));
-        if (this.state.usertype) {
-          this.state.navigation.navigate('DevHome');
+    LoginService(
+      this.state.username,
+      this.state.password,
+      this.state.checked,
+      data => {
+        console.log(data);
+        let userdata = '';
+        userdata = data.userdata;
+        this.setState({usertype: data.usertype});
+        this.setState({msg: userdata});
+        console.log(userdata);
+        /**
+         * 开发者usertype为1，普通用户usertype为0
+         * */
+        if (userdata === 'right') {
+          AsyncStorage.setItem('user', JSON.stringify(data)).then(r => {});
+          console.log(JSON.stringify(data));
+          if (this.state.usertype) {
+            this.state.navigation.navigate('DevHome');
+          } else {
+            this.state.navigation.navigate('Home');
+          }
         } else {
-          this.state.navigation.navigate('Home');
+          Alert.alert('提示', this.state.msg, [
+            {
+              text: '我知道了',
+              onPress: this.confirm,
+            },
+          ]);
+          //输入用户名错误，点击登录后清空输入
+          this.state.navigation.navigate('Login');
+          this.setState({inputUser: '', inputPwd: '', isShow: false});
         }
-      } else {
-        Alert.alert('提示', this.state.msg, [
-          {
-            text: '我知道了',
-            onPress: this.confirm,
-          },
-        ]);
-        //输入用户名错误，点击登录后清空输入
-        this.state.navigation.navigate('Login');
-        this.setState({inputUser: '', inputPwd: '', isShow: false});
-      }
-    });
+      },
+    );
   };
 
   render() {
@@ -117,7 +141,6 @@ class LoginPage extends React.Component {
         <View style={{flex: 1}}>
           <Input
             ref={generateTestHook('Login.pwdInput')}
-            // ref={generateTestHook('LoginUser.Input')}
             placeholder={'Password'}
             secureTextEntry={this.state.visible}
             leftIcon={

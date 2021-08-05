@@ -27,3 +27,18 @@ def addOrder(userid, devid, length):
         orderID = order_obj.orderid
         data = {'userdata': msg, 'devid': devid, 'orderid': orderID}
         return data
+
+def getOrder(orderID):
+    try:
+        order = APIorder.objects.get(orderid=orderID)
+    except Exception:
+        print("get order error")
+        msg = 'error'
+        data = {'userdata': msg}
+        return data
+    else:
+        msg = 'success'
+        data = {'userdata': msg, 'devid': order.dev_id, 'orderid': order.orderid, 'apiid': order.api_id,
+                'end_date': order.end_date.strftime('%Y-%m-%d %H'), 'count': order.count}
+        return data
+

@@ -1,10 +1,11 @@
 import {postRequest} from './AJAX';
 import {server} from './settings';
 
-export const LoginService = (username, password, callback) => {
+export const LoginService = (username, password, checked, callback) => {
   const data = {
     username: username,
     password: password,
+    checked: checked,
   };
   const url = server + 'login/';
   postRequest(url, data, callback);

@@ -47,7 +47,7 @@ export class ChatPage extends React.Component {
               name="angle-left"
               type="font-awesome"
               onPress={() => {
-                this.state.navigation.navigate('Home');
+                this.state.navigation.goBack();
               }}
               color={'#fff'}
               size={40}
