@@ -15,6 +15,7 @@ import TestableLogin from './view/LoginPage';
 import TestableUserList from './view/UserListPage';
 import TestableDevelop from './view/DeveloperPage';
 import DeveloperHomePage from './view/DeveloperHomePage';
+import OrderDetailPage from './view/OrderDetailPage';
 // Navigation Usage：onPress={() => navigation.navigate('Details')}
 const Stack = createStackNavigator();
 //传递参数
@@ -23,6 +24,10 @@ const Stack = createStackNavigator();
 // }
 function StartScreen({navigation}) {
   return <TestableStart navigation={navigation} />;
+}
+
+function OrderInfo({route, navigation}) {
+  return <OrderDetailPage route={route} navigation={navigation} />;
 }
 
 function BuyScreen({route, navigation}) {
@@ -61,6 +66,7 @@ function Navigator() {
         <Stack.Screen name="Developer" component={DeveloperScreen} />
         <Stack.Screen name="BuyAPI" component={BuyScreen} />
         <Stack.Screen name="DevHome" component={DeveloperHomeScreen} />
+        <Stack.Screen name="OrderInfo" component={OrderInfo} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -62,7 +62,7 @@ class LoginPage extends React.Component {
         AsyncStorage.setItem('user', JSON.stringify(data)).then(r => {});
         console.log(JSON.stringify(data));
         if (this.state.usertype) {
-          this.state.navigation.navigate('DevHome');
+          this.state.navigation.navigate('OrderInfo');
         } else {
           this.state.navigation.navigate('Home');
         }
