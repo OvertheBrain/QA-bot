@@ -3,6 +3,7 @@ from django.test import TestCase
 from backend.Service.DevService import addOrder
 from backend.Service.UserService import getUser, addUser, login
 from backend.models import User, Developer, API
+import django.test.utils
 
 
 class TestUserService(TestCase):
@@ -34,32 +35,59 @@ class TestUserService(TestCase):
         self.assertEqual(3, data['userid'])
 
     def test_login(self):
-        data = login('A', '123')
+        data = login('A', '123', True)
         msg = data['userdata']
         self.assertEqual('right', msg)
 
     def test_login_error(self):
-        data = login('b', '123')
+        data = login('b', '123', False)
         self.assertEqual('该用户不存在', data['userdata'])
 
     def test_login_pwd_error(self):
-        data = login('A', '12456')
+        data = login('A', '12456', True)
         msg = data['userdata']
         self.assertEqual('密码输入错误', msg)
 
     def test_login_developer(self):
-        data = login('A', '123')
+        data = login('A', '123', True)
         userid = data['userid']
         usertype = data['usertype']
         self.assertEqual(1, usertype)
         self.assertEqual(1, userid)
 
     def test_login_user(self):
-        data = login('c', '123')
+        data = login('c', '123', False)
         userid = data['userid']
         usertype = data['usertype']
         self.assertEqual(0, usertype)
         self.assertEqual(2, userid)
+
+    def test_login_remUser(self):
+        data = login('c', '123', True)
+        name = data['username']
+        pwd = data['password']
+        self.assertEqual(name, 'c')
+        self.assertEqual(pwd, '123')
+
+    def test_login_not_remUser(self):
+        data = login('c', '123', False)
+        self.assertIsNone(data.get('devid'))
+        self.assertIsNone(data.get('name'))
+        self.assertIsNone(data.get('password'))
+
+    def test_login_remDev(self):
+        data = login('A', '123', True)
+        name = data['username']
+        pwd = data['password']
+        self.assertIsNotNone(data.get('devid'))
+        self.assertEqual(name, 'A')
+        self.assertEqual(pwd, '123')
+
+    def test_login_not_remDev(self):
+        data = login('A', '123', False)
+        self.assertIsNotNone(data.get('devid'))
+        self.assertIsNone(data.get('name'))
+        self.assertIsNone(data.get('password'))
 
 
 class TestDevService(TestCase):
