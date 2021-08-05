@@ -36,7 +36,11 @@ def loginView(request):
     :param request: post
     :return: userdata:用户名密码是否正确的信息，usertype:用户是否为开发者
     """
-    return login(request)
+    post = json.loads(request.body.decode('utf-8'))
+    name = post['username']
+    pwd = post['password']
+    data = login(name, pwd)
+    return HttpResponse(json.dumps(data), content_type='application/json')
 
 
 def registerView(request):
@@ -45,7 +49,13 @@ def registerView(request):
     :param request: post
     :return:msg:代表是否注册成功的消息
     """
-    return addUser(request)
+    post = json.loads(request.body.decode('utf-8'))
+    username = post['username']
+    pwd = post['password']
+    usertype = post['usertype']
+    email = post['email']
+    data = addUser(username, pwd, usertype, email)
+    return HttpResponse(json.dumps(data), content_type='application/json')
 
 
 def getuserView(request):
@@ -54,7 +64,12 @@ def getuserView(request):
     :param request: post
     :return: msg:代表是否存在该用户名的消息
     """
-    return getUser(request)
+    post = json.loads(request.body.decode('utf-8'))
+    username = post['username']
+    msg = getUser(username)
+    data = {'msg': msg}
+    return HttpResponse(json.dumps(data), content_type='application/json')
+
 
 def addOrderView(request):
     return addOrder(request)
