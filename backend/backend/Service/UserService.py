@@ -15,11 +15,12 @@ def getUser(name):
     return msg
 
 
-def login(name, pwd):
+def login(name, pwd, checked):
     """
     login 根据用户名，密码登录
     :param name: 用户名
     :param pwd: 密码
+    :param checked: 是否记住密码
     :return: data包含用户基本信息
     """
     # usertype为0为普通用户，usertype为1为开发者
@@ -29,17 +30,24 @@ def login(name, pwd):
             userdata = 'right'
             usertype = user.usertype
             userid = user.userid
-            username = user.nickname
+            username = user.username
             if usertype:
                 developer = Developer.objects.filter(user_id=userid)[0]
                 dev_id = developer.devid
-                data = {'userdata': userdata, 'usertype': usertype, 'userid': userid, 'devid': dev_id,
-                        'nickname': username}
+                if checked:
+                    data = {'userdata': userdata, 'usertype': usertype, 'userid': userid, 'devid': dev_id,
+                            'nickname': username, 'username': username, 'password': pwd}
+                else:
+                    data = {'userdata': userdata, 'usertype': usertype, 'userid': userid, 'devid': dev_id,
+                            'nickname': username}
                 return data
             else:
-                data = {'userdata': userdata, 'usertype': usertype, 'userid': userid, 'nickname': username}
+                if checked:
+                    data = {'userdata': userdata, 'usertype': usertype, 'userid': userid, 'nickname': username,
+                            'username': username, 'password': pwd}
+                else:
+                    data = {'userdata': userdata, 'usertype': usertype, 'userid': userid, 'nickname': username}
                 return data
-
         else:
             userdata = '密码输入错误'
     else:
