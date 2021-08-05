@@ -39,7 +39,8 @@ def loginView(request):
     post = json.loads(request.body.decode('utf-8'))
     name = post['username']
     pwd = post['password']
-    data = login(name, pwd)
+    checked = post['checked']
+    data = login(name, pwd, checked)
     return HttpResponse(json.dumps(data), content_type='application/json')
 
 
