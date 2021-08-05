@@ -41,7 +41,8 @@ def getOrder(orderID):
     else:
         msg = 'success'
         data = {'userdata': msg, 'devid': order.dev_id, 'orderid': order.orderid, 'apiid': order.api_id,
-                'end_date': order.end_date.strftime('%Y-%m-%d %H'), 'count': order.count}
+                'end_date': order.end_date.strftime('%Y-%m-%d %H'), 'count': order.count,
+                'apiname': order.api.name, 'apiAddress': order.api.address}
         return data
 
 
@@ -55,7 +56,8 @@ def getAllOrders(devid):
             if datetime.datetime.now().strftime('%Y-%m-%d %H:%M') > i.end_date.strftime('%Y-%m-%d %H:%M'):
                 delay = True
             data = {'userdata': msg, 'devid': i.dev_id, 'orderid': i.orderid, 'apiid': i.api_id,
-                    'end_date': i.end_date.strftime('%Y-%m-%d %H'), 'count': i.count, 'delay': delay}
+                    'end_date': i.end_date.strftime('%Y-%m-%d %H'), 'count': i.count, 'delay': delay,
+                    'apiname': i.api.name, 'apiAddress': i.api.address}
             json.append(data)
         print(json)
         return json

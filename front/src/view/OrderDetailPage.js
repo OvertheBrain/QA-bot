@@ -31,21 +31,13 @@ class OrderDetailPage extends React.Component {
     super(props);
     this.state = {
       navigation: this.props.navigation,
-      route: this.props.route,
-      order: ' ',
     };
   }
 
-  componentDidMount() {
-    const {params} = this.state.route;
-
-    getOrder(params.orderId, data => {
-      this.setState({order: data});
-      console.log(this.state.order);
-    });
-  }
 
   render() {
+    const {params} = this.props.route;
+
     return (
       <View style={styles.container}>
         <Header
@@ -79,7 +71,7 @@ class OrderDetailPage extends React.Component {
         />
 
         <ScrollView>
-          <OrderCard orderInfo={this.state.order} />
+          <OrderCard orderInfo={params.order} />
         </ScrollView>
 
         <Button

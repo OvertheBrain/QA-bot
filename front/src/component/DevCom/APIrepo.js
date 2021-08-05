@@ -72,8 +72,9 @@ export default class APIrepo extends React.Component {
             key={i}
             bottomDivider
             onPress={() => {
+              console.log(l);
               this.state.navigation.navigate('OrderInfo', {
-                orderId: l.orderid,
+                order: l,
               });
             }}>
             <Icon
@@ -85,7 +86,7 @@ export default class APIrepo extends React.Component {
 
             <View>
               <ListItem.Content>
-                <ListItem.Title>{l.name}</ListItem.Title>
+                <ListItem.Title>{l.apiname}</ListItem.Title>
                 <ListItem.Subtitle>
                   {l.end_date + (l.delay === true ? ' ' : '到期')}
                 </ListItem.Subtitle>
