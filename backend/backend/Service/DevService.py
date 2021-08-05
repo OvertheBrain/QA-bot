@@ -1,4 +1,6 @@
 import json
+
+from django.forms import model_to_dict
 from django.http import HttpResponse
 from ..models import User
 from ..models import Developer
@@ -42,3 +44,21 @@ def getOrder(orderID):
                 'end_date': order.end_date.strftime('%Y-%m-%d %H'), 'count': order.count}
         return data
 
+
+def getAllOrders(devid):
+    orders = APIorder.objects.filter(dev_id=devid)
+    json = []
+    if orders.count() >= 1:
+        msg = 'success'
+        for i in orders:
+            delay = False
+            if datetime.datetime.now().strftime('%Y-%m-%d %H:%M') > i.end_date.strftime('%Y-%m-%d %H:%M'):
+                delay = True
+            data = {'userdata': msg, 'devid': i.dev_id, 'orderid': i.orderid, 'apiid': i.api_id,
+                    'end_date': i.end_date.strftime('%Y-%m-%d %H'), 'count': i.count, 'delay': delay}
+            json.append(data)
+        print(json)
+        return json
+    else:
+        msg = 'no order'
+        return {'userdata': msg}

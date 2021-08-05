@@ -10,8 +10,11 @@ export const getApiStoreList = (data, callback) => {
   const url = server + 'getApiStoreList/';
   postRequest(url, data, callback);
 };
-export const getApiOrderList = (data, callback) => {
+export const getApiOrderList = (DevID, callback) => {
   const url = server + 'getApiOrderList/';
+  const data = {
+    devid: DevID,
+  };
   postRequest(url, data, callback);
 };
 

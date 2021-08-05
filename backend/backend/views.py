@@ -3,7 +3,7 @@ from django.views.generic import View
 from chatterbot.ext.django_chatterbot import settings
 from django.http import HttpResponse, JsonResponse
 from chatterbot import ChatBot
-from backend.Service.DevService import addOrder, getOrder
+from backend.Service.DevService import addOrder, getOrder, getAllOrders
 from backend.Service.UserService import login, getUser, addUser
 
 
@@ -85,4 +85,11 @@ def getOrderView(request):
     post = json.loads(request.body.decode('utf-8'))
     orderID = post['orderid']
     data = getOrder(orderID)
+    return HttpResponse(json.dumps(data), content_type='application/json')
+
+
+def getAllOrdersView(request):
+    post = json.loads(request.body.decode('utf-8'))
+    devID = post['devid']
+    data = getAllOrders(devID)
     return HttpResponse(json.dumps(data), content_type='application/json')

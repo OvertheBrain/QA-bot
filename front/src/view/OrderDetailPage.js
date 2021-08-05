@@ -39,7 +39,7 @@ class OrderDetailPage extends React.Component {
   componentDidMount() {
     const {params} = this.state.route;
 
-    getOrder(params.apiId, data => {
+    getOrder(params.orderId, data => {
       this.setState({order: data});
       console.log(this.state.order);
     });
@@ -55,7 +55,7 @@ class OrderDetailPage extends React.Component {
               name="angle-left"
               type="font-awesome"
               onPress={() => {
-                this.state.navigation.navigate('Home');
+                this.state.navigation.goBack();
               }}
               color={'#fff'}
               size={40}
