@@ -1,6 +1,8 @@
 from django.test import TestCase
+
+from backend.Service.DevService import addOrder
 from backend.Service.UserService import getUser, addUser, login
-from backend.models import User, Developer
+from backend.models import User, Developer, API
 
 
 class TestUserService(TestCase):
@@ -58,3 +60,16 @@ class TestUserService(TestCase):
         usertype = data['usertype']
         self.assertEqual(0, usertype)
         self.assertEqual(2, userid)
+
+
+class TestDevService(TestCase):
+    def setUp(self) -> None:
+        User.objects.create(username='A', usertype=1, password='123')
+        User.objects.create(username='c', usertype=0, password='123')
+        Developer.objects.create(user_id=1)
+
+    def test_add_order(self):
+        API.objects.create(name='api0', description='xxx')
+        data = addOrder(1, 1, 30)
+        userdata = data['userdata']
+        self.assertEqual('success', userdata)
