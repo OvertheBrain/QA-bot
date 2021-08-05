@@ -1,17 +1,27 @@
 import React from 'react';
-import {Header, Tab, TabView} from 'react-native-elements';
+import {Button, Header, Tab, TabView} from 'react-native-elements';
 import {styles, themeColor} from '../styles';
 import {Text, View} from 'react-native';
 import {Icon} from 'react-native-elements/dist/icons/Icon';
+import UserListPage from './UserListPage';
+import APIstoreList from '../component/DevCom/APIStoreList';
+import APIrepo from '../component/DevCom/APIrepo';
 
 class DeveloperHomePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       navigation: this.props.navigation,
-      index: 2,
+      route: this.props.route,
+      index: 1,
     };
   }
+
+  switchView = x => {
+    this.setState({
+      index: x,
+    });
+  };
 
   render() {
     return (
@@ -19,29 +29,20 @@ class DeveloperHomePage extends React.Component {
         style={{
           flex: 1,
         }}>
-        <Header
-          style={{
-            flex: 1,
-          }}
-          backgroundColor={themeColor}
-          centerComponent={{
-            text: '开发者模式',
-            style: {color: '#fff', fontSize: 30},
-          }}
-        />
         <View
           style={{
             flex: 1,
           }}>
           <TabView value={this.state.index}>
+            <TabView.Item />
             <TabView.Item>
-              <Text h1>1</Text>
+              <APIstoreList navigation={this.state.navigation} />
             </TabView.Item>
             <TabView.Item>
-              <Text h1>2</Text>
-            </TabView.Item>
-            <TabView.Item>
-              <Text h1>3</Text>
+              <APIrepo
+                route={this.state.route}
+                navigation={this.state.navigation}
+              />
             </TabView.Item>
           </TabView>
         </View>
@@ -54,17 +55,19 @@ class DeveloperHomePage extends React.Component {
           }}>
           <Tab.Item
             icon={
-              <Icon type={'feather'} name={'user'} size={20} color="white" />
+              <Icon
+                type={'feather'}
+                name={'user'}
+                size={20}
+                color="white"
+                onPress={() => this.switchView(0)}
+              />
             }
             buttonStyle={styles.tab}
             containerStyle={{margin: 0}}
             titleStyle={styles.buttonTitles}
             title={'个人信息'}
             type={'clear'}
-            onPress={() => {
-              console.log('sad');
-              this.setState({index: 0});
-            }}
           />
           <Tab.Item
             icon={
@@ -73,6 +76,7 @@ class DeveloperHomePage extends React.Component {
                 name="shopping-cart"
                 size={20}
                 color="white"
+                onPress={() => this.switchView(1)}
               />
             }
             buttonStyle={styles.tab}
@@ -82,7 +86,15 @@ class DeveloperHomePage extends React.Component {
             type={'clear'}
           />
           <Tab.Item
-            icon={<Icon type={'feather'} name="key" size={20} color="white" />}
+            icon={
+              <Icon
+                type={'feather'}
+                name="key"
+                size={20}
+                color="white"
+                onPress={() => this.switchView(2)}
+              />
+            }
             buttonStyle={styles.tab}
             containerStyle={{margin: 0}}
             titleStyle={styles.buttonTitles}

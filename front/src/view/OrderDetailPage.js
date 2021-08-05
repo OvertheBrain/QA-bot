@@ -31,15 +31,18 @@ class OrderDetailPage extends React.Component {
     super(props);
     this.state = {
       navigation: this.props.navigation,
+      route: this.props.route,
       order: ' ',
     };
   }
 
   componentDidMount() {
-    getOrder(2, data => {
+    const {params} = this.state.route;
+
+    getOrder(params.apiId, data => {
       this.setState({order: data});
       console.log(this.state.order);
-    })
+    });
   }
 
   render() {
@@ -83,6 +86,7 @@ class OrderDetailPage extends React.Component {
           title={'Cancel'}
           titleStyle={styles.buttonTitle}
           buttonStyle={styles.buy}
+          onPress={() => this.state.navigation.goBack()}
         />
       </View>
     );

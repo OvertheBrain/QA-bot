@@ -48,8 +48,8 @@ function ChatScreen({route, navigation}) {
 function DeveloperScreen({navigation}) {
   return <TestableDevelop navigation={navigation} />;
 }
-function DeveloperHomeScreen({navigation}) {
-  return <DeveloperHomePage navigation={navigation} />;
+function DeveloperHomeScreen({route, navigation}) {
+  return <DeveloperHomePage route={route} navigation={navigation} />;
 }
 function Navigator() {
   return (

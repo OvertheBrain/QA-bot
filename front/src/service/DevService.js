@@ -6,6 +6,15 @@ export const addOrder = (data, callback) => {
   postRequest(url, data, callback);
 };
 
+export const getApiStoreList = (data, callback) => {
+  const url = server + 'getApiStoreList/';
+  postRequest(url, data, callback);
+};
+export const getApiOrderList = (data, callback) => {
+  const url = server + 'getApiOrderList/';
+  postRequest(url, data, callback);
+};
+
 export const getOrder = (OrderID, callback) => {
   const data = {
     orderid: OrderID,
