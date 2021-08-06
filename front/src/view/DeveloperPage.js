@@ -125,9 +125,10 @@ class DeveloperPage extends React.Component {
           <Button
             buttonStyle={styles.button1}
             containerStyle={styles.buttonContainer}
-            title="使用功能查询"
+            title="登出"
             titleStyle={styles.buttonTitle1}
             type="clear"
+            onPress={() => this.props.navigation.navigate('Start')}
           />
         </View>
       </View>
