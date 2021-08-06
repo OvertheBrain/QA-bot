@@ -14,6 +14,12 @@ def addOrder(userid, apiid, devid, length):
     print('start_date:' + start_time)
     end_time = (datetime.datetime.now() + datetime.timedelta(days=length)).strftime("%Y-%m-%d %H:%M")
     print(end_time)
+    if APIorder.objects.filter(dev_id=devid, api_id=apiid):
+        preOrder = APIorder.objects.filter(dev_id=devid, api_id=apiid)
+        if datetime.datetime.now().strftime("%Y-%m-%d %H:%M") < preOrder[0].end_date.strftime('%Y-%m-%d %H:%M'):
+            msg = '已有订单，不能再次购买'
+            data = {'userdata': msg}
+            return data
     order_obj = APIorder(dev_id=devid, start_date=start_time, end_date=end_time, count=count, api_id=apiid)
     try:
         order_obj.save()
@@ -23,7 +29,7 @@ def addOrder(userid, apiid, devid, length):
         data = {'userdata': msg}
         return data
     else:
-        msg = 'success'
+        msg = '恭喜您，订阅成功！'
         orderID = order_obj.orderid
         data = {'userdata': msg, 'apiid': apiid, 'devid': devid, 'orderid': orderID}
         return data
