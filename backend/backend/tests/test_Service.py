@@ -112,8 +112,6 @@ class TestDevService(TestCase):
         self.assertEqual(1, data['orderid'])
         print('orders:')
 
-
-
     def test_get_orders_error(self):
         data = getAllOrders(1)
         self.assertEqual('no order', data['userdata'])

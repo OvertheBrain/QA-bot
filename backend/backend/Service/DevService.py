@@ -8,7 +8,7 @@ from ..models import APIorder
 import datetime
 
 
-def addOrder(userid,apiid, devid, length):
+def addOrder(userid, apiid, devid, length):
     count = 0
     start_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M')
     print('start_date:' + start_time)
@@ -25,8 +25,9 @@ def addOrder(userid,apiid, devid, length):
     else:
         msg = 'success'
         orderID = order_obj.orderid
-        data = {'userdata': msg, 'devid': devid, 'orderid': orderID}
+        data = {'userdata': msg, 'apiid': apiid, 'devid': devid, 'orderid': orderID}
         return data
+
 
 def getOrder(orderID):
     try:
