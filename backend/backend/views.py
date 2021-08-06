@@ -78,8 +78,9 @@ def addOrderView(request):
     post = json.loads(request.body.decode('utf-8'))
     userid = post['userID']
     devid = post['devID']
+    apiid=post['apiID']
     length = post['days']
-    data = addOrder(userid, devid, length)
+    data = addOrder(userid,apiid, devid, length)
     return HttpResponse(json.dumps(data), content_type='application/json')
 
 

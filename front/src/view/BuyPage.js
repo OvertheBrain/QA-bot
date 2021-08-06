@@ -59,14 +59,15 @@ class BuyPage extends React.Component {
   };
 
   buyAPI = days => {
+    const {params} = this.props.route;
     let user = JSON.parse(this.state.user);
     let userID = user.userid;
     let devID = user.devid;
-    //let apiID = this.props.route;
+    let apiID = params.api.apiID;
     const json = {
       userID: userID,
       devID: devID,
-      //apiID: apiID,
+      apiID: apiID,
       days: days,
     };
     console.log(json);
@@ -75,15 +76,15 @@ class BuyPage extends React.Component {
       let userdata = '';
       userdata = data.userdata;
       console.log(userdata);
-      if (userdata == 'success') {
-        Alert.alert('提示', '恭喜您，购买成功', [
+      if (userdata === '恭喜您，订阅成功！') {
+        Alert.alert('提示', userdata + '请到”我的API“查看详情', [
           {
             text: '我知道了',
             onPress: this.confirm,
           },
         ]);
       } else {
-        Alert.alert('提示', '下单出现错误', [
+        Alert.alert('提示', '下单出现错误。' + userdata, [
           {
             text: '我知道了',
             onPress: this.confirm,
@@ -92,6 +93,7 @@ class BuyPage extends React.Component {
       }
     };
     addOrder(json, callback);
+    this.state.navigation.navigate('DevHome');
   };
 
   BuyList = [
@@ -131,6 +133,8 @@ class BuyPage extends React.Component {
   ];
 
   render() {
+    const {params} = this.props.route;
+
     return (
       <View style={styles.container}>
         <Header
@@ -164,7 +168,7 @@ class BuyPage extends React.Component {
         />
 
         <ScrollView>
-          <ApiCard callback={this.BuyCallback} />
+          <ApiCard callback={this.BuyCallback} API={params.api} />
         </ScrollView>
 
         <Button

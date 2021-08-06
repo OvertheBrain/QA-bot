@@ -6,9 +6,15 @@ import LinearGradient from 'react-native-linear-gradient'; // Only if no expo
 import {getApiStoreList} from '../../service/DevService';
 import {wrap} from 'cavy';
 import {themeColor, themeColor2} from '../../styles';
+
 const testList = [
-  {name: 'api0', description: '00000000000000'},
-  {name: 'api1', description: '11111111111111'},
+  {
+    apiID: 1,
+    name: '交讯问答',
+    description: '根据用户问题智能回答交大相关资讯',
+    address: 'http://123.60.111.188:8000/sendMsg',
+  },
+  {apiID: 2, name: 'api1', description: '11111111111111'},
 ];
 export default class APIstoreList extends React.Component {
   constructor(props) {
@@ -55,7 +61,7 @@ export default class APIstoreList extends React.Component {
             bottomDivider
             onPress={() => {
               this.state.navigation.navigate('BuyAPI', {
-                apiId: l.name,
+                api: l,
               });
             }}>
             <Icon
