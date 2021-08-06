@@ -51,7 +51,9 @@ class OrderCard extends React.Component {
     };
     const Status = {
       tableHead: ['API', '截止日期', '请求地址', '已调用次数'],
-      tableData: [['api1', order.end_date, 'kkk', order.count]],
+      tableData: [
+        [order.apiname, order.end_date, order.apiAddress, order.count],
+      ],
     };
     const Info = {
       tableHead: ['接口地址', '返回格式', '请求方法', '接口备注'],

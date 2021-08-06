@@ -90,9 +90,9 @@ class RegisterPage extends React.Component {
               {text: '我知道了', onPress: this.confirm},
             ]);
           } else {
+            AsyncStorage.setItem('user', JSON.stringify(data));
             if (this.state.usertype) {
-              AsyncStorage.setItem('user', JSON.stringify(data));
-              this.state.navigation.navigate('Developer');
+              this.state.navigation.navigate('DevHome');
             } else {
               this.state.navigation.navigate('Home');
             }

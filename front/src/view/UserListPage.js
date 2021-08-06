@@ -1,7 +1,7 @@
 import React from 'react';
 import {Header, ThemeProvider} from 'react-native-elements';
 import {ListItem, Avatar, ButtonGroup} from 'react-native-elements';
-import {View} from 'react-native';
+import {AsyncStorage, View} from 'react-native';
 import {themeColor} from '../styles';
 import {hook, wrap} from 'cavy';
 import {Input} from 'react-native-elements/dist/input/Input';
@@ -35,8 +35,19 @@ class UserListPage extends React.Component {
     this.state = {
       selectedIndex: 2,
       navigation: this.props.navigation,
+      route: this.props.route,
     };
     this.updateIndex = this.updateIndex.bind(this);
+  }
+  async componentDidMount() {
+    try {
+      const shop = await AsyncStorage.getItem('user');
+      let user = JSON.parse(shop);
+      this.setState({user: user});
+      console.log(this.state.user);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   updateIndex(selectedIndex) {
@@ -69,7 +80,9 @@ class UserListPage extends React.Component {
               }}
               size="medium"
               onPress={() => {
-                this.props.navigation.navigate('Developer');
+                this.props.navigation.navigate('Developer', {
+                  user: this.state.user,
+                });
               }}
             />
           }
