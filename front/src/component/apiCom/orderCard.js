@@ -47,11 +47,38 @@ class OrderCard extends React.Component {
     console.log(order);
     const OverView = {
       tableHead: ['订单编号', '开发者编号', 'API编号', 'API Key'],
-      tableData: [[order.orderid, order.devid, order.apiid, 30]],
+      tableData: [[0, order.devid, order.apiid, 30]],
     };
     const Status = {
       tableHead: ['API', '截止日期', '请求地址', '已调用次数'],
       tableData: [['api1', order.end_date, 'kkk', order.count]],
+    };
+    const Info = {
+      tableHead: ['接口地址', '返回格式', '请求方法', '接口备注'],
+      tableData: [
+        [
+          'http://123.60.111.188:8000/sendMsg/',
+          'json',
+          'POST',
+          '根据消息返回QA回答',
+        ],
+      ],
+    };
+    const POST = {
+      tableHead: ['名称', '必填', '类型', '说明'],
+      tableData: [
+        ['APIname', '是', 'string', '需要调用的API名称，详见订单状态'],
+        ['username', '是', 'string', '开发者用户名'],
+        ['password', '是', 'string', '开发者密码'],
+        ['msg', '是', 'string', '发送的消息'],
+      ],
+    };
+    const RET = {
+      tableHead: ['名称', '类型', '说明'],
+      tableData: [
+        ['error', 'string', '错误说明，若正确为authed'],
+        ['reply', 'string', '机器人的回答'],
+      ],
     };
     return (
       <View style={styles.container}>
@@ -85,7 +112,44 @@ class OrderCard extends React.Component {
           <View style={styles.titleView}>
             <Text style={styles.titleStyle}>请求与返回示例</Text>
           </View>
-          <Card />
+
+          <Table borderStyle={{borderWidth: 2, borderColor: '#c8e1ff'}}>
+            <Row
+              data={Info.tableHead}
+              style={styles.head}
+              textStyle={styles.text}
+            />
+            <Rows data={Info.tableData} textStyle={styles.text} />
+          </Table>
+        </Divider>
+
+        <Divider style={styles.table}>
+          <View style={styles.titleView}>
+            <Text style={styles.titleStyle}>请求参数</Text>
+          </View>
+
+          <Table borderStyle={{borderWidth: 2, borderColor: '#c8e1ff'}}>
+            <Row
+              data={POST.tableHead}
+              style={styles.head}
+              textStyle={styles.text}
+            />
+            <Rows data={POST.tableData} textStyle={styles.text} />
+          </Table>
+        </Divider>
+        <Divider style={styles.table}>
+          <View style={styles.titleView}>
+            <Text style={styles.titleStyle}>返回参数</Text>
+          </View>
+
+          <Table borderStyle={{borderWidth: 2, borderColor: '#c8e1ff'}}>
+            <Row
+              data={RET.tableHead}
+              style={styles.head}
+              textStyle={styles.text}
+            />
+            <Rows data={RET.tableData} textStyle={styles.text} />
+          </Table>
         </Divider>
       </View>
     );

@@ -92,6 +92,7 @@ class BuyPage extends React.Component {
       }
     };
     addOrder(json, callback);
+    this.state.navigation.navigate('DevHome');
   };
 
   BuyList = [

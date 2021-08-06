@@ -34,7 +34,6 @@ class OrderDetailPage extends React.Component {
     };
   }
 
-
   render() {
     const {params} = this.props.route;
 
@@ -73,13 +72,6 @@ class OrderDetailPage extends React.Component {
         <ScrollView>
           <OrderCard orderInfo={params.order} />
         </ScrollView>
-
-        <Button
-          title={'Cancel'}
-          titleStyle={styles.buttonTitle}
-          buttonStyle={styles.buy}
-          onPress={() => this.state.navigation.goBack()}
-        />
       </View>
     );
   }
