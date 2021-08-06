@@ -110,6 +110,7 @@ class TestDevService(TestCase):
         self.assertEqual('success', data['userdata'])
         self.assertEqual(1, data['devid'])
         self.assertEqual(1, data['orderid'])
+        self.assertEqual(1,data['apiid'])
         print('orders:')
 
     def test_get_orders_error(self):
