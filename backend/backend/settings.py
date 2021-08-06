@@ -57,7 +57,7 @@ CHATTERBOT = {
     'training_data': [
         # 'chatterbot.corpus.english',
         # 'chatterbot.corpus.chinese',
-        './backend/static/sjtu3'
+        './backend/static/entertainment'
     ],
 }
 MIDDLEWARE = [

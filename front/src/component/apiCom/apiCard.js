@@ -28,29 +28,33 @@ class ApiCard extends React.Component {
   };
 
   render() {
+    const apiinfo = this.props.API;
+
     return (
       <View style={styles.container}>
         <Divider style={{marginBottom: 15}}>
-          <Text h3={1}>API概览</Text>
-          <Text>sdkhskdhfkshksdhkdshdskhsdkhdskhkdsf</Text>
+          <Text h4={1}>API概览</Text>
+          <Text style={{marginBottom: 15, marginTop: 10}}>{apiinfo.description}</Text>
         </Divider>
         <Divider style={{marginBottom: 15}}>
-          <Text h3={1}>调用方法</Text>
-          <Text>sdkhskdhfkshksdhkdshdskhsdkhdskhkdsf</Text>
+          <Text h4={1}>调用方法</Text>
+          <Text style={{marginBottom: 15, marginTop: 10}}>
+            首先在api对应详情页购买指定日期的api接入套餐，购买成功后可在”我的API“中查看订单，使用对应的地址在POST参数中加入自己的账号密码，服务器鉴权通过后即可返回请求
+          </Text>
         </Divider>
         <Divider style={{marginBottom: 15}}>
-          <Text h3={1}>请求域名</Text>
-          <Text>sdkhskdhfkshksdhkdshdskhsdkhdskhkdsf</Text>
+          <Text h4={1}>请求域名</Text>
+          <Text style={{marginBottom: 15, marginTop: 10}}>sdkhskdhfkshksdhkdshdskhsdkhdskhkdsf</Text>
         </Divider>
         <Divider style={{marginBottom: 15}}>
-          <Text h3={1}>请求与返回示例</Text>
-          <Card />
+          <Text h4={1}>请求与返回示例</Text>
+          <Card style={{marginBottom: 15, marginTop: 10}}/>
         </Divider>
         <Divider style={{marginBottom: 15}}>
-          <Text h3={1}>参数表</Text>
-          <Text>sadscsdsdsadsadsad</Text>
+          <Text h4={1}>参数表</Text>
+          <Text style={{marginBottom: 15, marginTop: 10}}>sadscsdsdsadsadsad</Text>
         </Divider>
-        <Text h3={1}>价目表</Text>
+        <Text h4={1}>价目表</Text>
         <Divider style={styles.price}>
           <PricingCard
             color="#4f9deb"
