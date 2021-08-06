@@ -59,14 +59,15 @@ class BuyPage extends React.Component {
   };
 
   buyAPI = days => {
+    const {params} = this.props.route;
     let user = JSON.parse(this.state.user);
     let userID = user.userid;
     let devID = user.devid;
-    //let apiID = this.props.route;
+    let apiID = params.api.apiID;
     const json = {
       userID: userID,
       devID: devID,
-      //apiID: apiID,
+      apiID: apiID,
       days: days,
     };
     console.log(json);
@@ -75,7 +76,7 @@ class BuyPage extends React.Component {
       let userdata = '';
       userdata = data.userdata;
       console.log(userdata);
-      if (userdata == 'success') {
+      if (userdata === 'success') {
         Alert.alert('提示', '恭喜您，购买成功', [
           {
             text: '我知道了',

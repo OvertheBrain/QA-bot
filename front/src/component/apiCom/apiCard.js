@@ -3,6 +3,7 @@ import React from 'react';
 import {View, StyleSheet, ScrollView} from 'react-native';
 import {themeColor} from '../styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {Row, Rows, Table} from 'react-native-table-component';
 
 const styles = StyleSheet.create({
   container: {
@@ -11,6 +12,17 @@ const styles = StyleSheet.create({
   price: {
     flexDirection: 'row',
     flexWrap: 'wrap',
+  },
+  head: {
+    height: 40,
+    backgroundColor: '#f1f8ff',
+  },
+  text: {
+    margin: 10,
+    textAlign: 'center',
+  },
+  table: {
+    paddingTop: 10,
   },
 });
 
@@ -30,11 +42,22 @@ class ApiCard extends React.Component {
   render() {
     const apiinfo = this.props.API;
 
+    const POST = {
+      tableHead: ['名称', '必填', '类型', '说明'],
+      tableData: [
+        ['APIname', '是', 'string', '需要调用的API名称，详见订单状态'],
+        ['username', '是', 'string', '开发者用户名'],
+        ['password', '是', 'string', '开发者密码'],
+        ['msg', '是', 'string', '发送的消息'],
+      ],
+    };
     return (
       <View style={styles.container}>
         <Divider style={{marginBottom: 15}}>
           <Text h4={1}>API概览</Text>
-          <Text style={{marginBottom: 15, marginTop: 10}}>{apiinfo.description}</Text>
+          <Text style={{marginBottom: 15, marginTop: 10}}>
+            {apiinfo.description}
+          </Text>
         </Divider>
         <Divider style={{marginBottom: 15}}>
           <Text h4={1}>调用方法</Text>
@@ -44,15 +67,26 @@ class ApiCard extends React.Component {
         </Divider>
         <Divider style={{marginBottom: 15}}>
           <Text h4={1}>请求域名</Text>
-          <Text style={{marginBottom: 15, marginTop: 10}}>sdkhskdhfkshksdhkdshdskhsdkhdskhkdsf</Text>
+          <Text style={{marginBottom: 15, marginTop: 10}}>
+            {apiinfo.address}
+          </Text>
         </Divider>
         <Divider style={{marginBottom: 15}}>
           <Text h4={1}>请求与返回示例</Text>
-          <Card style={{marginBottom: 15, marginTop: 10}}/>
+          <Card style={{marginBottom: 15, marginTop: 10}} />
         </Divider>
         <Divider style={{marginBottom: 15}}>
           <Text h4={1}>参数表</Text>
-          <Text style={{marginBottom: 15, marginTop: 10}}>sadscsdsdsadsadsad</Text>
+          <Table
+            style={{marginBottom: 15, marginTop: 10}}
+            borderStyle={{borderWidth: 2, borderColor: '#c8e1ff'}}>
+            <Row
+              data={POST.tableHead}
+              style={styles.head}
+              textStyle={styles.text}
+            />
+            <Rows data={POST.tableData} textStyle={styles.text} />
+          </Table>
         </Divider>
         <Text h4={1}>价目表</Text>
         <Divider style={styles.price}>

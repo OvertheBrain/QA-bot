@@ -47,7 +47,7 @@ class OrderCard extends React.Component {
     console.log(order);
     const OverView = {
       tableHead: ['订单编号', '开发者编号', 'API编号', 'API Key'],
-      tableData: [[0, order.devid, order.apiid, 30]],
+      tableData: [[0, order.devid, order.apiid, '账号&密码']],
     };
     const Status = {
       tableHead: ['API', '截止日期', '请求地址', '已调用次数'],

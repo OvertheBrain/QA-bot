@@ -5,15 +5,9 @@ import TouchableScale from 'react-native-touchable-scale'; // https://github.com
 import LinearGradient from 'react-native-linear-gradient'; // Only if no expo
 import {getApiOrderList, getApiStoreList} from '../../service/DevService';
 import {wrap} from 'cavy';
-import {ScrollView} from 'react-native';
 import {themeColor, themeColor2, themeColor3, themeColor4} from '../../styles';
 
-const testList = [
-  {apiId: 0, name: 'api0', enddate: '2021-08-31', count: 110},
-  {apiId: 1, name: 'api1', enddate: '2021-09-31', count: 10},
-  {apiId: 2, name: 'api2', enddate: '已过期', count: 10},
-];
-export default class rAPIrepo extends React.Component {
+export default class APIrepo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -82,7 +76,6 @@ export default class rAPIrepo extends React.Component {
             />
           }
         />
-        <ScrollView>
           {this.state.apiList.map((l, i) => (
             <ListItem
               Component={TouchableScale}
@@ -123,7 +116,6 @@ export default class rAPIrepo extends React.Component {
               </View>
             </ListItem>
           ))}
-        </ScrollView>
       </View>
     );
   }
