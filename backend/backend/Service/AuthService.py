@@ -14,6 +14,7 @@ def check_auth(apiname, username, password):
             if datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")< apiorder.end_date.strftime("%Y-%m-%d %H:%M:%S"):
                 err = "authed"
                 apiorder.count = apiorder.count+1
+                apiorder.save()
             else:
                 err = "order out of date"
         else:
