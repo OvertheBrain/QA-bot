@@ -76,15 +76,15 @@ class BuyPage extends React.Component {
       let userdata = '';
       userdata = data.userdata;
       console.log(userdata);
-      if (userdata === 'success') {
-        Alert.alert('提示', '恭喜您，购买成功', [
+      if (userdata === '恭喜您，订阅成功！') {
+        Alert.alert('提示', userdata + '请到”我的API“查看详情', [
           {
             text: '我知道了',
             onPress: this.confirm,
           },
         ]);
       } else {
-        Alert.alert('提示', '下单出现错误', [
+        Alert.alert('提示', '下单出现错误。' + userdata, [
           {
             text: '我知道了',
             onPress: this.confirm,
