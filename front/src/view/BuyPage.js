@@ -131,6 +131,8 @@ class BuyPage extends React.Component {
   ];
 
   render() {
+    const {params} = this.props.route;
+
     return (
       <View style={styles.container}>
         <Header
@@ -164,7 +166,7 @@ class BuyPage extends React.Component {
         />
 
         <ScrollView>
-          <ApiCard callback={this.BuyCallback} />
+          <ApiCard callback={this.BuyCallback} API={params.api} />
         </ScrollView>
 
         <Button

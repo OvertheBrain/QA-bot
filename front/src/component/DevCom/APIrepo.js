@@ -1,5 +1,5 @@
 import React from 'react';
-import {AsyncStorage, Text, View} from 'react-native';
+import {AsyncStorage, ScrollView, Text, View} from 'react-native';
 import {ListItem, Icon, Header, Avatar} from 'react-native-elements';
 import TouchableScale from 'react-native-touchable-scale'; // https://github.com/kohver/react-native-touchable-scale
 import LinearGradient from 'react-native-linear-gradient'; // Only if no expo
