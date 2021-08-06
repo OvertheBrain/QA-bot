@@ -8,9 +8,8 @@ from ..models import APIorder
 import datetime
 
 
-def addOrder(userid, devid, length):
+def addOrder(userid,apiid, devid, length):
     count = 0
-    apiid = 1
     start_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M')
     print('start_date:' + start_time)
     end_time = (datetime.datetime.now() + datetime.timedelta(days=length)).strftime("%Y-%m-%d %H:%M")
