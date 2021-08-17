@@ -1,7 +1,6 @@
 import React from 'react';
 import {Alert, AsyncStorage, ScrollView, View} from 'react-native';
 import {Button, CheckBox} from 'react-native-elements';
-import {Text} from 'react-native-elements';
 import {Input} from 'react-native-elements/dist/input/Input';
 import {Icon} from 'react-native-elements/dist/icons/Icon';
 import LoginTitle from '../component/LoginCom/LoginTitle';
@@ -28,7 +27,9 @@ class RegisterPage extends React.Component {
       emailAddress: '',
       emailError: false,
       isSame: true,
-      isExist: false,
+      userError: false,
+      pwdError: false,
+      userMsg: '',
     };
   }
   changeProps1(v, i) {
@@ -40,16 +41,29 @@ class RegisterPage extends React.Component {
   changeNav(n) {
     this.setState({navigation: n});
   }
+  /**
+   * checkExist - 查找是否存在该用户名的用户并检查用户名的字符长度是否符合规范
+   * 根据返回的信息设定用户名错误信息
+   * */
   checkExist() {
     GetUser(this.state.username, data => {
       console.log(data);
-      if (data.msg === 'exist') {
-        this.setState({isExist: true});
+      if (data.msg === 'right') {
+        this.setState({userError: false});
       } else {
-        this.setState({isExist: false});
+        this.setState({userError: true});
+        if (data.msg === 'exist') {
+          this.setState({userMsg: '用户名已存在'});
+        } else {
+          this.setState({userMsg: data.msg});
+        }
       }
     });
   }
+  /**
+   * checkEmail - 检查邮箱格式是否正确
+   * 邮箱检查格式为必须含有@,且小数点后只能跟2~3位字符，只能有1~2个小数点
+   * */
   checkEmail() {
     let regex =
       /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
@@ -72,6 +86,10 @@ class RegisterPage extends React.Component {
       this.state.secondPassword === ''
     ) {
       Alert.alert('提示', '用户名与密码不能为空', [
+        {text: '我知道了', onPress: this.confirm},
+      ]);
+    } else if (this.state.userError || this.state.pwdError) {
+      Alert.alert('提示', '用户名或密码格式有误', [
         {text: '我知道了', onPress: this.confirm},
       ]);
     } else {
@@ -104,6 +122,8 @@ class RegisterPage extends React.Component {
   render() {
     let canClick;
     let emailMsg = '邮箱地址为空或者格式错误';
+    let userMsg = '用户名已存在';
+    let pwdMsg = '密码至少为3个字符';
     if (this.state.firstPassword === '') {
       this.state.isShowFirst = false;
     }
@@ -145,9 +165,12 @@ class RegisterPage extends React.Component {
             onChangeText={username => {
               this.setState({username: username});
             }}
-            onBlur={() => this.checkExist()}
+            onBlur={() => {
+              this.checkExist();
+              console.log(userMsg);
+            }}
             errorStyle={{color: 'red'}}
-            errorMessage={this.state.isExist ? '用户名已存在' : ''}
+            errorMessage={this.state.userError ? this.state.userMsg : ''}
           />
         </View>
         <View style={{flex: 1}}>
@@ -178,6 +201,15 @@ class RegisterPage extends React.Component {
             onChangeText={password => {
               this.setState({isShowFirst: true, firstPassword: password});
             }}
+            onBlur={() => {
+              if (this.state.firstPassword.length < 3) {
+                this.setState({pwdError: true});
+              } else {
+                this.setState({pwdError: false});
+              }
+            }}
+            errorStyle={{color: 'red'}}
+            errorMessage={this.state.pwdError ? pwdMsg : ''}
           />
         </View>
         <View style={{flex: 1}}>

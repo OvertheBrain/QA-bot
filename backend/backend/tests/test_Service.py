@@ -107,11 +107,11 @@ class TestDevService(TestCase):
 
     def test_get_orders(self):
         data = addOrder(1, 1, 1, 30)
-        self.assertEqual('success', data['userdata'])
+        self.assertEqual('恭喜您，订阅成功！', data['userdata'])
         self.assertEqual(1, data['devid'])
         self.assertEqual(1, data['orderid'])
-        self.assertEqual(1,data['apiid'])
-        print('orders:')
+        self.assertEqual(1, data['apiid'])
+        # orders = getAllOrders(1)
 
     def test_get_orders_error(self):
         data = getAllOrders(1)

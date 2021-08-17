@@ -12,6 +12,11 @@ def getUser(name):
     msg = 'right'
     if User.objects.filter(username=name):
         msg = 'exist'
+        return msg
+    if len(name) < 3:
+        msg = '用户名至少为3个字符'
+    if len(name) > 6:
+        msg = '用户名最多为6个字符'
     return msg
 
 
