@@ -7,6 +7,7 @@ from chatterbot import ChatBot
 from backend.Service.AuthService import check_auth
 from backend.Service.DevService import addOrder, getOrder, getAllOrders
 from backend.Service.UserService import login, getUser, addUser
+from backend.models import EmailVerifyRecord, User
 
 
 class ChatBotApiView(View):
@@ -74,13 +75,35 @@ def getuserView(request):
     return HttpResponse(json.dumps(data), content_type='application/json')
 
 
+def activeUserView(request, active_code):
+    """
+    激活用户
+    :param request:get请求
+    :param active_code: 邮箱收到的验证码
+    :return: 激活成功的页面
+    """
+    # 用code在数据库中过滤处信息
+    all_records = EmailVerifyRecord.objects.filter(code=active_code)
+    if all_records:
+        for record in all_records:
+            email = record.email
+            # 通过邮箱查找到对应的用户
+            user = User.objects.get(email=email)
+            # 激活用户
+            user.is_active = 1
+            user.save()
+            return HttpResponse("恭喜你，激活成功!")
+    else:
+        return HttpResponse("该邮件已过期!")
+
+
 def addOrderView(request):
     post = json.loads(request.body.decode('utf-8'))
     userid = post['userID']
     devid = post['devID']
-    apiid=post['apiID']
+    apiid = post['apiID']
     length = post['days']
-    data = addOrder(userid,apiid, devid, length)
+    data = addOrder(userid, apiid, devid, length)
     return HttpResponse(json.dumps(data), content_type='application/json')
 
 
@@ -90,9 +113,10 @@ def getOrderView(request):
     data = getOrder(orderID)
     return HttpResponse(json.dumps(data), content_type='application/json')
 
+
 def checkAuthView(request):
     post = json.loads(request.body.decode('utf-8'))
-    apiname= post['APIname']
+    apiname = post['APIname']
     username = post['username']
     password = post['password']
     msg = post['msg']
@@ -107,6 +131,7 @@ def checkAuthView(request):
         }
 
     return HttpResponse(json.dumps(data), content_type='application/json')
+
 
 def getAllOrdersView(request):
     post = json.loads(request.body.decode('utf-8'))

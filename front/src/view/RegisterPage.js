@@ -107,13 +107,25 @@ class RegisterPage extends React.Component {
             Alert.alert('提示', '用户名已存在', [
               {text: '我知道了', onPress: this.confirm},
             ]);
+          } else if (message === 'exist email') {
+            Alert.alert('提示', '邮箱已注册', [
+              {text: '我知道了', onPress: this.confirm},
+            ]);
+          } else if (message === 'wrong email') {
+            Alert.alert('提示', '无法发送邮件至邮箱，请检查邮箱输入', [
+              {text: '我知道了', onPress: this.confirm},
+            ]);
           } else {
             AsyncStorage.setItem('user', JSON.stringify(data));
-            if (this.state.usertype) {
-              this.state.navigation.navigate('DevHome');
-            } else {
-              this.state.navigation.navigate('Home');
-            }
+            // if (this.state.usertype) {
+            //   this.state.navigation.navigate('DevHome');
+            // } else {
+            //   this.state.navigation.navigate('Home');
+            // }
+            Alert.alert('提示', '已发送验证邮件至邮箱，请到邮箱激活账号', [
+              {text: '我知道了', onPress: this.confirm},
+            ]);
+            this.state.navigation.navigate('Login');
           }
         },
       );
