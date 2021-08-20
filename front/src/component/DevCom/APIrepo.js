@@ -54,6 +54,53 @@ export default class APIrepo extends React.Component {
       console.log(this.state.apiList);
     });
   }
+  renderList() {
+    const list = this.state.apiList;
+    console.log(list);
+    if (list.userdata === 'no order') {
+      return;
+    }
+
+    const comp = list.map((l, i) => (
+      <ListItem
+        Component={TouchableScale}
+        containerStyle={{
+          marginTop: 20,
+          marginHorizontal: 20,
+          borderRadius: 10,
+          backgroundColor: l.delay === true ? themeColor4 : themeColor3,
+        }}
+        friction={90} //
+        tension={100} // These props are passed to the parent component (here TouchableScale)
+        activeScale={0.95} //
+        key={i}
+        bottomDivider
+        onPress={() => {
+          console.log(l);
+          this.state.navigation.navigate('OrderInfo', {
+            order: l,
+          });
+        }}>
+        <Icon
+          raised
+          name={l.delay === true ? 'unlink' : 'link'}
+          type="font-awesome"
+          color={l.delay === true ? themeColor4 : themeColor3}
+        />
+
+        <View>
+          <ListItem.Content>
+            <ListItem.Title>{l.apiname}</ListItem.Title>
+            <ListItem.Subtitle>
+              {l.end_date + (l.delay === true ? ' ' : '到期')}
+            </ListItem.Subtitle>
+            <ListItem.Subtitle>{'已调用' + l.count + '次'}</ListItem.Subtitle>
+          </ListItem.Content>
+        </View>
+      </ListItem>
+    ));
+    return comp;
+  }
 
   render() {
     return (
@@ -76,46 +123,7 @@ export default class APIrepo extends React.Component {
             />
           }
         />
-          {this.state.apiList.map((l, i) => (
-            <ListItem
-              Component={TouchableScale}
-              containerStyle={{
-                marginTop: 20,
-                marginHorizontal: 20,
-                borderRadius: 10,
-                backgroundColor: l.delay === true ? themeColor4 : themeColor3,
-              }}
-              friction={90} //
-              tension={100} // These props are passed to the parent component (here TouchableScale)
-              activeScale={0.95} //
-              key={i}
-              bottomDivider
-              onPress={() => {
-                console.log(l);
-                this.state.navigation.navigate('OrderInfo', {
-                  order: l,
-                });
-              }}>
-              <Icon
-                raised
-                name={l.delay === true ? 'unlink' : 'link'}
-                type="font-awesome"
-                color={l.delay === true ? themeColor4 : themeColor3}
-              />
-
-              <View>
-                <ListItem.Content>
-                  <ListItem.Title>{l.apiname}</ListItem.Title>
-                  <ListItem.Subtitle>
-                    {l.end_date + (l.delay === true ? ' ' : '到期')}
-                  </ListItem.Subtitle>
-                  <ListItem.Subtitle>
-                    {'已调用' + l.count + '次'}
-                  </ListItem.Subtitle>
-                </ListItem.Content>
-              </View>
-            </ListItem>
-          ))}
+        {this.renderList()}
       </View>
     );
   }

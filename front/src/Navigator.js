@@ -16,6 +16,7 @@ import TestableUserList from './view/UserListPage';
 import TestableDevelop from './view/DeveloperPage';
 import DeveloperHomePage from './view/DeveloperHomePage';
 import OrderDetailPage from './view/OrderDetailPage';
+
 // Navigation Usage：onPress={() => navigation.navigate('Details')}
 const Stack = createStackNavigator();
 //传递参数
@@ -33,8 +34,8 @@ function OrderInfo({route, navigation}) {
 function BuyScreen({route, navigation}) {
   return <BuyPage route={route} navigation={navigation} />;
 }
-function HomeScreen({navigation}) {
-  return <TestableUserList navigation={navigation} />;
+function HomeScreen({route, navigation}) {
+  return <TestableUserList navigation={navigation} route={route} />;
 }
 function LoginScreen({navigation}) {
   return <TestableLogin navigation={navigation} />;
@@ -45,8 +46,8 @@ function RegisterScreen({navigation}) {
 function ChatScreen({route, navigation}) {
   return <ChatPage route={route} navigation={navigation} />;
 }
-function DeveloperScreen({navigation}) {
-  return <TestableDevelop navigation={navigation} />;
+function DeveloperScreen({route, navigation}) {
+  return <TestableDevelop route={route} navigation={navigation} />;
 }
 function DeveloperHomeScreen({route, navigation}) {
   return <DeveloperHomePage route={route} navigation={navigation} />;

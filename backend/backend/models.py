@@ -9,15 +9,23 @@ class User(models.Model):
     password = models.CharField(max_length=255)
     email = models.CharField(max_length=255)
     avatar = models.CharField(max_length=1000, null=True)
-    usertype =models.IntegerField(default=1)
+    usertype = models.IntegerField(default=1)
+
+    is_active = models.IntegerField(default=0)
 
     def __str__(self):
         return self.username
 
 
+class EmailVerifyRecord(models.Model):
+    # 验证码
+    code = models.CharField(max_length=20, verbose_name=u"验证码")
+    email = models.EmailField(max_length=50, verbose_name=u"邮箱")
+
+
 class Developer(models.Model):
     devid = models.AutoField(primary_key=True)
-    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     APIcount = models.IntegerField(default=0)
     billings = models.FloatField(default=0)
 
@@ -28,7 +36,7 @@ class Developer(models.Model):
 class API(models.Model):
     apiid = models.AutoField(primary_key=True)
     name = models.CharField(max_length=30)
-    address = models.CharField(max_length=100 , default="")
+    address = models.CharField(max_length=100, default="")
     description = models.CharField(max_length=1000)
     price = models.IntegerField(default=0)
 
@@ -43,8 +51,6 @@ class APIorder(models.Model):
     start_date = models.DateTimeField()
     count = models.IntegerField()
     end_date = models.DateTimeField()
-
-
 
 
 admin.site.register(User)

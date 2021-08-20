@@ -70,6 +70,13 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+#邮件
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.qq.com'  # 因为是示例为qq浏览器，所以这里是qq
+EMAIL_PORT = 25
+EMAIL_HOST_USER = '2512618003@qq.com'
+EMAIL_HOST_PASSWORD = 'ftpfhfoalxivdidh'
+EMAIL_FROM = 'Robot<2512618003@qq.com>'  # 收件人看到的发件人
 
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_ALLOW_ALL = True

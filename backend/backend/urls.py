@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
 
 from backend import views
 from backend.views import ChatBotApiView
@@ -24,10 +24,12 @@ urlpatterns = [
     path('login/', views.loginView),
     path('register/', views.registerView),
     path('getuser/', views.getuserView),
+    path('active/<active_code>/', views.activeUserView),
     path('addOrder/', views.addOrderView),
     path('getOrder/', views.getOrderView),
     path('getApiOrderList/', views.getAllOrdersView),
     path('test/', ChatBotApiView.as_view()),
-    path('sendMsg/', views.checkAuthView)
+    path('sendMsg/', views.checkAuthView),
+
     # path('sendMsg/', views.api),
 ]

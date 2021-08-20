@@ -9,7 +9,7 @@ import {
   ThemeProvider,
 } from 'react-native-elements';
 import {styles, themeColor} from '../styles';
-import {View} from 'react-native';
+import {AsyncStorage, View} from 'react-native';
 import {Icon} from 'react-native-elements/dist/icons/Icon';
 import {hook, wrap} from 'cavy';
 import {Input} from 'react-native-elements/dist/input/Input';
@@ -25,6 +25,8 @@ class DeveloperPage extends React.Component {
   render() {
     const {generateTestHook} = this.props;
     const WrappedAvatar = wrap(Avatar);
+    const {params} = this.props.route;
+
     return (
       <View
         style={{
@@ -44,7 +46,10 @@ class DeveloperPage extends React.Component {
               }}
             />
           }
-          centerComponent={{text: 'MyId', style: {color: '#fff', fontSize: 30}}}
+          centerComponent={{
+            text: params.user.nickname,
+            style: {color: '#fff', fontSize: 30},
+          }}
         />
         <View
           style={{
@@ -103,7 +108,7 @@ class DeveloperPage extends React.Component {
               width: '60%',
               flex: 4,
             }}>
-            <Text h3>User's Name</Text>
+            <Text h3>{params.user.nickname}</Text>
           </View>
           <View
             style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
@@ -120,9 +125,10 @@ class DeveloperPage extends React.Component {
           <Button
             buttonStyle={styles.button1}
             containerStyle={styles.buttonContainer}
-            title="使用功能查询"
+            title="登出"
             titleStyle={styles.buttonTitle1}
             type="clear"
+            onPress={() => this.props.navigation.navigate('Start')}
           />
         </View>
       </View>
