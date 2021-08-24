@@ -16,6 +16,10 @@ import TestableUserList from './view/UserListPage';
 import TestableDevelop from './view/DeveloperPage';
 import DeveloperHomePage from './view/DeveloperHomePage';
 import OrderDetailPage from './view/OrderDetailPage';
+//new
+import NameEditPage from './view/NameEditPage';
+import AvatarEditPage from './view/AvatarEditPage';
+//new
 
 // Navigation Usage：onPress={() => navigation.navigate('Details')}
 const Stack = createStackNavigator();
@@ -52,6 +56,15 @@ function DeveloperScreen({route, navigation}) {
 function DeveloperHomeScreen({route, navigation}) {
   return <DeveloperHomePage route={route} navigation={navigation} />;
 }
+//new
+function NameEditScreen({navigation}) {
+  return <NameEditPage navigation={navigation} />;
+}
+function AvatarEditScreen({navigation}) {
+  return <AvatarEditPage navigation={navigation} />;
+}
+//new
+
 function Navigator() {
   return (
     <NavigationContainer>
@@ -68,6 +81,10 @@ function Navigator() {
         <Stack.Screen name="BuyAPI" component={BuyScreen} />
         <Stack.Screen name="DevHome" component={DeveloperHomeScreen} />
         <Stack.Screen name="OrderInfo" component={OrderInfo} />
+        {/*new*/}
+        <Stack.Screen name="NameEdit" component={NameEditScreen} />
+        <Stack.Screen name="AvatarEdit" component={AvatarEditScreen} />
+        {/*new*/}
       </Stack.Navigator>
     </NavigationContainer>
   );

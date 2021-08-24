@@ -6,7 +6,7 @@ from chatterbot import ChatBot
 
 from backend.Service.AuthService import check_auth
 from backend.Service.DevService import addOrder, getOrder, getAllOrders
-from backend.Service.UserService import login, getUser, addUser
+from backend.Service.UserService import login, getUser, addUser, nameedit, avataredit, avatarget, nicknameget, emailget
 from backend.models import EmailVerifyRecord, User
 
 
@@ -137,4 +137,45 @@ def getAllOrdersView(request):
     post = json.loads(request.body.decode('utf-8'))
     devID = post['devid']
     data = getAllOrders(devID)
+    return HttpResponse(json.dumps(data), content_type='application/json')
+
+
+
+
+
+
+
+
+
+def nameeditView(request):
+    post = json.loads(request.body.decode('utf-8'))
+    name = post['username']
+    newname = post['newname']
+    data = nameedit(name, newname)
+    return HttpResponse(json.dumps(data), content_type='application/json')
+
+def avatareditView(request):
+    post = json.loads(request.body.decode('utf-8'))
+    name = post['username']
+    imagedata = post['imagedata']
+    imagemime = post['imagemime']
+    data = avataredit(name, imagedata, imagemime)
+    return HttpResponse(json.dumps(data), content_type='application/json')
+
+def avatargetView(request):
+    post = json.loads(request.body.decode('utf-8'))
+    name = post['username']
+    data = avatarget(name)
+    return HttpResponse(json.dumps(data), content_type='application/json')
+
+def nicknamegetView(request):
+    post = json.loads(request.body.decode('utf-8'))
+    name = post['username']
+    data = nicknameget(name)
+    return HttpResponse(json.dumps(data), content_type='application/json')
+
+def emailgetView(request):
+    post = json.loads(request.body.decode('utf-8'))
+    name = post['username']
+    data = emailget(name)
     return HttpResponse(json.dumps(data), content_type='application/json')
