@@ -12,21 +12,66 @@ import {styles, themeColor} from '../styles';
 import {AsyncStorage, View} from 'react-native';
 import {Icon} from 'react-native-elements/dist/icons/Icon';
 import {hook, wrap} from 'cavy';
-import {Input} from 'react-native-elements/dist/input/Input';
+import {
+  AvatarGetService,
+  NicknameGetService,
+  EmailGetService,
+} from '../service/UserService';
 
 class DeveloperPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       navigation: this.props.navigation,
+      username: '',
+      //临时赋值
+      nickname: 'user',
+      email: 'abc@123.com',
+      //实际使用‘’
+      imagedata: '',
+      imagemime: '',
     };
   }
+  getAvatar = () => {
+    AsyncStorage.getItem('user').then(data => {
+      if (data) {
+        let userdata = JSON.parse(data);
+        this.setState({username: userdata.username});
+      }
+    });
+    AvatarGetService(this.state.username, data => {
+      this.setState({imagedata: data.imagedata, imagemime: data.imagemime});
+    });
+  };
 
+  getNickname = () => {
+    AsyncStorage.getItem('user').then(data => {
+      if (data) {
+        let userdata = JSON.parse(data);
+        this.setState({username: userdata.username});
+      }
+    });
+    NicknameGetService(this.state.username, data => {
+      this.setState({nickname: data.nickname});
+    });
+  };
+  getEmail = () => {
+    AsyncStorage.getItem('user').then(data => {
+      if (data) {
+        let userdata = JSON.parse(data);
+        this.setState({username: userdata.username});
+      }
+    });
+    EmailGetService(this.state.username, data => {
+      this.setState({email: data.email});
+    });
+  };
   render() {
     const {generateTestHook} = this.props;
     const WrappedAvatar = wrap(Avatar);
-    const {params} = this.props.route;
-
+    //test const {params} = this.props.route;
+    this.getAvatar();
+    this.getNickname();
     return (
       <View
         style={{
@@ -39,7 +84,7 @@ class DeveloperPage extends React.Component {
             <Icon
               name="angle-left"
               type="font-awesome"
-              size={40}
+              //new              size={40}
               color={'white'}
               onPress={() => {
                 this.state.navigation.navigate('Home');
@@ -47,7 +92,7 @@ class DeveloperPage extends React.Component {
             />
           }
           centerComponent={{
-            text: params.user.nickname,
+            text: this.state.nickname,
             style: {color: '#fff', fontSize: 30},
           }}
         />
@@ -77,12 +122,20 @@ class DeveloperPage extends React.Component {
               ref={generateTestHook('Develop.avatar')}
               rounded
               size={'large'}
-              source={{uri: 'https://placeimg.com/140/140/any'}}
+              source={{
+                uri: `data:${this.state.imagemime};base64,${this.state.imagedata}`,
+              }}
             />
           </View>
           <View
             style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
-            <Icon name="edit" color="black" />
+            <Icon
+              name="edit"
+              color="black"
+              onPress={() => {
+                this.state.navigation.navigate('AvatarEdit');
+              }}
+            />
           </View>
         </View>
 
@@ -108,12 +161,30 @@ class DeveloperPage extends React.Component {
               width: '60%',
               flex: 4,
             }}>
-            <Text h3>{params.user.nickname}</Text>
+            <Text h3>{this.state.nickname}</Text>
           </View>
           <View
             style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
-            <Icon name="edit" color="black" />
+            <Icon
+              name="edit"
+              color="black"
+              //new
+              onPress={() => {
+                this.state.navigation.navigate('NameEdit');
+              }}
+              //new
+            />
           </View>
+        </View>
+
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'center',
+            flex: 1,
+          }}>
+          <Text h3>{this.state.email}</Text>
         </View>
 
         <View

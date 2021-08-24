@@ -107,3 +107,54 @@ def addUser(username, pwd, usertype, email):
             userid = user_obj.userid
             data = {'userdata': msg, 'usertype': usertype, 'userid': userid, 'nickname': username}
             return data
+
+
+def nameedit(name, newname):
+    if User.objects.filter(username=name):
+        user = User.objects.filter(username=name)[0]
+        user.nickname = newname
+        user.save()
+        data = {'msg': 'success'}
+        return HttpResponse(json.dumps(data), content_type='application/json')
+    else:
+        data = {'msg': 'fail'}
+        return HttpResponse(json.dumps(data), content_type='application/json')
+
+def avataredit(name, imagedata, imagemime):
+    if User.objects.filter(username=name):
+        user = User.objects.filter(username=name)[0]
+        user.imagedata = imagedata
+        user.imagemime = imagemime
+        user.save()
+        data = {'msg': 'success'}
+        return HttpResponse(json.dumps(data), content_type='application/json')
+    else:
+        data = {'msg': 'fail'}
+        return HttpResponse(json.dumps(data), content_type='application/json')
+
+def avatarget(name):
+    if User.objects.filter(username=name):
+        user = User.objects.filter(username=name)[0]
+        data = {'imagedata': user.imagedata, 'imagemime': user.imagemime}
+        return HttpResponse(json.dumps(data), content_type='application/json')
+    else:
+        data = {'imagedata': '', 'imagemime': ''}
+        return HttpResponse(json.dumps(data), content_type='application/json')
+
+def nicknameget(name):
+    if User.objects.filter(username=name):
+        user = User.objects.filter(username=name)[0]
+        data = {'nickname': user.nickname}
+        return HttpResponse(json.dumps(data), content_type='application/json')
+    else:
+        data = {'nickname': ''}
+        return HttpResponse(json.dumps(data), content_type='application/json')
+
+def emailget(name):
+    if User.objects.filter(username=name):
+        user = User.objects.filter(username=name)[0]
+        data = {'email': user.email}
+        return HttpResponse(json.dumps(data), content_type='application/json')
+    else:
+        data = {'email': ''}
+        return HttpResponse(json.dumps(data), content_type='application/json')
