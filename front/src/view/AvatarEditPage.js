@@ -71,7 +71,7 @@ class NameEditPage extends React.Component {
   }
 
   handleAvatarEdit = () => {
-    if (this.state.imagedata.length <= 3999999) {
+    if (this.state.newimagedata.length <= 3999999) {
       AsyncStorage.getItem('user').then(data => {
         if (data) {
           let userdata = JSON.parse(data);
@@ -80,8 +80,8 @@ class NameEditPage extends React.Component {
       });
       AvatarEditService(
         this.state.username,
-        this.state.imagedata,
-        this.state.imagemime,
+        this.state.newimagedata,
+        this.state.newimagemime,
         data => {
           if (data.msg === 'success') {
             this.setState({
