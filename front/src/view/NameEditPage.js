@@ -2,7 +2,7 @@ import React from 'react';
 import {Header, Input} from 'react-native-elements';
 import {Alert, AsyncStorage, View} from 'react-native';
 import {Icon} from 'react-native-elements/dist/icons/Icon';
-import {themeColor} from '../styles';
+import {styles, themeColor} from '../styles';
 import {NameEditService} from '../service/UserService';
 
 class NameEditPage extends React.Component {
@@ -11,26 +11,37 @@ class NameEditPage extends React.Component {
     this.state = {
       navigation: this.props.navigation,
       username: '',
-      newname: '',
+      name: '',
     };
   }
-
+  async componentDidMount() {
+    try {
+      const shop = await AsyncStorage.getItem('user');
+      let user = JSON.parse(shop);
+      this.setState({username: user.username});
+      console.log(this.state.username);
+    } catch (error) {
+      console.log(error);
+    }
+  }
   handleNameEdit() {
-    if (this.state.newname.length > 30) {
-      Alert.alert('提示', '用户名长度过长', [
+    if (this.state.name.length > 30) {
+      Alert.alert('提示', '用户名长度不能超过30个字', [
         {text: '我知道了', onPress: this.confirm},
       ]);
+      //百度好像中文一个字length和编码方式有关？
       this.state.navigation.navigate('NameEdit');
-      this.setState({newname: ''});
+      this.setState({name: ''});
       //输入新名字长度超出范围，点击edit Icon后清空输入
     } else {
-      AsyncStorage.getItem('user').then(data => {
-        if (data) {
-          let userdata = JSON.parse(data);
-          this.setState({username: userdata.username});
-        }
-      });
-      NameEditService(this.state.username, this.state.newname, data => {
+      // AsyncStorage.getItem('user').then(data => {
+      //   if (data) {
+      //     let userdata = JSON.parse(data);
+      //     this.setState({username: userdata.username});
+      //   }
+      // });
+      NameEditService(this.state.username, this.state.name, data => {
+        console.log(data);
         if (data.msg === 'success') {
           Alert.alert('提示', '修改成功', [
             {
@@ -63,6 +74,7 @@ class NameEditPage extends React.Component {
             <Icon
               name="angle-left"
               type="font-awesome"
+              size={40}
               color={'white'}
               onPress={() => {
                 this.state.navigation.navigate('Developer');
@@ -77,7 +89,7 @@ class NameEditPage extends React.Component {
         <View>
           <Input
             placeholder="new name"
-            onChangeText={name => this.setState({newname: name})}
+            onChangeText={name => this.setState({name: name})}
             rightIcon={
               <Icon
                 name="edit"

@@ -38,6 +38,7 @@ export const NameEditService = (username, newname, callback) => {
     username: username,
     newname: newname,
   };
+  console.log(data);
   const url = server + 'nameedit/';
   postRequest(url, data, callback);
 };

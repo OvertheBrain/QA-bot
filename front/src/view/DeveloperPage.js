@@ -30,31 +30,33 @@ class DeveloperPage extends React.Component {
       //实际使用‘’
       imagedata: '',
       imagemime: '',
+      user: {},
     };
   }
-  getAvatar = () => {
-    AsyncStorage.getItem('user').then(data => {
-      if (data) {
-        let userdata = JSON.parse(data);
-        this.setState({username: userdata.username});
-      }
-    });
-    AvatarGetService(this.state.username, data => {
-      this.setState({imagedata: data.imagedata, imagemime: data.imagemime});
-    });
-  };
-
-  getNickname = () => {
-    AsyncStorage.getItem('user').then(data => {
-      if (data) {
-        let userdata = JSON.parse(data);
-        this.setState({username: userdata.username});
-      }
-    });
-    NicknameGetService(this.state.username, data => {
-      this.setState({nickname: data.nickname});
-    });
-  };
+  // getAvatar = () => {
+  //   AsyncStorage.getItem('user').then(data => {
+  //     if (data) {
+  //       let userdata = JSON.parse(data);
+  //       console.log(userdata.username);
+  //       this.setState({username: userdata.username});
+  //     }
+  //   });
+  //   AvatarGetService(this.state.username, data => {
+  //     this.setState({imagedata: data.imagedata, imagemime: data.imagemime});
+  //   });
+  // };
+  //
+  // getNickname = () => {
+  //   AsyncStorage.getItem('user').then(data => {
+  //     if (data) {
+  //       let userdata = JSON.parse(data);
+  //       this.setState({username: userdata.username});
+  //     }
+  //   });
+  //   NicknameGetService(this.state.username, data => {
+  //     this.setState({nickname: data.nickname});
+  //   });
+  // };
   getEmail = () => {
     AsyncStorage.getItem('user').then(data => {
       if (data) {
@@ -66,12 +68,23 @@ class DeveloperPage extends React.Component {
       this.setState({email: data.email});
     });
   };
+
+  async componentDidMount() {
+    try {
+      const shop = await AsyncStorage.getItem('user');
+      let user = JSON.parse(shop);
+      this.setState({user: user});
+      console.log(this.state.user);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   render() {
     const {generateTestHook} = this.props;
     const WrappedAvatar = wrap(Avatar);
     //test const {params} = this.props.route;
-    this.getAvatar();
-    this.getNickname();
+
     return (
       <View
         style={{
@@ -92,7 +105,7 @@ class DeveloperPage extends React.Component {
             />
           }
           centerComponent={{
-            text: this.state.nickname,
+            text: this.state.user.nickname,
             style: {color: '#fff', fontSize: 30},
           }}
         />
@@ -123,7 +136,7 @@ class DeveloperPage extends React.Component {
               rounded
               size={'large'}
               source={{
-                uri: `data:${this.state.imagemime};base64,${this.state.imagedata}`,
+                uri: `data:${this.state.user.imagemime};base64,${this.state.user.imagedata}`,
               }}
             />
           </View>
@@ -161,7 +174,7 @@ class DeveloperPage extends React.Component {
               width: '60%',
               flex: 4,
             }}>
-            <Text h3>{this.state.nickname}</Text>
+            <Text h3>{this.state.user.nickname}</Text>
           </View>
           <View
             style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
@@ -184,7 +197,7 @@ class DeveloperPage extends React.Component {
             alignItems: 'center',
             flex: 1,
           }}>
-          <Text h3>{this.state.email}</Text>
+          <Text h3>{this.state.user.email}</Text>
         </View>
 
         <View
