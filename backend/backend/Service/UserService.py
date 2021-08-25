@@ -38,6 +38,8 @@ def login(name, pwd, checked):
             userid = user.userid
             username = user.username
             active = user.is_active
+            imagedata = user.imagedata
+            imagemime = user.imagemime
             # 账号激活才能够登录
             if active:
                 if usertype:
@@ -45,17 +47,20 @@ def login(name, pwd, checked):
                     dev_id = developer.devid
                     if checked:
                         data = {'userdata': userdata, 'usertype': usertype, 'userid': userid, 'devid': dev_id,
-                                'nickname': username, 'username': username, 'password': pwd}
+                                'nickname': username, 'username': username, 'password': pwd, 'imagedata': imagedata,
+                                'imagemime': imagemime}
                     else:
                         data = {'userdata': userdata, 'usertype': usertype, 'userid': userid, 'devid': dev_id,
-                                'nickname': username}
+                                'nickname': username, 'imagedata': imagedata, 'imagemime': imagemime}
                     return data
                 else:
                     if checked:
                         data = {'userdata': userdata, 'usertype': usertype, 'userid': userid, 'nickname': username,
-                                'username': username, 'password': pwd}
+                                'username': username, 'password': pwd, 'imagedata': imagedata, 'imagemime': imagemime
+                                }
                     else:
-                        data = {'userdata': userdata, 'usertype': usertype, 'userid': userid, 'nickname': username}
+                        data = {'userdata': userdata, 'usertype': usertype, 'userid': userid, 'nickname': username,
+                                'imagedata': imagedata, 'imagemime': imagemime}
                     return data
             else:
                 userdata = '用户未激活'
@@ -115,10 +120,10 @@ def nameedit(name, newname):
         user.nickname = newname
         user.save()
         data = {'msg': 'success'}
-        return HttpResponse(json.dumps(data), content_type='application/json')
+        return data
     else:
         data = {'msg': 'fail'}
-        return HttpResponse(json.dumps(data), content_type='application/json')
+        return data
 
 def avataredit(name, imagedata, imagemime):
     if User.objects.filter(username=name):
@@ -127,19 +132,19 @@ def avataredit(name, imagedata, imagemime):
         user.imagemime = imagemime
         user.save()
         data = {'msg': 'success'}
-        return HttpResponse(json.dumps(data), content_type='application/json')
+        return data
     else:
         data = {'msg': 'fail'}
-        return HttpResponse(json.dumps(data), content_type='application/json')
+        return data
 
 def avatarget(name):
     if User.objects.filter(username=name):
         user = User.objects.filter(username=name)[0]
         data = {'imagedata': user.imagedata, 'imagemime': user.imagemime}
-        return HttpResponse(json.dumps(data), content_type='application/json')
+        return data
     else:
         data = {'imagedata': '', 'imagemime': ''}
-        return HttpResponse(json.dumps(data), content_type='application/json')
+        return data
 
 def nicknameget(name):
     if User.objects.filter(username=name):
