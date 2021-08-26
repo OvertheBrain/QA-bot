@@ -19,11 +19,12 @@ class NameEditPage extends React.Component {
     this.state = {
       navigation: this.props.navigation,
       isVisible: false,
-      username: '',
-      imagedata: '',
-      imagemime: '',
+      // username: '',
+      // imagedata: '',
+      // imagemime: '',
       newimagedata: '',
       newimagemime: '',
+      user: {},
     };
   }
   _openAlbum() {
@@ -35,17 +36,12 @@ class NameEditPage extends React.Component {
       includeBase64: true,
       cropperCircleOverlay: true,
     };
-    ImageCropPicker.openPicker(option).then(
-      image => {
-        console.log(image);
-        this.setState({newimagedata: image.data, newimagemime: image.mime});
-        this.handleAvatarEdit();
-        this.setState({isVisible: false});
-      },
-      error => {
-        alert(error);
-      },
-    );
+    ImageCropPicker.openPicker(option).then(image => {
+      console.log(image);
+      this.setState({newimagedata: image.data, newimagemime: image.mime});
+      this.handleAvatarEdit();
+      this.setState({isVisible: false});
+    });
   }
 
   _openCamera() {
@@ -57,41 +53,33 @@ class NameEditPage extends React.Component {
       includeBase64: true,
       cropperCircleOverlay: true,
     };
-    ImageCropPicker.openCamera(option).then(
-      image => {
-        console.log(image);
-        this.setState({newimagedata: image.data, newimagemime: image.mime});
-        this.handleAvatarEdit();
-        this.setState({isVisible: false});
-      },
-      error => {
-        alert(error);
-      },
-    );
+    ImageCropPicker.openCamera(option).then(image => {
+      console.log(image);
+      this.setState({newimagedata: image.data, newimagemime: image.mime});
+      this.handleAvatarEdit();
+      this.setState({isVisible: false});
+    });
   }
 
   handleAvatarEdit = () => {
     if (this.state.newimagedata.length <= 3999999) {
-      AsyncStorage.getItem('user').then(data => {
-        if (data) {
-          let userdata = JSON.parse(data);
-          this.setState({username: userdata.username});
-        }
-      });
       AvatarEditService(
-        this.state.username,
+        this.state.user.userid,
         this.state.newimagedata,
         this.state.newimagemime,
         data => {
           if (data.msg === 'success') {
-            this.setState({
-              imagedata: this.state.newimagedata,
-              imagemime: this.state.newimagemime,
-            });
-            this.setState({newimagedata: '', newimagemime: ''});
-          } else {
-            this.setState({newimagedata: '', newimagemime: ''});
+            let user = this.state.user;
+            user.imagedata = this.state.newimagedata;
+            user.imagemime = this.state.newimagemime;
+            AsyncStorage.setItem('user', JSON.stringify(user));
+            this.setState({user: user});
+            // this.setState({
+            //   imagedata: this.state.newimagedata,
+            //   imagemime: this.state.newimagemime,
+            // });
           }
+          this.setState({newimagedata: '', newimagemime: ''});
         },
       );
     } else {
@@ -103,18 +91,28 @@ class NameEditPage extends React.Component {
     }
   };
 
-  getAvatar = () => {
-    AsyncStorage.getItem('user').then(data => {
-      if (data) {
-        let userdata = JSON.parse(data);
-        this.setState({username: userdata.username});
-      }
-    });
-    AvatarGetService(this.state.username, data => {
-      this.setState({imagedata: data.imagedata, imagemime: data.imagemime});
-    });
-  };
+  // getAvatar = () => {
+  //   AsyncStorage.getItem('user').then(data => {
+  //     if (data) {
+  //       let userdata = JSON.parse(data);
+  //       this.setState({username: userdata.username});
+  //     }
+  //   });
+  //   AvatarGetService(this.state.username, data => {
+  //     this.setState({imagedata: data.imagedata, imagemime: data.imagemime});
+  //   });
+  // };
 
+  async componentDidMount() {
+    try {
+      const shop = await AsyncStorage.getItem('user');
+      let user = JSON.parse(shop);
+      this.setState({user: user});
+      console.log(this.state.user);
+    } catch (error) {
+      console.log(error);
+    }
+  }
   render() {
     const list = [
       {
@@ -134,7 +132,6 @@ class NameEditPage extends React.Component {
         },
       },
     ];
-    this.getAvatar();
     return (
       <View
         style={{
@@ -170,7 +167,7 @@ class NameEditPage extends React.Component {
             size={150}
             source={{
               // uri: 'https://placeimg.com/140/140/any'
-              uri: `data:${this.state.imagemime};base64,${this.state.imagedata}`,
+              uri: `data:${this.state.user.imagemime};base64,${this.state.user.imagedata}`,
             }}
           />
         </View>

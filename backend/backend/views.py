@@ -149,33 +149,33 @@ def getAllOrdersView(request):
 
 def nameeditView(request):
     post = json.loads(request.body.decode('utf-8'))
-    name = post['username']
+    id = post['userid']
     newname = post['newname']
-    data = nameedit(name, newname)
+    data = nameedit(id, newname)
     return HttpResponse(json.dumps(data), content_type='application/json')
 
 def avatareditView(request):
     post = json.loads(request.body.decode('utf-8'))
-    name = post['username']
+    id = post['userid']
     imagedata = post['imagedata']
     imagemime = post['imagemime']
-    data = avataredit(name, imagedata, imagemime)
+    data = avataredit(id, imagedata, imagemime)
     return HttpResponse(json.dumps(data), content_type='application/json')
 
-def avatargetView(request):
-    post = json.loads(request.body.decode('utf-8'))
-    name = post['username']
-    data = avatarget(name)
-    return HttpResponse(json.dumps(data), content_type='application/json')
-
-def nicknamegetView(request):
-    post = json.loads(request.body.decode('utf-8'))
-    name = post['username']
-    data = nicknameget(name)
-    return HttpResponse(json.dumps(data), content_type='application/json')
-
-def emailgetView(request):
-    post = json.loads(request.body.decode('utf-8'))
-    name = post['username']
-    data = emailget(name)
-    return HttpResponse(json.dumps(data), content_type='application/json')
+# def avatargetView(request):
+#     post = json.loads(request.body.decode('utf-8'))
+#     name = post['username']
+#     data = avatarget(name)
+#     return HttpResponse(json.dumps(data), content_type='application/json')
+#
+# def nicknamegetView(request):
+#     post = json.loads(request.body.decode('utf-8'))
+#     name = post['username']
+#     data = nicknameget(name)
+#     return HttpResponse(json.dumps(data), content_type='application/json')
+#
+# def emailgetView(request):
+#     post = json.loads(request.body.decode('utf-8'))
+#     name = post['username']
+#     data = emailget(name)
+#     return HttpResponse(json.dumps(data), content_type='application/json')

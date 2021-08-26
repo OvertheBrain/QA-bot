@@ -37,9 +37,13 @@ def login(name, pwd, checked):
             usertype = user.usertype
             userid = user.userid
             username = user.username
+            nickname = user.nickname
+            if nickname == '':
+                nickname = username
             active = user.is_active
             imagedata = user.imagedata
             imagemime = user.imagemime
+            email = user.email
             # 账号激活才能够登录
             if active:
                 if usertype:
@@ -47,20 +51,21 @@ def login(name, pwd, checked):
                     dev_id = developer.devid
                     if checked:
                         data = {'userdata': userdata, 'usertype': usertype, 'userid': userid, 'devid': dev_id,
-                                'nickname': username, 'username': username, 'password': pwd, 'imagedata': imagedata,
-                                'imagemime': imagemime}
+                                'nickname': nickname, 'username': username, 'password': pwd, 'imagedata': imagedata,
+                                'imagemime': imagemime, 'email': email}
                     else:
                         data = {'userdata': userdata, 'usertype': usertype, 'userid': userid, 'devid': dev_id,
-                                'nickname': username, 'imagedata': imagedata, 'imagemime': imagemime}
+                                'nickname': nickname, 'imagedata': imagedata, 'imagemime': imagemime, 'email': email}
                     return data
                 else:
                     if checked:
-                        data = {'userdata': userdata, 'usertype': usertype, 'userid': userid, 'nickname': username,
-                                'username': username, 'password': pwd, 'imagedata': imagedata, 'imagemime': imagemime
+                        data = {'userdata': userdata, 'usertype': usertype, 'userid': userid, 'nickname': nickname,
+                                'username': username, 'password': pwd, 'imagedata': imagedata, 'imagemime': imagemime,
+                                'email': email
                                 }
                     else:
-                        data = {'userdata': userdata, 'usertype': usertype, 'userid': userid, 'nickname': username,
-                                'imagedata': imagedata, 'imagemime': imagemime}
+                        data = {'userdata': userdata, 'usertype': usertype, 'userid': userid, 'nickname': nickname,
+                                'imagedata': imagedata, 'imagemime': imagemime, 'email': email}
                     return data
             else:
                 userdata = '用户未激活'
@@ -114,9 +119,9 @@ def addUser(username, pwd, usertype, email):
             return data
 
 
-def nameedit(name, newname):
-    if User.objects.filter(username=name):
-        user = User.objects.filter(username=name)[0]
+def nameedit(id, newname):
+    if User.objects.filter(userid=id):
+        user = User.objects.filter(userid=id)[0]
         user.nickname = newname
         user.save()
         data = {'msg': 'success'}
@@ -125,9 +130,9 @@ def nameedit(name, newname):
         data = {'msg': 'fail'}
         return data
 
-def avataredit(name, imagedata, imagemime):
-    if User.objects.filter(username=name):
-        user = User.objects.filter(username=name)[0]
+def avataredit(id, imagedata, imagemime):
+    if User.objects.filter(userid=id):
+        user = User.objects.filter(userid=id)[0]
         user.imagedata = imagedata
         user.imagemime = imagemime
         user.save()
@@ -137,29 +142,29 @@ def avataredit(name, imagedata, imagemime):
         data = {'msg': 'fail'}
         return data
 
-def avatarget(name):
-    if User.objects.filter(username=name):
-        user = User.objects.filter(username=name)[0]
-        data = {'imagedata': user.imagedata, 'imagemime': user.imagemime}
-        return data
-    else:
-        data = {'imagedata': '', 'imagemime': ''}
-        return data
-
-def nicknameget(name):
-    if User.objects.filter(username=name):
-        user = User.objects.filter(username=name)[0]
-        data = {'nickname': user.nickname}
-        return HttpResponse(json.dumps(data), content_type='application/json')
-    else:
-        data = {'nickname': ''}
-        return HttpResponse(json.dumps(data), content_type='application/json')
-
-def emailget(name):
-    if User.objects.filter(username=name):
-        user = User.objects.filter(username=name)[0]
-        data = {'email': user.email}
-        return HttpResponse(json.dumps(data), content_type='application/json')
-    else:
-        data = {'email': ''}
-        return HttpResponse(json.dumps(data), content_type='application/json')
+# def avatarget(name):
+#     if User.objects.filter(username=name):
+#         user = User.objects.filter(username=name)[0]
+#         data = {'imagedata': user.imagedata, 'imagemime': user.imagemime}
+#         return data
+#     else:
+#         data = {'imagedata': '', 'imagemime': ''}
+#         return data
+#
+# def nicknameget(name):
+#     if User.objects.filter(username=name):
+#         user = User.objects.filter(username=name)[0]
+#         data = {'nickname': user.nickname}
+#         return data
+#     else:
+#         data = {'nickname': ''}
+#         return data
+#
+# def emailget(name):
+#     if User.objects.filter(username=name):
+#         user = User.objects.filter(username=name)[0]
+#         data = {'email': user.email}
+#         return data
+#     else:
+#         data = {'email': ''}
+#         return data

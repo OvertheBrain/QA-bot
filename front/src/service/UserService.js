@@ -33,44 +33,44 @@ export const RegisterService = (
   const url = server + 'register/';
   postRequest(url, data, callback);
 };
-export const NameEditService = (username, newname, callback) => {
+export const NameEditService = (userid, newname, callback) => {
   const data = {
-    username: username,
+    userid: userid,
     newname: newname,
   };
   console.log(data);
   const url = server + 'nameedit/';
   postRequest(url, data, callback);
 };
-export const AvatarEditService = (username, imagedata, imagemime, callback) => {
+export const AvatarEditService = (userid, imagedata, imagemime, callback) => {
   const data = {
-    username: username,
+    userid: userid,
     imagedata: imagedata,
     imagemime: imagemime,
   };
   const url = server + 'avataredit/';
   postRequest(url, data, callback);
 };
-export const AvatarGetService = (username, callback) => {
-  const data = {
-    username: username,
-  };
-  const url = server + 'avatarget/';
-  postRequest(url, data, callback);
-};
-
-export const NicknameGetService = (username, callback) => {
-  const data = {
-    username: username,
-  };
-  const url = server + 'nicknameget/';
-  postRequest(url, data, callback);
-};
-
-export const EmailGetService = (username, callback) => {
-  const data = {
-    username: username,
-  };
-  const url = server + 'emailget/';
-  postRequest(url, data, callback);
-};
+// export const AvatarGetService = (username, callback) => {
+//   const data = {
+//     username: username,
+//   };
+//   const url = server + 'avatarget/';
+//   postRequest(url, data, callback);
+// };
+//
+// export const NicknameGetService = (username, callback) => {
+//   const data = {
+//     username: username,
+//   };
+//   const url = server + 'nicknameget/';
+//   postRequest(url, data, callback);
+// };
+//
+// export const EmailGetService = (username, callback) => {
+//   const data = {
+//     username: username,
+//   };
+//   const url = server + 'emailget/';
+//   postRequest(url, data, callback);
+// };

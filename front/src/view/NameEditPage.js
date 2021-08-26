@@ -10,29 +10,28 @@ class NameEditPage extends React.Component {
     super(props);
     this.state = {
       navigation: this.props.navigation,
-      username: '',
+      // userid: '',
       name: '',
+      user: {},
     };
   }
   async componentDidMount() {
     try {
       const shop = await AsyncStorage.getItem('user');
       let user = JSON.parse(shop);
-      this.setState({username: user.username});
-      console.log(this.state.username);
+      this.setState({user: user});
+      console.log(this.state.user);
     } catch (error) {
       console.log(error);
     }
   }
   handleNameEdit() {
     if (this.state.name.length > 30) {
-      Alert.alert('提示', '用户名长度不能超过30个字', [
+      Alert.alert('提示', '用户名长度过长，请重新设置', [
         {text: '我知道了', onPress: this.confirm},
       ]);
-      //百度好像中文一个字length和编码方式有关？
       this.state.navigation.navigate('NameEdit');
       this.setState({name: ''});
-      //输入新名字长度超出范围，点击edit Icon后清空输入
     } else {
       // AsyncStorage.getItem('user').then(data => {
       //   if (data) {
@@ -40,9 +39,15 @@ class NameEditPage extends React.Component {
       //     this.setState({username: userdata.username});
       //   }
       // });
-      NameEditService(this.state.username, this.state.name, data => {
+      NameEditService(this.state.user.userid, this.state.name, data => {
         console.log(data);
         if (data.msg === 'success') {
+          let user = this.state.user;
+          user.nickname = this.state.name;
+          AsyncStorage.setItem('user', JSON.stringify(user));
+          this.setState({user: user});
+          this.setState({name: ''});
+
           Alert.alert('提示', '修改成功', [
             {
               text: '我知道了',
@@ -56,6 +61,7 @@ class NameEditPage extends React.Component {
               onPress: this.confirm,
             },
           ]);
+          this.setState({name: ''});
         }
         this.state.navigation.navigate('Developer');
       });
@@ -89,6 +95,7 @@ class NameEditPage extends React.Component {
         <View>
           <Input
             placeholder="new name"
+            value={this.state.name}
             onChangeText={name => this.setState({name: name})}
             rightIcon={
               <Icon

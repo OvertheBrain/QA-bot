@@ -23,13 +23,11 @@ class DeveloperPage extends React.Component {
     super(props);
     this.state = {
       navigation: this.props.navigation,
-      username: '',
-      //临时赋值
-      nickname: 'user',
-      email: 'abc@123.com',
-      //实际使用‘’
-      imagedata: '',
-      imagemime: '',
+      // username: '',
+      // nickname: '',
+      // email: '',
+      // imagedata: '',
+      // imagemime: '',
       user: {},
     };
   }
@@ -57,17 +55,17 @@ class DeveloperPage extends React.Component {
   //     this.setState({nickname: data.nickname});
   //   });
   // };
-  getEmail = () => {
-    AsyncStorage.getItem('user').then(data => {
-      if (data) {
-        let userdata = JSON.parse(data);
-        this.setState({username: userdata.username});
-      }
-    });
-    EmailGetService(this.state.username, data => {
-      this.setState({email: data.email});
-    });
-  };
+  // getEmail = () => {
+  //   AsyncStorage.getItem('user').then(data => {
+  //     if (data) {
+  //       let userdata = JSON.parse(data);
+  //       this.setState({username: userdata.username});
+  //     }
+  //   });
+  //   EmailGetService(this.state.username, data => {
+  //     this.setState({email: data.email});
+  //   });
+  // };
 
   async componentDidMount() {
     try {
