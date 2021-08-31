@@ -17,6 +17,7 @@ import {
   NicknameGetService,
   EmailGetService,
 } from '../service/UserService';
+import {getApiOrderList} from '../service/DevService';
 
 class DeveloperPage extends React.Component {
   constructor(props) {
@@ -78,6 +79,17 @@ class DeveloperPage extends React.Component {
     }
   }
 
+  async update() {
+    try {
+      const shop = await AsyncStorage.getItem('user');
+      let user = JSON.parse(shop);
+      this.setState({user: user});
+      console.log(this.state.user);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   render() {
     const {generateTestHook} = this.props;
     const WrappedAvatar = wrap(Avatar);
@@ -106,6 +118,17 @@ class DeveloperPage extends React.Component {
             text: this.state.user.nickname,
             style: {color: '#fff', fontSize: 30},
           }}
+          rightComponent={
+            <Icon
+              name="refresh"
+              type="font-awesome"
+              //new              size={40}
+              color={'white'}
+              onPress={() => {
+                this.update();
+              }}
+            />
+          }
         />
         <View
           style={{
