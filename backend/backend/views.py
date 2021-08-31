@@ -141,12 +141,6 @@ def getAllOrdersView(request):
 
 
 
-
-
-
-
-
-
 def nameeditView(request):
     post = json.loads(request.body.decode('utf-8'))
     id = post['userid']

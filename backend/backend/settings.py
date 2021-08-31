@@ -51,7 +51,7 @@ CHATTERBOT = {
         {
             'import_path': 'chatterbot.logic.LowConfidenceAdapter',
             'threshold': 0.3,  # 低于置信度，则默认回答
-            'default_response': 'Sorry,I don\'t know', }
+            'default_response': 'UNKNOWN', }
     ],
     'trainer': 'chatterbot.trainers.ChatterBotCorpusTrainer',
     'training_data': [

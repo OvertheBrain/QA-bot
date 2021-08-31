@@ -36,6 +36,7 @@ class UserListPage extends React.Component {
       selectedIndex: 2,
       navigation: this.props.navigation,
       route: this.props.route,
+      user: {},
     };
     this.updateIndex = this.updateIndex.bind(this);
   }
@@ -76,7 +77,7 @@ class UserListPage extends React.Component {
             <Avatar
               rounded
               source={{
-                uri: 'https://placeimg.com/140/140/any',
+                uri: `data:${this.state.user.imagemime};base64,${this.state.user.imagedata}`,
               }}
               size="medium"
               onPress={() => {
