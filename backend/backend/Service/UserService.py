@@ -37,13 +37,13 @@ def login(name, pwd, checked):
             usertype = user.usertype
             userid = user.userid
             username = user.username
-            nickname = user.nickname
-            if nickname == '':
-                nickname = username
             active = user.is_active
             imagedata = user.imagedata
             imagemime = user.imagemime
+            nickname = user.nickname
             email = user.email
+            if nickname == '':
+                nickname = username
             # 账号激活才能够登录
             if active:
                 if usertype:
