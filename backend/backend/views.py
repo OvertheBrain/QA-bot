@@ -120,7 +120,7 @@ def checkAuthView(request):
     username = post['username']
     password = post['password']
     msg = post['msg']
-    err = check_auth(apiname, username, password)
+    err = check_auth(apiname, username, password, msg)
     if err != "authed":
         data = {'errorType': err}
     else:
@@ -129,6 +129,7 @@ def checkAuthView(request):
             'errorType': 'authed',
             'reply': response.text,
         }
+
 
     return HttpResponse(json.dumps(data), content_type='application/json')
 

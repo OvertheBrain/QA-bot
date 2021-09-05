@@ -119,9 +119,9 @@ def addUser(username, pwd, usertype, email):
             return data
 
 
-def nameedit(id, newname):
-    if User.objects.filter(userid=id):
-        user = User.objects.filter(userid=id)[0]
+def nameedit(name, newname):
+    if User.objects.filter(username=name):
+        user = User.objects.filter(username=name)[0]
         user.nickname = newname
         user.save()
         data = {'msg': 'success'}
@@ -130,9 +130,10 @@ def nameedit(id, newname):
         data = {'msg': 'fail'}
         return data
 
-def avataredit(id, imagedata, imagemime):
-    if User.objects.filter(userid=id):
-        user = User.objects.filter(userid=id)[0]
+
+def avataredit(name, imagedata, imagemime):
+    if User.objects.filter(username=name):
+        user = User.objects.filter(username=name)[0]
         user.imagedata = imagedata
         user.imagemime = imagemime
         user.save()
@@ -142,29 +143,32 @@ def avataredit(id, imagedata, imagemime):
         data = {'msg': 'fail'}
         return data
 
-# def avatarget(name):
-#     if User.objects.filter(username=name):
-#         user = User.objects.filter(username=name)[0]
-#         data = {'imagedata': user.imagedata, 'imagemime': user.imagemime}
-#         return data
-#     else:
-#         data = {'imagedata': '', 'imagemime': ''}
-#         return data
-#
-# def nicknameget(name):
-#     if User.objects.filter(username=name):
-#         user = User.objects.filter(username=name)[0]
-#         data = {'nickname': user.nickname}
-#         return data
-#     else:
-#         data = {'nickname': ''}
-#         return data
-#
-# def emailget(name):
-#     if User.objects.filter(username=name):
-#         user = User.objects.filter(username=name)[0]
-#         data = {'email': user.email}
-#         return data
-#     else:
-#         data = {'email': ''}
-#         return data
+
+def avatarget(name):
+    if User.objects.filter(username=name):
+        user = User.objects.filter(username=name)[0]
+        data = {'imagedata': user.imagedata, 'imagemime': user.imagemime}
+        return data
+    else:
+        data = {'imagedata': '', 'imagemime': ''}
+        return data
+
+
+def nicknameget(name):
+    if User.objects.filter(username=name):
+        user = User.objects.filter(username=name)[0]
+        data = {'nickname': user.nickname}
+        return HttpResponse(json.dumps(data), content_type='application/json')
+    else:
+        data = {'nickname': ''}
+        return HttpResponse(json.dumps(data), content_type='application/json')
+
+
+def emailget(name):
+    if User.objects.filter(username=name):
+        user = User.objects.filter(username=name)[0]
+        data = {'email': user.email}
+        return HttpResponse(json.dumps(data), content_type='application/json')
+    else:
+        data = {'email': ''}
+        return HttpResponse(json.dumps(data), content_type='application/json')
