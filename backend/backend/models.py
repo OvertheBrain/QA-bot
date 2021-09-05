@@ -57,7 +57,7 @@ class APIorder(models.Model):
     end_date = models.DateTimeField()
     recent_call_time = models.DateTimeField()
 
-
+#
 class Record(models.Model):
     recordid = models.AutoField(primary_key=True)
     apiorder = models.ForeignKey(APIorder, on_delete=models.CASCADE())
