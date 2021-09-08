@@ -1,20 +1,20 @@
 import datetime
 
-from ..models import User
-from ..models import Developer
-from ..models import API
-from ..models import APIorder
+from ..models import Developer, APIorder, Record
 
 
-def check_auth(apiname, username, password):
+def check_auth(apiname, username, password, content):
     if Developer.objects.filter(user__username=username, user__password=password):
         if APIorder.objects.filter(dev__user__username=username, api__name=apiname):
             apiorder = APIorder.objects.get(dev__user__username=username, api__name=apiname)
 
-            if datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")< apiorder.end_date.strftime("%Y-%m-%d %H:%M:%S"):
+            if datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") < apiorder.end_date.strftime("%Y-%m-%d %H:%M:%S"):
                 err = "authed"
-                apiorder.count = apiorder.count+1
+                apiorder.count = apiorder.count + 1
+                apiorder.recent_call_time = datetime.datetime.now()
                 apiorder.save()
+                new_rec = Record(apiorder=apiorder, datetime=datetime.datetime.now(), content=content)
+                new_rec.save()
             else:
                 err = "order out of date"
         else:
