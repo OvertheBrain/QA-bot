@@ -6,7 +6,7 @@ from chatterbot import ChatBot
 
 from backend.Service.AuthService import check_auth, not_auth
 from backend.Service.DevService import addOrder, getOrder, getAllOrders
-from backend.Service.UserService import login, getUser, addUser, nameedit, avataredit, avatarget, nicknameget, emailget
+from backend.Service.UserService import login, getUser, addUser, nameedit, avataredit
 from backend.models import EmailVerifyRecord, User
 from backend.Service.StatService import word_frec_stat
 
