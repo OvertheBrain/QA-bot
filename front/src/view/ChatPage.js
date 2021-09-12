@@ -29,9 +29,11 @@ export class ChatPage extends React.Component {
     this.state = {
       navigation: this.props.navigation,
       OptionsOpen: 0,
+      user: {},
     };
   }
 
+  tokens = {};
   async componentDidMount() {
     try {
       const shop = await AsyncStorage.getItem('user');
@@ -49,7 +51,7 @@ export class ChatPage extends React.Component {
 
   render() {
     const {params} = this.props.route;
-
+    console.log(this.state.user);
     return (
       <View style={styles.container}>
         <Header
@@ -87,27 +89,6 @@ export class ChatPage extends React.Component {
           BotName={BotList[params.botId].name}
           localuser={this.state.user}
         />
-        <SpeedDial
-          style={styles.options}
-          isOpen={this.state.OptionsOpen}
-          icon={{name: 'add', color: '#fff'}}
-          openIcon={{name: 'close', color: '#fff'}}
-          onOpen={() => this.OpenDial(1)}
-          onClose={() => this.OpenDial(0)}
-          color={'#18d9ea'}>
-          <SpeedDial.Action
-            icon={{name: 'add', color: '#fff'}}
-            title="Add"
-            onPress={() => console.log('Add Something')}
-            color={'#18d9ea'}
-          />
-          <SpeedDial.Action
-            icon={{name: 'delete', color: '#fff'}}
-            title="Delete"
-            onPress={() => console.log('Delete Something')}
-            color={'#18d9ea'}
-          />
-        </SpeedDial>
       </View>
     );
   }

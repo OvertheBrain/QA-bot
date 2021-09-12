@@ -1,15 +1,18 @@
 import React, {useState, useCallback, useEffect} from 'react';
 import {GiftedChat, Bubble, Send} from 'react-native-gifted-chat';
 import 'dayjs/locale/zh-cn';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, AsyncStorage} from 'react-native';
 import {themeColor} from '../../styles';
 import {SendService} from '../../service/MessageService';
+import {Avatar} from 'react-native-elements';
 
 export default function ChatRoomScreen(props) {
   const [messages, setMessages] = useState([]);
-
+  const {localuser} = props;
+  console.log(localuser);
   useEffect(() => {
-    const {avatar, BotName} = props;
+    const {avatar, BotName}= props;
+
     setMessages([
       {
         _id: 1,
@@ -98,8 +101,10 @@ export default function ChatRoomScreen(props) {
       onPressAvatar={PressAvatar}
       user={{
         _id: 50,
-        name: '阳光',
-        avatar: 'https://placeimg.com/140/140/any',
+        name: localuser.username,
+        avatar: {
+          uri: `data:${localuser.imagemime};base64,${localuser.imagedata}`,
+        },
       }}
       alignTop={true}
     />
