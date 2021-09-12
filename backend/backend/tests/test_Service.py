@@ -9,15 +9,19 @@ import django.test.utils
 
 class TestUserService(TestCase):
     def setUp(self) -> None:
-        User.objects.create(username='A', usertype=1, password='123')
-        User.objects.create(username='c', usertype=0, password='123')
+        User.objects.create(username='A', usertype=1, password='123', is_active=True)
+        User.objects.create(username='c', usertype=0, password='123', is_active=True, email='2439711645@qq.com')
+        User.objects.create(username='inactive', usertype=0, password='123', is_active=False)
         Developer.objects.create(user_id=1)
 
     def test_get_exist_user(self):
         self.assertEqual('exist', getUser('A'))
 
     def test_get_not_exist_user(self):
-        self.assertEqual('right', getUser('b'))
+        self.assertEqual('用户名至少为3个字符', getUser('b'))
+
+    def test_get_longname_user(self):
+        self.assertEqual('用户名最多为6个字符', getUser('bhgjhgkg'))
 
     def test_add_exist_user(self):
         data = addUser('A', '123', 1, '123456789@qq.com')
@@ -26,14 +30,22 @@ class TestUserService(TestCase):
     def test_add_not_exist_developer(self):
         data = addUser('b', '123', 1, '123456789@qq.com')
         self.assertEqual('no exist', data['userdata'])
-        self.assertEqual(3, data['userid'])
+        self.assertEqual(4, data['userid'])
         self.assertEqual(2, data['devid'])
+
+    def test_exist_email_addition(self):
+        data = addUser('b', '123', 1, '2439711645@qq.com')
+        self.assertEqual('exist email', data['userdata'])
+
+    def test_wrong_email_addition(self):
+        data = addUser('b', '123', 1, 'kkkk5@qq.com')
+        self.assertEqual('wrong email', data['userdata'])
 
     def test_add_not_exist_user(self):
         data = addUser('d', '123', 0, '123456789@qq.com')
         self.assertEqual('no exist', data['userdata'])
         self.assertEqual(0, data['usertype'])
-        self.assertEqual(3, data['userid'])
+        self.assertEqual(4, data['userid'])
 
     def test_login(self):
         data = login('A', '123', True)
@@ -62,6 +74,10 @@ class TestUserService(TestCase):
         usertype = data['usertype']
         self.assertEqual(0, usertype)
         self.assertEqual(2, userid)
+
+    def test_login_inactive(self):
+        data = login('inactive', '123', False)
+        self.assertEqual('用户未激活', data['userdata'])
 
     def test_login_remUser(self):
         data = login('c', '123', True)

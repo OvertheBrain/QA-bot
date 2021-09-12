@@ -9,7 +9,7 @@ class TestUser(TestCase):
         User.objects.create(username='b', password='123456', usertype=0, email='4566489465@126.com')
 
     def test_user_model_1(self):
-        user = User.objects.get(usernamess='A')
+        user = User.objects.get(username='A')
         usertype = user.usertype
         pwd = user.password
         self.assertEqual('123', pwd)

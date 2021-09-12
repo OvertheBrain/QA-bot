@@ -9,6 +9,7 @@ from backend.Service.DevService import addOrder, getOrder, getAllOrders
 from backend.Service.UserService import login, getUser, addUser, nameedit, avataredit
 from backend.models import EmailVerifyRecord, User
 from backend.Service.StatService import word_frec_stat
+from backend.utils.spider import zhihu
 
 from django.shortcuts import render
 
@@ -26,9 +27,15 @@ class ChatBotApiView(View):
         """
         Return data corresponding to the current conversation.
         """
+        res = {}
         input_data = json.loads(request.body.decode('utf-8'))
         response = self.chatterbot.get_response(input_data)
-        res = {
+        if response.text == 'UNKNOWN' :
+            res = {
+                'reply': zhihu(input_data)
+            }
+        else:
+            res = {
             'reply': response.text,
         }
         return HttpResponse(json.dumps(res), content_type='application/json')
@@ -129,7 +136,7 @@ def checkAuthView(request):
     username = post['username']
     password = post['password']
     msg = post['msg']
-    err = check_auth(apiname, username, password)
+    err = check_auth(apiname, username, password,msg)
     if err != "authed":
         data = {'errorType': err}
     else:
