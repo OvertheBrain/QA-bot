@@ -32,8 +32,8 @@ urlpatterns = [
     path('sendMsg/', views.checkAuthView),
     path('nameedit/', views.nameeditView),
     path('avataredit/', views.avatareditView),
-    path('avatarget/', views.avatargetView),
-    path('nicknameget/', views.nicknamegetView),
-    path('emailget/', views.emailgetView),
+    # path('avatarget/', views.avatargetView),
+    # path('nicknameget/', views.nicknamegetView),
+    # path('emailget/', views.emailgetView),
     # path('sendMsg/', views.api),
 ]
