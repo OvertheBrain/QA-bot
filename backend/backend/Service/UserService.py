@@ -41,6 +41,7 @@ def login(name, pwd, checked):
             imagedata = user.imagedata
             imagemime = user.imagemime
             nickname = user.nickname
+
             email = user.email
             if nickname == '':
                 nickname = username
@@ -49,13 +50,14 @@ def login(name, pwd, checked):
                 if usertype:
                     developer = Developer.objects.filter(user_id=userid)[0]
                     dev_id = developer.devid
+                    billings=developer.billings
                     if checked:
                         data = {'userdata': userdata, 'usertype': usertype, 'userid': userid, 'devid': dev_id,
                                 'nickname': nickname, 'username': username, 'password': pwd, 'imagedata': imagedata,
-                                'imagemime': imagemime, 'email': email}
+                                'imagemime': imagemime, 'email': email, 'billings':billings}
                     else:
                         data = {'userdata': userdata, 'usertype': usertype, 'userid': userid, 'devid': dev_id,
-                                'nickname': nickname, 'imagedata': imagedata, 'imagemime': imagemime, 'email': email}
+                                'nickname': nickname, 'imagedata': imagedata, 'imagemime': imagemime, 'email': email,'billings':billings}
                     return data
                 else:
                     if checked:

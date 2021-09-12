@@ -24,7 +24,6 @@ def check_auth(apiname, username, password, content):
 
 
 def not_auth(content):
-
     err = "authed"
     new_rec = Record(datetime=datetime.datetime.now(), content=content)
     new_rec.save()
