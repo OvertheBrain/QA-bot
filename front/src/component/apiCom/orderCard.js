@@ -66,14 +66,7 @@ class OrderCard extends React.Component {
     };
     const Info = {
       tableHead: ['接口地址', '返回格式', '请求方法', '接口备注'],
-      tableData: [
-        [
-          'http://123.60.111.188:8000/sendMsg/',
-          'json',
-          'POST',
-          '根据消息返回QA回答',
-        ],
-      ],
+      tableData: [[order.apiAddress, 'json', 'POST', '根据消息返回回答']],
     };
     const POST = {
       tableHead: ['名称', '必填', '类型', '说明'],

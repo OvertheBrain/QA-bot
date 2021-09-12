@@ -58,7 +58,7 @@ class StatCard extends React.Component {
   getWordStat() {
     WordStatService(
       this.state.orderInfo.orderid,
-      this.state.checked,
+      !this.state.checked,
       this.state.datetime1,
       this.state.datetime2,
       data => {
