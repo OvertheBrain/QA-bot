@@ -7,6 +7,7 @@ import {
   Header,
   Text,
   ThemeProvider,
+  ListItem,
 } from 'react-native-elements';
 import {styles, themeColor} from '../styles';
 import {AsyncStorage, View} from 'react-native';
@@ -92,21 +93,14 @@ class DeveloperPage extends React.Component {
   render() {
     const {generateTestHook} = this.props;
     const WrappedAvatar = wrap(Avatar);
-    //test const {params} = this.props.route;
-
     return (
-      <View
-        style={{
-          flex: 1,
-        }}>
+      <View>
         <Header
-          style={{flex: 1}}
           backgroundColor={themeColor}
           leftComponent={
             <Icon
               name="angle-left"
               type="font-awesome"
-              //new              size={40}
               color={'white'}
               onPress={() => {
                 this.state.navigation.navigate('Home');
@@ -114,115 +108,59 @@ class DeveloperPage extends React.Component {
             />
           }
           centerComponent={{
-            text: this.state.user.nickname,
+            text: '用户信息',
             style: {color: '#fff', fontSize: 30},
           }}
         />
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center',
-            flex: 2,
-          }}>
-          <View
-            style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-              flex: 1,
-            }}>
-            {/*空的view，用来让头像居中（暂时没想到更好的方法）*/}
-          </View>
-          <View
-            style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-              width: '60%',
-              flex: 4,
-            }}>
-            <WrappedAvatar
-              ref={generateTestHook('Develop.avatar')}
-              rounded
-              size={'large'}
-              source={{
-                uri: `data:${this.state.user.imagemime};base64,${this.state.user.imagedata}`,
-              }}
-            />
-          </View>
-          <View
-            style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
-            <Icon
+        <View>
+          <ListItem bottomDivider>
+            <Icon name="supervised-user-circle" style={{opacity: 0}} />
+            <ListItem.Content style={{alignItems: 'center'}}>
+              <WrappedAvatar
+                ref={generateTestHook('Develop.avatar')}
+                rounded
+                size={'large'}
+                source={{
+                  uri: `data:${this.state.user.imagemime};base64,${this.state.user.imagedata}`,
+                }}
+              />
+            </ListItem.Content>
+            <ListItem.Chevron
               name="edit"
-              color="black"
               onPress={() => {
                 this.state.navigation.navigate('AvatarEdit');
               }}
             />
-          </View>
-        </View>
+          </ListItem>
 
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center',
-            flex: 1,
-          }}>
-          <View
-            style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-              flex: 1,
-            }}>
-            {/*空的view，用来让用户名居中（暂时没想到更好的方法）*/}
-          </View>
-          <View
-            style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-              width: '60%',
-              flex: 4,
-            }}>
-            <Text h3>{this.state.user.nickname}</Text>
-          </View>
-          <View
-            style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
-            <Icon
+          <ListItem bottomDivider>
+            <Icon name="supervised-user-circle" />
+            <ListItem.Content>
+              <ListItem.Title>{this.state.user.nickname}</ListItem.Title>
+            </ListItem.Content>
+            <ListItem.Chevron
               name="edit"
-              color="black"
-              //new
               onPress={() => {
                 this.state.navigation.navigate('NameEdit');
               }}
-              //new
             />
-          </View>
-        </View>
+          </ListItem>
 
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center',
-            flex: 1,
-          }}>
-          <Text h3>{this.state.user.email}</Text>
-        </View>
+          <ListItem bottomDivider>
+            <Icon name="mail-outline" />
+            <ListItem.Content>
+              <ListItem.Title>{this.state.user.email}</ListItem.Title>
+            </ListItem.Content>
+            <ListItem.Chevron name="edit" style={{opacity: 0}} />
+          </ListItem>
 
-        <View
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            flex: 7,
-          }}>
-          <Button
-            buttonStyle={styles.button1}
-            containerStyle={styles.buttonContainer}
-            title="登出"
-            titleStyle={styles.buttonTitle1}
-            type="clear"
-            onPress={() => this.props.navigation.navigate('Start')}
-          />
+          <ListItem
+            bottomDivider
+            onPress={() => this.props.navigation.navigate('Start')}>
+            <ListItem.Content style={{alignItems: 'center'}}>
+              <ListItem.Title style={{color: 'red'}}>退出登录</ListItem.Title>
+            </ListItem.Content>
+          </ListItem>
         </View>
       </View>
     );
