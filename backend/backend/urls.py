@@ -28,10 +28,14 @@ urlpatterns = [
     path('addOrder/', views.addOrderView),
     path('getOrder/', views.getOrderView),
     path('getApiOrderList/', views.getAllOrdersView),
-    path('test/', ChatBotApiView.as_view()),
+    # path('test/', ChatBotApiView.as_view()),
     path('sendMsg/', views.checkAuthView),
+    path('sendMsgByApp/', views.notAuthView),
     path('nameedit/', views.nameeditView),
     path('avataredit/', views.avatareditView),
+    path('statword/',views.statword),
+    path('adminpage/',views.adminpage)
+   # path('simpletest', views.simpletest)
     # path('avatarget/', views.avatargetView),
     # path('nicknameget/', views.nicknamegetView),
     # path('emailget/', views.emailgetView),
