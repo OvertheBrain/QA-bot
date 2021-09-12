@@ -1,6 +1,6 @@
 import datetime
 
-from ..models import Developer, APIorder, Record
+from ..models import Developer, APIorder, Record, User
 
 
 def check_auth(apiname, username, password, content):
@@ -22,4 +22,12 @@ def check_auth(apiname, username, password, content):
     else:
         err = "developer not exist or password not right"
 
+    return err
+
+
+def not_auth(content):
+
+    err = "authed"
+    new_rec = Record(datetime=datetime.datetime.now(), content=content)
+    new_rec.save()
     return err

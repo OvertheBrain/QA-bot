@@ -34,7 +34,7 @@ def send(email):
         email_record.code = code
         email_record.email = email
         email_record.save()
-        email_body = "你好，很荣幸你能使用我们的交讯问答机器人，请点击链接激活你的账号:http://127.0.0.1:8000/active/{0}".format(code)
+        email_body = "你好，很荣幸你能使用我们的交讯问答机器人，请点击链接激活你的账号:http://123.60.111.188:8000/active/{0}".format(code)
         return send_mail(subject, email_body, from_email, [to_email])
     except Exception as e:
         print('邮件发送失败 Error:%s' % e)

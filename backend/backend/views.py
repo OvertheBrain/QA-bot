@@ -4,10 +4,19 @@ from chatterbot.ext.django_chatterbot import settings
 from django.http import HttpResponse, JsonResponse
 from chatterbot import ChatBot
 
-from backend.Service.AuthService import check_auth
+from backend.Service.AuthService import check_auth, not_auth
 from backend.Service.DevService import addOrder, getOrder, getAllOrders
 from backend.Service.UserService import login, getUser, addUser, nameedit, avataredit, avatarget, nicknameget, emailget
 from backend.models import EmailVerifyRecord, User
+from backend.Service.StatService import word_frec_stat
+
+from django.shortcuts import render
+
+
+def adminpage(request):
+    context = {}
+    context['hello'] = 'Hello World!'
+    return render(request, 'index.html', context)
 
 
 class ChatBotApiView(View):
@@ -120,7 +129,7 @@ def checkAuthView(request):
     username = post['username']
     password = post['password']
     msg = post['msg']
-    err = check_auth(apiname, username, password, msg)
+    err = check_auth(apiname, username, password)
     if err != "authed":
         data = {'errorType': err}
     else:
@@ -130,6 +139,22 @@ def checkAuthView(request):
             'reply': response.text,
         }
 
+    return HttpResponse(json.dumps(data), content_type='application/json')
+
+
+def notAuthView(request):
+    post = json.loads(request.body.decode('utf-8'))
+
+    msg = post['msg']
+    err = not_auth(msg)
+    if err != "authed":
+        data = {'errorType': err}
+    else:
+        response = ChatBot(**settings.CHATTERBOT).get_response(msg)
+        data = {
+            'errorType': 'authed',
+            'reply': response.text,
+        }
 
     return HttpResponse(json.dumps(data), content_type='application/json')
 
@@ -141,7 +166,6 @@ def getAllOrdersView(request):
     return HttpResponse(json.dumps(data), content_type='application/json')
 
 
-
 def nameeditView(request):
     post = json.loads(request.body.decode('utf-8'))
     id = post['userid']
@@ -149,12 +173,24 @@ def nameeditView(request):
     data = nameedit(id, newname)
     return HttpResponse(json.dumps(data), content_type='application/json')
 
+
 def avatareditView(request):
     post = json.loads(request.body.decode('utf-8'))
     id = post['userid']
     imagedata = post['imagedata']
     imagemime = post['imagemime']
     data = avataredit(id, imagedata, imagemime)
+    return HttpResponse(json.dumps(data), content_type='application/json')
+
+
+def statword(request):
+    post = json.loads(request.body.decode('utf-8'))
+    order_id = post['orderid']
+    alltime = post['alltime']
+    date1 = post['date1']
+    date2 = post['date2']
+
+    data = word_frec_stat(order_id, alltime, date1, date2);
     return HttpResponse(json.dumps(data), content_type='application/json')
 
 # def avatargetView(request):
