@@ -63,7 +63,7 @@ class NameEditPage extends React.Component {
           ]);
           this.setState({name: ''});
         }
-        this.state.navigation.navigate('Developer');
+        this.state.navigation.goBack();
       });
     }
   }
@@ -83,7 +83,7 @@ class NameEditPage extends React.Component {
               size={40}
               color={'white'}
               onPress={() => {
-                this.state.navigation.navigate('Developer');
+                this.state.navigation.goBack();
               }}
             />
           }
