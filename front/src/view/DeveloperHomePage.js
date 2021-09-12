@@ -6,7 +6,7 @@ import {Icon} from 'react-native-elements/dist/icons/Icon';
 import UserListPage from './UserListPage';
 import APIstoreList from '../component/DevCom/APIStoreList';
 import APIrepo from '../component/DevCom/APIrepo';
-
+import DevInfo from '../component/DevCom/DevInfo';
 class DeveloperHomePage extends React.Component {
   constructor(props) {
     super(props);
@@ -34,7 +34,12 @@ class DeveloperHomePage extends React.Component {
             flex: 1,
           }}>
           <TabView value={this.state.index}>
-            <TabView.Item />
+            <TabView.Item>
+              <DevInfo
+                route={this.state.route}
+                navigation={this.state.navigation}
+              />
+            </TabView.Item>
             <TabView.Item>
               <APIstoreList navigation={this.state.navigation} />
             </TabView.Item>

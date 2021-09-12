@@ -3,6 +3,7 @@ from django.test import TestCase
 from backend.Service.DevService import addOrder, getAllOrders
 from backend.Service.UserService import getUser, addUser, login
 from backend.models import User, Developer, API, APIorder
+import datetime
 import django.test.utils
 
 
@@ -93,26 +94,41 @@ class TestUserService(TestCase):
 class TestDevService(TestCase):
     def setUp(self) -> None:
         User.objects.create(username='A', usertype=1, password='123')
+        User.objects.create(username='B', usertype=1, password='123')
         User.objects.create(username='c', usertype=0, password='123')
         Developer.objects.create(user_id=1)
+        Developer.objects.create(user_id=2)
         API.objects.create(name='api0', description='xxx')
         API.objects.create(name='api1', description='what')
+        APIorder.objects.create(api_id=2, dev_id=1, count=0,
+                                start_date=datetime.datetime.now().strftime('%Y-%m-%d %H:%M'),
+                                end_date=(datetime.datetime.now() + datetime.timedelta(days=30)).strftime("%Y-%m-%d %H:%M"))
+        APIorder.objects.create(api_id=2, dev_id=1, count=0,
+                                start_date=(datetime.datetime.now()-datetime.timedelta(days=30)).strftime('%Y-%m-%d %H:%M'),
+                                end_date=(datetime.datetime.now()-datetime.timedelta(days=23)).strftime('%Y-%m-%d %H:%M'))
 
     def test_add_order(self):
         data = addOrder(1, 1, 1, 30)
         userdata = data['userdata']
-        self.assertEqual('success', userdata)
+        self.assertEqual('恭喜您，订阅成功！', userdata)
         self.assertEqual(1, data['devid'])
-        self.assertEqual(1, data['orderid'])
+        self.assertEqual(1, data['apiid'])
+
+    def test_addorder_overtime(self):
+        data = addOrder(1, 2, 1, 30)
+        userdata = data['userdata']
+        self.assertEqual('已有订单，不能再次购买', userdata)
+
 
     def test_get_orders(self):
-        data = addOrder(1, 1, 1, 30)
-        self.assertEqual('恭喜您，订阅成功！', data['userdata'])
-        self.assertEqual(1, data['devid'])
-        self.assertEqual(1, data['orderid'])
-        self.assertEqual(1, data['apiid'])
+        data = getAllOrders(1)
+        self.assertEqual('success', data[0]['userdata'])
         # orders = getAllOrders(1)
 
     def test_get_orders_error(self):
-        data = getAllOrders(1)
+        data = getAllOrders(2)
         self.assertEqual('no order', data['userdata'])
+
+    def test_get_orders_overtime(self):
+        data = getAllOrders(1)
+        self.assertEqual(True, data[1]['delay'])

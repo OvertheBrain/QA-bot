@@ -16,6 +16,7 @@ import TestableUserList from './view/UserListPage';
 import TestableDevelop from './view/DeveloperPage';
 import DeveloperHomePage from './view/DeveloperHomePage';
 import OrderDetailPage from './view/OrderDetailPage';
+
 //new
 import NameEditPage from './view/NameEditPage';
 import AvatarEditPage from './view/AvatarEditPage';
@@ -30,7 +31,6 @@ const Stack = createStackNavigator();
 function StartScreen({navigation}) {
   return <TestableStart navigation={navigation} />;
 }
-
 function OrderInfo({route, navigation}) {
   return <OrderDetailPage route={route} navigation={navigation} />;
 }
@@ -63,6 +63,7 @@ function NameEditScreen({navigation}) {
 function AvatarEditScreen({navigation}) {
   return <AvatarEditPage navigation={navigation} />;
 }
+
 //new
 
 function Navigator() {
@@ -81,6 +82,7 @@ function Navigator() {
         <Stack.Screen name="BuyAPI" component={BuyScreen} />
         <Stack.Screen name="DevHome" component={DeveloperHomeScreen} />
         <Stack.Screen name="OrderInfo" component={OrderInfo} />
+
         {/*new*/}
         <Stack.Screen name="NameEdit" component={NameEditScreen} />
         <Stack.Screen name="AvatarEdit" component={AvatarEditScreen} />
