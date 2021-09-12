@@ -3,13 +3,15 @@ import {GiftedChat, Bubble, Send} from 'react-native-gifted-chat';
 import 'dayjs/locale/zh-cn';
 import {View, Text, StyleSheet} from 'react-native';
 import {themeColor} from '../../styles';
-import {SendService} from '../../service/MessageService';
+import {DiceService, SendService} from '../../service/MessageService';
 
 export default function ChatRoomScreen(props) {
   const [messages, setMessages] = useState([]);
-
+  const {localuser, navigation} = props;
   useEffect(() => {
     const {avatar, BotName} = props;
+
+    console.log(props);
     setMessages([
       {
         _id: 1,
@@ -22,32 +24,72 @@ export default function ChatRoomScreen(props) {
         },
       },
     ]);
-  }, []);
+  }, [props]);
 
   let index = 2;
 
-  const onSend = useCallback((msg = []) => {
-    setMessages(previousMessages => GiftedChat.append(previousMessages, msg));
-    console.log(msg[0].text);
-    const {avatar, BotName} = props;
-    SendService(msg[0].text, data => {
-      console.log(data);
-      let msg1 = {
-        _id: index,
-        text: data.reply,
-        createdAt: new Date(),
-        user: {
-          _id: 2,
-          name: BotName,
-          avatar: avatar,
-        },
-      };
-      setMessages(previousMessages =>
-        GiftedChat.append(previousMessages, msg1),
-      );
-      index++;
-    });
-  }, []);
+  const onSend = useCallback(
+    (msg = []) => {
+      setMessages(previousMessages => GiftedChat.append(previousMessages, msg));
+      console.log(msg[0].text);
+      const {avatar, BotName} = props;
+      if (BotName !== '开发者信箱') {
+        if (BotName === '幸运') {
+          DiceService(msg[0].text, data => {
+            console.log(data);
+            let msg1 = {
+              _id: index,
+              text: data.reply,
+              createdAt: new Date(),
+              user: {
+                _id: 2,
+                name: BotName,
+                avatar: avatar,
+              },
+            };
+            setMessages(previousMessages =>
+              GiftedChat.append(previousMessages, msg1),
+            );
+            index++;
+          });
+        } else {
+          SendService(msg[0].text, data => {
+            console.log(data);
+            let msg1 = {
+              _id: index,
+              text: data.reply,
+              createdAt: new Date(),
+              user: {
+                _id: 2,
+                name: BotName,
+                avatar: avatar,
+              },
+            };
+            setMessages(previousMessages =>
+              GiftedChat.append(previousMessages, msg1),
+            );
+            index++;
+          });
+        }
+      } else {
+        let msg1 = {
+          _id: index,
+          text: '感谢您的回复',
+          createdAt: new Date(),
+          user: {
+            _id: 2,
+            name: BotName,
+            avatar: avatar,
+          },
+        };
+        setMessages(previousMessages =>
+          GiftedChat.append(previousMessages, msg1),
+        );
+        index++;
+      }
+    },
+    [index, props],
+  );
 
   const renderBubble = props => {
     return (
@@ -98,8 +140,8 @@ export default function ChatRoomScreen(props) {
       onPressAvatar={PressAvatar}
       user={{
         _id: 50,
-        name: '阳光',
-        avatar: 'https://placeimg.com/140/140/any',
+        name: props.localuser.nickname,
+        avatar: `data:${localuser.imagemime};base64,${localuser.imagedata}`,
       }}
       alignTop={true}
     />

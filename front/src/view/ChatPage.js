@@ -32,17 +32,6 @@ export class ChatPage extends React.Component {
     };
   }
 
-  async componentDidMount() {
-    try {
-      const shop = await AsyncStorage.getItem('user');
-      let user = JSON.parse(shop);
-      this.setState({user: user});
-      console.log(this.state.user);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   OpenDial = isopen => {
     this.setState({OptionsOpen: isopen});
   };
@@ -85,29 +74,9 @@ export class ChatPage extends React.Component {
         <ChatRoomScreen
           avatar={BotList[params.botId].avatar_url}
           BotName={BotList[params.botId].name}
-          localuser={this.state.user}
+          localuser={params.user}
+          navigation={params.navigation}
         />
-        <SpeedDial
-          style={styles.options}
-          isOpen={this.state.OptionsOpen}
-          icon={{name: 'add', color: '#fff'}}
-          openIcon={{name: 'close', color: '#fff'}}
-          onOpen={() => this.OpenDial(1)}
-          onClose={() => this.OpenDial(0)}
-          color={'#18d9ea'}>
-          <SpeedDial.Action
-            icon={{name: 'add', color: '#fff'}}
-            title="Add"
-            onPress={() => console.log('Add Something')}
-            color={'#18d9ea'}
-          />
-          <SpeedDial.Action
-            icon={{name: 'delete', color: '#fff'}}
-            title="Delete"
-            onPress={() => console.log('Delete Something')}
-            color={'#18d9ea'}
-          />
-        </SpeedDial>
       </View>
     );
   }

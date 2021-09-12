@@ -8,24 +8,28 @@ import {Input} from 'react-native-elements/dist/input/Input';
 
 export const BotList = [
   {
-    name: 'Bot1',
-    avatar_url: 'https://seikim.com/i/2021/07/19/nqplo9.png',
+    name: '交讯问答',
+    avatar_url: 'https://s3.bmp.ovh/imgs/2021/09/20f73055332d30a2.png',
     subtitle: '交大相关咨询（生活学习，图书馆等）',
+    start: '饮水思源，爱国荣校',
   },
   {
-    name: 'Bot2',
-    avatar_url: 'https://seikim.com/i/2021/07/19/nroe63.png',
-    subtitle: 'Vice Chairman',
+    name: '人机对话',
+    avatar_url: 'https://s3.bmp.ovh/imgs/2021/09/5bf3dc4f458a7415.png',
+    subtitle: '随便说点什么',
+    start: '开始聊天吧~',
   },
   {
-    name: 'Bot3',
-    avatar_url: 'https://seikim.com/i/2021/07/19/nrq1o0.png',
-    subtitle: 'Uncle',
+    name: '幸运',
+    avatar_url: 'https://s3.bmp.ovh/imgs/2021/09/db8cab91b23c5e62.png',
+    subtitle: '占卜',
+    start: '回复每日运势或用包含{rd(数字)}的字符串进行占卜',
   },
   {
-    name: 'Bot4',
-    avatar_url: 'https://seikim.com/i/2021/07/19/nrqmjj.png',
-    subtitle: 'Vice Chairman',
+    name: '开发者信箱',
+    avatar_url: 'https://s3.bmp.ovh/imgs/2021/09/248806ae0f5187fd.png',
+    subtitle: '意见反馈',
+    start: '提出您宝贵的意见',
   },
 ];
 
@@ -63,7 +67,7 @@ class UserListPage extends React.Component {
       <ThemeProvider>
         <Header
           backgroundColor={themeColor}
-          centerComponent={{text: 'Home', style: {color: '#fff', fontSize: 30}}}
+          centerComponent={{text: '广场', style: {color: '#fff', fontSize: 30}}}
           leftComponent={
             <Avatar
               rounded
@@ -88,6 +92,8 @@ class UserListPage extends React.Component {
             onPress={() => {
               this.state.navigation.navigate('Chat', {
                 botId: i,
+                user: this.state.user,
+                navigation: this.props.navigation,
               });
             }}>
             <View>
