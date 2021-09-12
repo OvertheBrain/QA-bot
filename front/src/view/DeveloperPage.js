@@ -32,41 +32,6 @@ class DeveloperPage extends React.Component {
       user: {},
     };
   }
-  // getAvatar = () => {
-  //   AsyncStorage.getItem('user').then(data => {
-  //     if (data) {
-  //       let userdata = JSON.parse(data);
-  //       console.log(userdata.username);
-  //       this.setState({username: userdata.username});
-  //     }
-  //   });
-  //   AvatarGetService(this.state.username, data => {
-  //     this.setState({imagedata: data.imagedata, imagemime: data.imagemime});
-  //   });
-  // };
-  //
-  // getNickname = () => {
-  //   AsyncStorage.getItem('user').then(data => {
-  //     if (data) {
-  //       let userdata = JSON.parse(data);
-  //       this.setState({username: userdata.username});
-  //     }
-  //   });
-  //   NicknameGetService(this.state.username, data => {
-  //     this.setState({nickname: data.nickname});
-  //   });
-  // };
-  // getEmail = () => {
-  //   AsyncStorage.getItem('user').then(data => {
-  //     if (data) {
-  //       let userdata = JSON.parse(data);
-  //       this.setState({username: userdata.username});
-  //     }
-  //   });
-  //   EmailGetService(this.state.username, data => {
-  //     this.setState({email: data.email});
-  //   });
-  // };
 
   async componentDidMount() {
     try {
@@ -108,7 +73,7 @@ class DeveloperPage extends React.Component {
             />
           }
           centerComponent={{
-            text: '用户信息',
+            text: '我的信息',
             style: {color: '#fff', fontSize: 30},
           }}
         />

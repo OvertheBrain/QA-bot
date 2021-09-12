@@ -2,6 +2,7 @@ import {Card, Text, Divider} from 'react-native-elements';
 import React from 'react';
 import {View, StyleSheet, ScrollView, Platform} from 'react-native';
 import {Row, Rows, Table} from 'react-native-table-component';
+import {WordStatService} from '../../service/StatService';
 import {themeColor} from '../styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -41,13 +42,21 @@ class OrderCard extends React.Component {
       orderInfo: this.props.orderInfo,
     };
   }
+  componentDidMount() {
+    WordStatService(this.state.orderInfo.orderid, data => {
+      console.log(data);
+      this.setState({
+        wordstat: data,
+      });
+    });
+  }
 
   render() {
     const order = this.state.orderInfo;
     console.log(order);
     const OverView = {
       tableHead: ['订单编号', '开发者编号', 'API编号', 'API Key'],
-      tableData: [[0, order.devid, order.apiid, '账号&密码']],
+      tableData: [[order.orderid, order.devid, order.apiid, '账号&密码']],
     };
     const Status = {
       tableHead: ['API', '截止日期', '请求地址', '已调用次数'],

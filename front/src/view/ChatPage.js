@@ -6,6 +6,7 @@ import {
   View,
   PanResponder,
   Animated,
+  AsyncStorage,
 } from 'react-native';
 import ChatRoomScreen from '../component/ChatCom/ChatRoomScreen';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -29,6 +30,17 @@ export class ChatPage extends React.Component {
       navigation: this.props.navigation,
       OptionsOpen: 0,
     };
+  }
+
+  async componentDidMount() {
+    try {
+      const shop = await AsyncStorage.getItem('user');
+      let user = JSON.parse(shop);
+      this.setState({user: user});
+      console.log(this.state.user);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   OpenDial = isopen => {
@@ -73,6 +85,7 @@ export class ChatPage extends React.Component {
         <ChatRoomScreen
           avatar={BotList[params.botId].avatar_url}
           BotName={BotList[params.botId].name}
+          localuser={this.state.user}
         />
         <SpeedDial
           style={styles.options}

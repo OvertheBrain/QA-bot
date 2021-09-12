@@ -11,6 +11,9 @@ import {themeColor} from '../styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {getOrder} from '../service/DevService';
 import OrderCard from '../component/apiCom/orderCard';
+import {WordStatService} from '../service/StatService';
+import DatePicker from 'react-native-datepicker';
+import StatCard from '../component/apiCom/StatCard';
 
 const styles = StyleSheet.create({
   container: {
@@ -32,6 +35,15 @@ class OrderDetailPage extends React.Component {
     this.state = {
       navigation: this.props.navigation,
     };
+  }
+  componentDidMount() {
+    const {params} = this.props.route;
+    WordStatService(params.order.orderid, data => {
+      console.log(data);
+      this.setState({
+        wordstat: data,
+      });
+    });
   }
 
   render() {
@@ -56,21 +68,11 @@ class OrderDetailPage extends React.Component {
             text: '订单详情',
             style: {color: '#fff', fontSize: 30},
           }}
-          rightComponent={
-            <Icon
-              name="info"
-              type="AntDesign"
-              //onPress={() => {
-              //this.state.navigation.navigate('Start');
-              //}}
-              color={'#fff'}
-              size={40}
-            />
-          }
         />
 
         <ScrollView>
           <OrderCard orderInfo={params.order} />
+          <StatCard orderInfo={params.order} />
         </ScrollView>
       </View>
     );

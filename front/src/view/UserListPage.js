@@ -63,17 +63,8 @@ class UserListPage extends React.Component {
       <ThemeProvider>
         <Header
           backgroundColor={themeColor}
-          leftComponent={{
-            icon: 'menu',
-            color: '#fff',
-            iconStyle: {color: '#fff'},
-            onPress: () => {
-              this.state.navigation.goBack();
-            },
-            size: 40,
-          }}
           centerComponent={{text: 'Home', style: {color: '#fff', fontSize: 30}}}
-          rightComponent={
+          leftComponent={
             <Avatar
               rounded
               source={{
