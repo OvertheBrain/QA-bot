@@ -94,7 +94,7 @@ class ApiCard extends React.Component {
             color="#4f9deb"
             title="7天"
             price="￥7"
-            info={['1 User', 'Basic Support', 'All Core Features']}
+            info={['1 User', '每周定额']}
             button={{
               title: 'GET STARTED',
               icon: 'flight-takeoff',
@@ -107,7 +107,7 @@ class ApiCard extends React.Component {
             color="#4f9deb"
             title="30天"
             price="￥25"
-            info={['1 User', 'Basic Support', 'All Core Features']}
+            info={['1 User', '超值月卡']}
             button={{
               title: 'GET STARTED',
               icon: 'flight-takeoff',
@@ -120,7 +120,7 @@ class ApiCard extends React.Component {
             color="#4f9deb"
             title="90天"
             price="￥80"
-            info={['1 User', 'Basic Support', 'All Core Features']}
+            info={['1 User', '季度套餐']}
             button={{
               title: 'GET STARTED',
               icon: 'flight-takeoff',
@@ -133,7 +133,7 @@ class ApiCard extends React.Component {
             color="#4f9deb"
             title="180天"
             price="￥150"
-            info={['1 User', 'Basic Support', 'All Core Features']}
+            info={['1 User', '半年专享']}
             button={{
               title: 'GET STARTED',
               icon: 'flight-takeoff',

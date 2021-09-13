@@ -14,8 +14,18 @@ const testList = [
     description: '根据用户问题智能回答交大相关资讯',
     address: 'http://123.60.111.188:8000/sendMsg',
   },
-  {apiID: 2, name: '智能聊天', description: '随便回复点什么'},
-  {apiID: 3, name: '占卜机', description: '随机事件发生器'},
+  {
+    apiID: 2,
+    name: '智能聊天',
+    description: '随便回复点什么',
+    address: 'http://123.60.111.188:8000/chat',
+  },
+  {
+    apiID: 3,
+    name: '占卜机',
+    description: '随机事件发生器',
+    address: 'http://123.60.111.188:8000/dice',
+  },
 ];
 export default class APIstoreList extends React.Component {
   constructor(props) {

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Header, Overlay, Text} from 'react-native-elements';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, ScrollView} from 'react-native';
 import ChatRoomScreen from '../component/ChatCom/ChatRoomScreen';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {themeColor} from '../styles';
@@ -12,6 +12,10 @@ const styles = StyleSheet.create({
   },
   options: {
     marginBottom: 50,
+  },
+  overlay: {
+      width: 200,
+      height: 200,
   },
 });
 
@@ -67,11 +71,13 @@ export class ChatPage extends React.Component {
         <Overlay
           isVisible={this.state.visible}
           onBackdropPress={() => {
-            this.setState({visible: true});
-          }}>
-          <Text>
-            本软件的问答功能基于深度学习(DL)和自然语言处理(NLP)技术开发而成，本软件提供的四个机器人分别可以应对交大相关咨询、人机对话、占卜和意见反馈四个方面的需求。输入你想说的内容并点击发送，开始与机器人对话吧！
-          </Text>
+            this.setState({visible: false});
+          }}
+          overlayStyle = {styles.overlay}
+        >
+            <Text>
+              本软件的问答功能基于深度学习(DL)和自然语言处理(NLP)技术开发而成，本软件提供的四个机器人分别可以应对交大相关咨询、人机对话、占卜和意见反馈四个方面的需求。输入你想说的内容并点击发送，开始与机器人对话吧！
+            </Text>
         </Overlay>
         <ChatRoomScreen
           avatar={BotList[params.botId].avatar_url}
