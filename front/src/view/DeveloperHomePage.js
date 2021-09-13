@@ -13,7 +13,7 @@ class DeveloperHomePage extends React.Component {
     this.state = {
       navigation: this.props.navigation,
       route: this.props.route,
-      index: 1,
+      index: 0,
     };
   }
 
