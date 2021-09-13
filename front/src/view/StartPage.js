@@ -24,7 +24,6 @@ class StartPage extends React.Component {
           ref={generateTestHook('Start.title')}>
           QA Robot
         </TestableText>
-
         <WrappedButton
           buttonStyle={styles.button}
           containerStyle={styles.buttonContainer}

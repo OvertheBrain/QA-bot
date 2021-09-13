@@ -23,7 +23,7 @@ export const BotList = [
     name: '幸运',
     avatar_url: 'https://s3.bmp.ovh/imgs/2021/09/db8cab91b23c5e62.png',
     subtitle: '占卜',
-    start: '回复每日运势或用包含{rd(数字)}的字符串进行占卜',
+    start: '今日运势/掷骰子/抽牌/',
   },
   {
     name: '开发者信箱',

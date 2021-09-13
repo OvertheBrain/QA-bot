@@ -9,13 +9,13 @@ export default function ChatRoomScreen(props) {
   const [messages, setMessages] = useState([]);
   const {localuser, navigation} = props;
   useEffect(() => {
-    const {avatar, BotName} = props;
+    const {avatar, BotName, start} = props;
 
     console.log(props);
     setMessages([
       {
         _id: 1,
-        text: '开始聊天吧！',
+        text: start,
         createdAt: new Date(),
         user: {
           _id: 2,

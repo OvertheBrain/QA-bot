@@ -1,13 +1,6 @@
 import React from 'react';
-import {Header, SpeedDial} from 'react-native-elements';
-import {
-  StyleSheet,
-  ScrollView,
-  View,
-  PanResponder,
-  Animated,
-  AsyncStorage,
-} from 'react-native';
+import {Header, Overlay, Text} from 'react-native-elements';
+import {StyleSheet, View} from 'react-native';
 import ChatRoomScreen from '../component/ChatCom/ChatRoomScreen';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {themeColor} from '../styles';
@@ -29,6 +22,7 @@ export class ChatPage extends React.Component {
     this.state = {
       navigation: this.props.navigation,
       OptionsOpen: 0,
+      visible: false,
     };
   }
 
@@ -62,18 +56,27 @@ export class ChatPage extends React.Component {
             <Icon
               name="info"
               type="AntDesign"
-              //onPress={() => {
-              //this.state.navigation.navigate('Start');
-              //}}
+              onPress={() => {
+                this.setState({visible: true});
+              }}
               color={'#fff'}
               size={40}
             />
           }
         />
-
+        <Overlay
+          isVisible={this.state.visible}
+          onBackdropPress={() => {
+            this.setState({visible: true});
+          }}>
+          <Text>
+            本软件的问答功能基于深度学习(DL)和自然语言处理(NLP)技术开发而成，本软件提供的四个机器人分别可以应对交大相关咨询、人机对话、占卜和意见反馈四个方面的需求。输入你想说的内容并点击发送，开始与机器人对话吧！
+          </Text>
+        </Overlay>
         <ChatRoomScreen
           avatar={BotList[params.botId].avatar_url}
           BotName={BotList[params.botId].name}
+          start={BotList[params.botId].start}
           localuser={params.user}
           navigation={params.navigation}
         />
