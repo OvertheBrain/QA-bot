@@ -74,6 +74,7 @@ export class ChatPage extends React.Component {
         <ChatRoomScreen
           avatar={BotList[params.botId].avatar_url}
           BotName={BotList[params.botId].name}
+          start={BotList[params.botId].start}
           localuser={params.user}
           navigation={params.navigation}
         />
