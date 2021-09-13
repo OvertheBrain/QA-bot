@@ -46,12 +46,14 @@ CHATTERBOT = {
     'read_only': True,
     'logic_adapters': [
         'chatterbot.logic.BestMatch',
-        # 'chatterbot.logic.MathematicalEvaluation',
-        # 'chatterbot.logic.TimeLogicAdapter',
+         'chatterbot.logic.MathematicalEvaluation',
+
         {
             'import_path': 'chatterbot.logic.LowConfidenceAdapter',
             'threshold': 0.3,  # 低于置信度，则默认回答
             'default_response': 'UNKNOWN', }
+
+
     ],
     'trainer': 'chatterbot.trainers.ChatterBotCorpusTrainer',
     'training_data': [
@@ -198,4 +200,4 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# DATABASE_ROUTERS = ['dbrouter.Router']
+#DATABASE_ROUTERS = ['dbrouter.Router']

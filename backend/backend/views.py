@@ -6,6 +6,7 @@ from chatterbot import ChatBot
 
 from backend.Service.AuthService import check_auth, not_auth
 from backend.Service.DevService import addOrder, getOrder, getAllOrders
+from backend.Service.DiceService import dice
 from backend.Service.UserService import login, getUser, addUser, nameedit, avataredit
 from backend.models import EmailVerifyRecord, User
 from backend.Service.StatService import word_frec_stat
@@ -36,8 +37,8 @@ class ChatBotApiView(View):
             }
         else:
             res = {
-            'reply': response.text,
-        }
+                'reply': response.text,
+            }
         return HttpResponse(json.dumps(res), content_type='application/json')
 
     def get(self, request, *args, **kwargs):
@@ -123,11 +124,11 @@ def addOrderView(request):
     return HttpResponse(json.dumps(data), content_type='application/json')
 
 
-def getOrderView(request):
-    post = json.loads(request.body.decode('utf-8'))
-    orderID = post['orderid']
-    data = getOrder(orderID)
-    return HttpResponse(json.dumps(data), content_type='application/json')
+# def getOrderView(request):
+#     post = json.loads(request.body.decode('utf-8'))
+#     orderID = post['orderid']
+#     data = getOrder(orderID)
+#     return HttpResponse(json.dumps(data), content_type='application/json')
 
 
 def checkAuthView(request):
@@ -140,14 +141,18 @@ def checkAuthView(request):
     if err != "authed":
         data = {'errorType': err}
     else:
+        reply = ''
         response = ChatBot(**settings.CHATTERBOT).get_response(msg)
+        if response.text == 'UNKNOWN' :
+            reply = zhihu(msg)
+        else:
+            reply = response.text
         data = {
             'errorType': 'authed',
-            'reply': response.text,
+            'reply': reply,
         }
 
     return HttpResponse(json.dumps(data), content_type='application/json')
-
 
 def notAuthView(request):
     post = json.loads(request.body.decode('utf-8'))
@@ -157,13 +162,54 @@ def notAuthView(request):
     if err != "authed":
         data = {'errorType': err}
     else:
+        reply = ''
         response = ChatBot(**settings.CHATTERBOT).get_response(msg)
+        if response.text == 'UNKNOWN':
+            reply = zhihu(msg)
+        else:
+            reply = response.text
         data = {
             'errorType': 'authed',
-            'reply': response.text,
+            'reply': reply,
         }
 
     return HttpResponse(json.dumps(data), content_type='application/json')
+def checkAuthViewD(request):
+    post = json.loads(request.body.decode('utf-8'))
+    apiname = post['APIname']
+    username = post['username']
+    password = post['password']
+    msg = post['msg']
+    err = check_auth(apiname, username, password,msg)
+    if err != "authed":
+        data = {'errorType': err}
+    else:
+
+        response = dice(msg)
+        data = {
+            'errorType': 'authed',
+            'reply': response,
+        }
+
+    return HttpResponse(json.dumps(data), content_type='application/json')
+
+
+def notAuthViewD(request):
+    post = json.loads(request.body.decode('utf-8'))
+
+    msg = post['msg']
+    err = not_auth(msg)
+    if err != "authed":
+        data = {'errorType': err}
+    else:
+        response = dice(msg)
+        data = {
+            'errorType': 'authed',
+            'reply': response,
+        }
+
+    return HttpResponse(json.dumps(data), content_type='application/json')
+
 
 
 def getAllOrdersView(request):

@@ -41,10 +41,10 @@ class word_frec_list:
 
 def word_frec_stat(api_order_id, alltime, date1, date2):
     apiorder = APIorder.objects.get(orderid=api_order_id)
-    if alltime == "false":
-        records = Record.objects.filter(apiorder=apiorder, datetime_gte=start_time, datetime_lte=end_time)
-    else:
-        records = Record.objects.filter(apiorder=apiorder)
+    # if alltime == "false":
+    #    # records = Record.objects.filter(apiorder=apiorder, datetime_gte=start_time, datetime_lte=end_time)
+    # else:
+    records = Record.objects.filter(apiorder=apiorder)
     total_list = word_frec_list()
     for x in records:
         tmplist = jieba.lcut(x.content)

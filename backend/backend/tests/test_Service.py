@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from backend.Service.DevService import addOrder, getAllOrders
+from backend.Service.DevService import addOrder, getOrder, getAllOrders
 from backend.Service.UserService import getUser, addUser, login
 from backend.models import User, Developer, API, APIorder
 import datetime
@@ -36,10 +36,6 @@ class TestUserService(TestCase):
     def test_exist_email_addition(self):
         data = addUser('b', '123', 1, '2439711645@qq.com')
         self.assertEqual('exist email', data['userdata'])
-
-    def test_wrong_email_addition(self):
-        data = addUser('b', '123', 1, 'kkkk5@qq.com')
-        self.assertEqual('wrong email', data['userdata'])
 
     def test_add_not_exist_user(self):
         data = addUser('d', '123', 0, '123456789@qq.com')
@@ -148,3 +144,11 @@ class TestDevService(TestCase):
     def test_get_orders_overtime(self):
         data = getAllOrders(1)
         self.assertEqual(True, data[1]['delay'])
+
+    def test_getorder(self):
+        data = getOrder(1)
+        self.assertEqual('success', data['userdata'])
+
+    def test_getorder_error(self):
+        data = getOrder(3)
+        self.assertEqual('error', data['userdata'])
